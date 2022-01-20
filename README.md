@@ -8,7 +8,7 @@
 
 
 
-구글 회의록
+회의록
 https://drive.google.com/drive/folders/1KOxh0BQcq0vqFPm7B6lVInRmAHocs2Xc?usp=sharing
 
 노션

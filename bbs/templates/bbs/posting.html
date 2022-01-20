@@ -3,9 +3,11 @@
         <title>Posting!</title>
     </head>
     <body>
-        <h1>게시글 개별 페이지입니다</h1>
+        <h1>게시글 개별 페이지</h1>
         <p>{{post.postname}}</p>
         <p>{{post.contents}}</p>
+        
+        <a href="/free/{{post.pk}}/remove/">삭제</a>
         <a href="/free/">목록</a>
     </body>
 </html>

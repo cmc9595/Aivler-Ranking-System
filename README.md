@@ -7,7 +7,7 @@
 ## 김태형,서현직,이대용,전현근,천명철,최아현
 
 
-
+------------------------------
 회의록
 https://drive.google.com/drive/folders/1KOxh0BQcq0vqFPm7B6lVInRmAHocs2Xc?usp=sharing
 

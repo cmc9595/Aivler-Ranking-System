@@ -1,18 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="row">
-    <div class="col-4"></div>
-    <div class="col-4">
-        메인페이지 입니다 <br>
-        여기에 랭킹, 게시판 미리보기
-
-        <form method='post' action="{% url 'home:search' %}">
-            {% csrf_token %}
-            검색할 github ID: <input id='githubID' type='text' name='githubID' />
-            <input type='submit' value='검색'>
-        </form>
+    <div class="col-1 bg-primary">사이드바 영역</div>
+    <div class="col-11 my-5">
+        <div class="col">
+            <div class='col d-flex justify-content-center'>
+                    <form method='post' action="{% url 'home:search' %}">
+                        {% csrf_token %}
+                        <input id='githubID' type='text' name='githubID' placeholder="검색할 github ID" />
+                        <input type='submit' value='검색'>
+            </div>
+            </form>
+            <div class="container">
+                <div class="row">
+                    <div class="col my-5 bg-primary">
+                        왼쪽 랭킹
+                        <div class="container"></div>
+                    </div>
+                    <div class="col my-5 bg-danger">
+                        오른쪽 게시판 미리보기
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-4"></div>
-</div>
-
 {% endblock %}

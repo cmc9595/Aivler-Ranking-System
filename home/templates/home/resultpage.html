@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<p>{{id}} 검색결과 : 총 {{data|length}}건</p>
+
+{% if data %}
+    {% for i in data %}
+        {{i.eventid}} {{i.userid}} {{i.repository}} {{i.time}} {{i.message}}<br>
+    {% endfor %}
+{% else %}    
+    검색 결과 없음.
+{% endif %}
+
+<br><br>
+1일 내<br>
+{% if rankDay %}
+    {% for key, val in rankDay %}
+        {{key}}--{{val}}<br>
+    {% endfor %}
+{% else %}    
+    순위 결과 없음.
+{% endif %}
+
+<br><br>
+일주일 내<br>
+{% if rankWeek %}
+    {% for key, val in rankWeek %}
+        {{key}}--{{val}}<br>
+    {% endfor %}
+{% else %}    
+    순위 결과 없음.
+{% endif %}
+
+<br><br>
+한달 내<br>
+{% if rankMonth %}
+    {% for key, val in rankMonth %}
+        {{key}}--{{val}}<br>
+    {% endfor %}
+{% else %}    
+    순위 결과 없음.
+{% endif %}
+
+{% endblock %}

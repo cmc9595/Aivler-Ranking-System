@@ -12,11 +12,14 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Post',
+            name='Commit',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('postname', models.CharField(max_length=50)),
-                ('contents', models.TextField()),
+                ('eventid', models.IntegerField()),
+                ('userid', models.CharField(max_length=50)),
+                ('repository', models.CharField(max_length=100)),
+                ('time', models.DateField()),
+                ('message', models.CharField(max_length=1000)),
             ],
         ),
     ]

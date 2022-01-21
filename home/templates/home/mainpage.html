@@ -1,12 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+        메인페이지 입니다 <br>
+        여기에 랭킹, 게시판 미리보기
 
-메인페이지 입니다 <br>
-여기에 랭킹, 게시판 미리보기
+        <form method='post' action="{% url 'home:search' %}">
+            {% csrf_token %}
+            검색할 github ID: <input id='githubID' type='text' name='githubID' />
+            <input type='submit' value='검색'>
+        </form>
+    </div>
+    <div class="col-4"></div>
+</div>
 
-<form method='post' action="{% url 'home:search' %}">
-    {% csrf_token %}
-    검색할 github ID: <input id='githubID' type='text' name='githubID'/>
-    <input type='submit' value='검색'>
-</form>
 {% endblock %}

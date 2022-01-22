@@ -39,7 +39,7 @@
                     </li>
 
                     <li class="sidebar-item">
-                        <a class="sidebar-link" href="index.html">
+                        <a class="sidebar-link" href="/free/">
                             <i class="align-middle" data-feather="file"></i> <span
                                 class="align-middle">자유게시판</span>
                         </a>
@@ -259,11 +259,15 @@
                         </div>
                     </div> {% endcomment %}
                     <form method="POST">
-                        {% csrf_token %}
-                        제목<br>
-                        <input type="text" name="postname"><br>
-                        내용<br>
-                        <textarea rows="10" cols="50" name="contents"></textarea><br>
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">게시판 제목</label>
+                        <input type="text" name="postname" class="form-control" id="exampleFormControlInput1">
+                      </div>
+                      <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">게시판 내용</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" cols="50" name="contents"></textarea>
+                      </div>
                         <br>
                         <input class="btn btn-primary" href="free/"type="submit" value = "글쓰기">
                     </form>

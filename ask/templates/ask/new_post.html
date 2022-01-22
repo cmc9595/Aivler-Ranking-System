@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h1 class="h3 mb-3">게시판-작성</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">게시판 제목</label>
+        <input type="text" name="postname" class="form-control" id="exampleFormControlInput1">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">게시판 내용</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" cols="50" name="contents"></textarea>
+    </div>
+    <br>
+    <input class="btn btn-primary" href="ask/" type="submit" value="작성">
+    <a class="btn btn-secondary" href="/ask/" role="button">취소</a>
+</form>
+{% endblock %}

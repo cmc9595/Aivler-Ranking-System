@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <div>
+        <h5> {{Post.postname}} 삭제</h5>
+    </div>
+    <div>
+        <p>정말 삭제하시겠습니까?</p>
+    </div>
+    <button type="submit" class="btn btn-danger">삭제</button>
+    <a class="btn btn-secondary" href="/free/{{Post.pk}}/" role="button">취소</a>
+</form>
+{% endblock %}

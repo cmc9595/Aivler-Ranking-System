@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="h3 mb-3">게시판-질문/자유</h1>
+{%for list in postlist%}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+
+                    <li><a href="{{list.pk}}/">temp {{list.postname}}</a></li>
+                    <br>{{list.contents}}
+
+                </h5>
+            </div>
+            <div class="card-body">
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+<a class="btn btn-primary" href="new_post/" role="button">글쓰기</a>
+{% endblock %}

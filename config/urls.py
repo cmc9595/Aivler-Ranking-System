@@ -24,5 +24,6 @@ urlpatterns = [
     path('common/', include('common.urls')),
     path('free/', include('bbs.urls')),
     path('ask/', include('ask.urls')),
+    path('qna/', include('qna.urls')),
     path('profile/', include('git_profile.urls'))
 ]

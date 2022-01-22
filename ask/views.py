@@ -1,7 +1,7 @@
 import imp
 from django.shortcuts import render, redirect
 
-from .models import Post
+from .models import Post, Answer
 
 def ask(request):
     postlist = Post.objects.all()
@@ -9,7 +9,13 @@ def ask(request):
 
 def posting(request, pk):
     post = Post.objects.get(pk=pk)
-    return render(request, 'ask/posting.html', {'post':post})
+    answer = Answer.objects.all()
+    if request.method == 'POST':
+        new_article=Answer.objects.create(
+            answer=request.POST['answer'],
+        )
+        new_article.save()
+    return render(request, 'ask/posting.html', {'post':post, 'answer':answer})
 
 def new_post(request):
     if request.method == 'POST':

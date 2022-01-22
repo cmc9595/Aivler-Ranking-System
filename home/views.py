@@ -44,6 +44,7 @@ def search(request):
     data = []
     if request.method=='POST':
         id = request.POST.get('githubID')
+        print(id)
         commitList = getCommitsFromAPI(id)
         
         if commitList: # id검색되면, database refresh
@@ -51,7 +52,10 @@ def search(request):
             for i in commitList:
                 Commit(eventid=i[0], userid=id, repository=i[1], time=i[2][:10], message=i[3]).save()
             data = Commit.objects.filter(userid=id)
-
+    else:
+        id = None
+        data = None
+        
     return render(request, 'home/resultpage.html', 
                   {'data': data,
                    'id': id,
@@ -59,3 +63,6 @@ def search(request):
                    'rankWeek':rankByDate('week'),
                    'rankMonth':rankByDate('month'),
                    })
+    
+def showRank(request):
+    return render(request, 'home/ranking.html', {})

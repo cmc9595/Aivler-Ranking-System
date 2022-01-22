@@ -1,12 +1,24 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="row">
-    <div class='col d-flex justify-content-center'>
-        <form method='post' action="{% url 'home:search' %}">
-            {% csrf_token %}
-            <input id='githubID' type='text' name='githubID' placeholder="검색할 github ID" />
-            <input type='submit' value='검색'>
-        </form>
+  <div class="col-6">
+    <h1 class="h3 mb-3"><strong>Top</strong> Ranker</h1>
+    <div class="card">
+      <div class="card-body">
+        랭킹 테이블이 들어갈 영역
+      </div>
     </div>
+    
+  </div>
+  <div class="col-6">
+    <h1 class="h3 mb-3">Answer<strong> required</strong></h1>
+    <div class="card">
+      <div class="card-body">
+        답변 필요한 질문이 들어갈 영역
+      </div>
+    </div>
+  </div>
 </div>
+
+
 {% endblock %}

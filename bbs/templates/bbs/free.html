@@ -1,18 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
 <html>
-    <head>
-        <title>Blog List</title>
-    </head>
-    <body>
-        <h1>자유 게시판</h1>
-        <table>
+
+<head>
+    <title>Blog List</title>
+</head>
+
+<body>
+    <style>
+        .postlist{
+            border : 3px solid #d4d4d4;
+            width : 1400px;
+            border-radius: 10px;
+        }
+        .newpostbtn{
+        }
+    </style>
+    <h1>자유 게시판</h1>
+    <br><br>
+    <table>
         {% for list in postlist %}
+        <div class='postlist'>
             <ul>
                 <li><a href="{{list.pk}}/">{{list.postname}}</a></li>
+                {{list.contents}}
             </ul>
+            
+        </div>
+        <br><br>
         {% endfor %}
-
+    
+        <div class='newpostbtn'>
         <button><a href="new_post/">글쓰기</a></button>
-        
-        </table>
-    </body>
+    </div>
+    </table>
+</body>
+
 </html>
+{% endblock %}

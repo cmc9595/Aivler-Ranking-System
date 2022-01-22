@@ -1,13 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
 <html>
     <head>
         <title>Posting!</title>
     </head>
     <body>
+        <style>
+            .postname{
+                border : 3px solid #d4d4d4;
+                width : 1400px;
+                height : 100px;
+                border-radius : 10px;
+                line-height : 100px;
+            }
+            .postcontents{
+                border : 3px solid #d4d4d4;
+                width : 1400px;
+                height : 500px;
+                border-radius : 10px;
+            }
+        </style>
+        <br>
         <h1>게시글 개별 페이지</h1>
+        <div class="postname">
         <p>{{post.postname}}</p>
+        </div>
+        <br>
+        <div class="postcontents">
         <p>{{post.contents}}</p>
-        
+        </div>
+        <br>
         <a href="/free/{{post.pk}}/remove/">삭제</a>
         <a href="/free/">목록</a>
     </body>
 </html>
+{% endblock %}

@@ -25,90 +25,10 @@
 <body>
 
     <div class="wrapper">
-        <!-- 사이드바 시작 -->
-        <nav id="sidebar" class="sidebar js-sidebar">
-            <div class="sidebar-content js-simplebar">
-                <a class="sidebar-brand" href="http://127.0.0.1:8000/">
-                    <span class="align-middle">Aivler Ranking</span>
-                </a>
-                <ul class="sidebar-nav">
-                    <li class="sidebar-header">
-                        Pages
-                    </li>
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="http://127.0.0.1:8000/free/">
-                            <i class="align-middle" data-feather="align-left"></i> <span class="align-middle">자유
-                                게시판</span>
-                        </a>
-                    </li>
-
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="#">
-                            <i class="align-middle" data-feather="align-right"></i> <span class="align-middle">질문
-                                게시판</span>
-                        </a>
-                    </li>
-
-                    <li class="sidebar-item">
-                        <a class="sidebar-link" href="#">
-                            <i class="align-middle" data-feather="user"></i> <span class="align-middle">전체 랭킹</span>
-                        </a>
-                    </li>
-                    <!-- 커밋 메시지 자리 -->
-                    <li class="sidebar-header">
-                        에이블러들의 최근 커밋
-                        <p>
-                            <a class="btn btn-secondary mt-2 w-100" data-bs-toggle="collapse" href="#collapseExample"
-                                role="button" aria-expanded="false" aria-controls="collapseExample">
-                                커밋 메시지 1
-                            </a>
-                        <div class="collapse" id="collapseExample">
-                            <div class="card card-body bg-black">
-                                db 기반으로 커밋 내용 삽입할 공간
-                            </div>
-                        </div>
-                        <a class="btn btn-secondary mt-2 w-100" data-bs-toggle="collapse" href="#collapseExample2"
-                            role="button" aria-expanded="false" aria-controls="collapseExample2">
-                            커밋 메시지 2
-                        </a>
-                        <div class="collapse" id="collapseExample2">
-                            <div class="card card-body bg-black">
-                                db 기반으로 커밋 내용 삽입할 공간
-                            </div>
-                        </div>
-                        </p>
-                    </li>
-                    <!-- 커밋 관련 자리 끝 -->
-                </ul>
-                <div class="sidebar-cta">
-                </div>
-            </div>
-        </nav>
-        <!-- 사이드바 끝 -->
+        {% include 'sidebar.html' %}
 
         <div class="main">
-            <!-- 네비게이션 바 영역 시작 -->
-            <nav class="navbar navbar-expand navbar-light navbar-bg">
-                <!-- 사이드 바 on/off 버튼 -->
-                <a class="sidebar-toggle js-sidebar-toggle">
-                    <i class="hamburger align-self-center"></i>
-                </a>
-                <!-- 상단 navbar 시작 -->
-                <div class="navbar-collapse collapse">
-                    <ul class="navbar-nav navbar-align">
-                        <li>
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Put in your github ID"
-                                    aria-label="Recipient's username" aria-describedby="button-addon2">
-                                <button class="btn btn-outline-secondary" type="button" id="button-addon2">
-                                    <i data-feather="search"></i>
-                                </button>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-                <!-- 상단 navbar 끝 -->
-            </nav>
+            {% include 'navigation.html' %}
 
             <!-- 컨텐츠 영역 -->
             <main class="content">
@@ -120,44 +40,9 @@
                 </div>
             </main>
             <!-- contents 영역 끝 -->
-            <!-- footer 영역 시작 -->
-            <footer class="footer">
-                <div class="container-fluid">
-                    <div class="row text-muted">
-                        <div class="col-6 text-start">
-                            <p class="mb-0">
-                                <a class="text-muted" href="https://github.com/cmc9595/Aivler-Ranking-System" target='_blank'><strong>수도권 AI 1반 2조</strong></a>
-                            </p>
-                        </div>
-                        <div class="col-6 text-end">
-                            <ul class="list-inline">
-                                <li class="list-inline-item">
-                                    <a class="text-muted" href="#">김태형</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a class="text-muted" href="#">서현직</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a class="text-muted" href="#">이대용</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a class="text-muted" href="#">전현근</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a class="text-muted" href="#">천명철</a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a class="text-muted" href="#">최아현</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-            <!-- footer 영역 끝 -->
+            {% include 'footer.html' %}
         </div>
     </div>
-
     <script src={% static 'js/app.js' %}></script>
 </body>
 

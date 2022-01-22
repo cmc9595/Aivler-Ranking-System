@@ -1,0 +1,8 @@
+<form class='d-flex justify-content-between' method='post' action="{% url 'home:search' %}">
+  {% csrf_token %}
+  <input id='githubID' type="text" class="form-control" placeholder="Put in your github ID"
+    aria-describedby="button-addon2">
+  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">
+    <i data-feather="search"></i>
+  </button>
+</form>

@@ -52,8 +52,10 @@ def search(request):
             for i in commitList:
                 Commit(eventid=i[0], userid=id, repository=i[1], time=i[2][:10], message=i[3]).save()
             data = Commit.objects.filter(userid=id)
+    elif request.method=='GET':
+        id = request.GET.get('githubID')
     else:
-        id = None
+        id = '123'
         data = None
         
     return render(request, 'home/resultpage.html', 

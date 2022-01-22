@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'common',
     'bbs',
     'ask',
+    'reply',
     'git_profile',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -82,8 +83,14 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    },
+    'reply': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'reply.sqlite3',
+    },
 }
+DATABASE_ROUTERS = ['reply.router.DBRouter']
+
 # 앱이름.모델이름
 #AUTH_USER_MODEL = 'users.User'
 

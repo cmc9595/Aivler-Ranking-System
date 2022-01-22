@@ -34,7 +34,6 @@ INSTALLED_APPS = [
     'home',
     'common',
     'bbs',
-    'ask',
     'qna',
     'git_profile',
     'django.contrib.admin',

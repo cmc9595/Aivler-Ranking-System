@@ -26,10 +26,11 @@ def rankByDate(option):
 def getCommitsFromAPI(id):
     l = []
     # 현재 event검색, 추후 search api 검색으로 바꿀것
-    headers = {'Authorization': 'token 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'} # token
+    token = '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'
+    headers = {'Authorization': 'token '+token} # token
     url = f'https://api.github.com/users/{id}/events'
     response = requests.get(url, headers=headers).json()
-    #print(response) 잘 안될땐 여기 보셈
+    #print(response)
     for i in response:
         try:
             if i['type']=='PushEvent':
@@ -43,8 +44,7 @@ from .models import Commit
 def search(request):
     data = []
     if request.method=='POST':
-        id = request.POST.get('githubID')
-        print(id)
+        id = request.POST.get('githubID').split()[0] # 양쪽공백허용
         commitList = getCommitsFromAPI(id)
         
         if commitList: # id검색되면, database refresh
@@ -52,14 +52,11 @@ def search(request):
             for i in commitList:
                 Commit(eventid=i[0], userid=id, repository=i[1], time=i[2][:10], message=i[3]).save()
             data = Commit.objects.filter(userid=id)
-    elif request.method=='GET':
-        id = request.GET.get('githubID')
     else:
-        id = '123'
-        data = None
-        
+        id = None
+    print("id=", id)
     return render(request, 'home/resultpage.html', 
-                  {'data': data,
+                  {'data': data[:10],
                    'id': id,
                    'rankDay':rankByDate('day'),
                    'rankWeek':rankByDate('week'),

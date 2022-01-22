@@ -1,16 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
-<p>{{id}} 검색결과 : 총 {{data|length}}건</p>
 
-{% if data %}
-    {% for i in data %}
-        {{i.eventid}} {{i.userid}} {{i.repository}} {{i.time}} {{i.message}}<br>
-    {% endfor %}
-{% else %}    
-    검색 결과 없음.
+{% if id %}
+<p>{{id}} 검색결과 : 총 {{data|length}}건</p>
 {% endif %}
 
-<br><br>
+최근 커밋내역(10건)<br>
+{% if data %}
+    {% for i in data %}
+        {{i.eventid}} / {{i.userid}} / {{i.repository}} / {{i.time}} / {{i.message}}<br>
+    {% endfor %}
+{% endif %}
+
+<br>
 1일 내<br>
 {% if rankDay %}
     {% for key, val in rankDay %}

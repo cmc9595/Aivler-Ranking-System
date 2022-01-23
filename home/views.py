@@ -2,10 +2,10 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import requests
 from datetime import datetime, timedelta
-# from dotenv import load_dotenv
+from dotenv import load_dotenv
 import os
 
-# load_dotenv()
+load_dotenv()
 # Create your views here.
 def index(request):
     return render(request, 'home/mainpage.html', {})

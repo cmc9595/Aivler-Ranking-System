@@ -1,15 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
-<h1 class="h3 mb-3">{{post.postname}}</h1>
+<h1 class="h3 mb-3"></h1>
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title mb-0">
-                    {{post.contents}}
-                </h5>
+                <h2 class="card-title mb-0">
+                    <h2><p class="fw-bold"> <p class="text-black"> {{post.postname}}</p></p></h2>
+                </h2>
             </div>
             <div class="card-body">
+                {{post.contents}}
             </div>
         </div>
     </div>

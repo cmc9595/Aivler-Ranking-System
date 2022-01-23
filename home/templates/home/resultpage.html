@@ -1,76 +1,129 @@
 {% extends "base.html" %}
 {% block content %}
 
-
-{% if msg %}
-<p>{{msg}}</p>
-{% endif %}
-
-{% if id %}
-<p>{{id}} 검색결과 : 총 {{data|length}}건</p>
-{% endif %}
-
-{% if data %}
-최근 커밋내역(10건)<br>
-{% for i in data %}
-{{i.eventid}} / {{i.userid}} / {{i.repository}} / {{i.time}} / {{i.message}}<br>
-{% endfor %}
-{% endif %}
-
-<br>
-<h2>1일 내</h2><br>
-<ol class="list-group list-group-numbered">  
-    {% if rankDay %}
-    {% for key, val in rankDay %}
-    <li class="list-group-item d-flex justify-content-between align-items-start">
-        <div class="ms-2 me-auto">
-          <div class="fw-bold">{{key}}</div>
-          
+<div class="container">
+  <!-- 검색결과창 -->
+  <div class="row">
+    <div class="col">
+      <div class="card text-center">
+        <div class="card-header">
+          {% if msg %}
+            <h2>{{msg}}</h2>
+          {% endif %}
         </div>
-        <span class="badge bg-primary rounded-pill">{{val}}</span>
-      </li>
-    {% endfor %}
-    {% else %}
-    순위 결과 없음.
-    {% endif %}
-</ol>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- 최근커밋내역 -->
+  <div class="row">
+    <div class="col">
+      <h1>Recently Commit</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Github ID</th>
+            <th scope="col">Repository Name</th>
+            <th scope="col">Date</th>
+            <th scope="col">Commit Message</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if data %}
+            {% for i in data %}
+              <tr>
+                <th scope="row">{{i.eventid}}</th>
+                <td>{{i.userid}}</td>
+                <td>{{i.repository}}</td>
+                <td>{{i.time}}</td>
+                <td>{{i.message}}</td>
+              </tr>
+            {% endfor %}
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+<br><br>
+  <div class="row">
+    <!-- 하루 -->
+    <div class="col">
+      <h2>Daily</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">num</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if rankDay %}
+            {% for key, val in rankDay %}
+            <tr>
+            <th scope="row">{{key}}</th>
+            <td>{{val}}</td>
+            </tr>
+            {% endfor %}
+          {% else %}
+            순위 결과 없음.
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+    <!-- 주 -->
+    <div class="col">
+      <h2>Weekly</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">num</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if rankWeek %}
+            {% for key, val in rankWeek %}
+              <tr>
+              <th scope="row">{{key}}</th>
+              <td>{{val}}</td>
+              </tr>
+            {% endfor %}
+          {% else %}
+            순위 결과 없음.
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+    <!-- 한달 -->
+    <div class="col">
+      <h2>Monthly</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">num</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if rankMonth %}
+            {% for key, val in rankMonth %}
+              <tr>
+                <th scope="row">{{key}}</th>
+                <td>{{val}}</td>
+              </tr>
+            {% endfor %}
+          {% else %}
+            순위 결과 없음.
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
 
 
-<br>
-<h2>일주일 내</h2><br>
-<ol class="list-group list-group-numbered">
-        {% if rankWeek %}
-                    {% for key, val in rankWeek %}
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <div class="ms-2 me-auto">
-                          <div class="fw-bold">{{key}}</div>
-                          
-                        </div>
-                        <span class="badge bg-primary rounded-pill">{{val}}</span>
-                      </li>
-                    {% endfor %}
-                    {% else %}
-                    순위 결과 없음.
-                    {% endif %}
-                </ol>
 
-<br>
-<h2>
-    한달 내</h2><br>
-    <ol class="list-group list-group-numbered">
-
-                    {% if rankMonth %}
-                    {% for key, val in rankMonth %}
-                    <li class="list-group-item d-flex justify-content-between align-items-start">
-                        <div class="ms-2 me-auto">
-                          <div class="fw-bold">{{key}}</div>
-                          
-                        </div>
-                        <span class="badge bg-primary rounded-pill">{{val}}</span>
-                      </li>
-                    {% endfor %}
-                    {% else %}
-                    순위 결과 없음.
-                    {% endif %}
-                    {% endblock %}
-                    </ol>

@@ -3,25 +3,23 @@
 
 <h1 class="h3 mb-3">자유게시판</h1>
 {%for list in postlist%}
+<a href="{{list.pk}}/">
 <div class="row">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title mb-0">
-
-                    <li><small>#{{list.id}}</small>
-                        <a href="{{list.pk}}/"><br>
-                        {{list.postname}}</a>
-                    </li>
-                    <br>{{list.contents}}
-
-                </h5>
-            </div>
+                <h2 class="card-title mb-0">
+                    <div><li><small>{{list.id}}</small> <h2><p class="fw-bold"> <p class="text-black">{{list.postname}}</p></p></h2>
+                    </li></div>
+                </h2>
+            </div></a>
             <div class="card-body">
+                {{list.contents}}
             </div>
         </div>
     </div>
 </div>
+
 {% endfor %}
 <a class="btn btn-primary" href="new_post/" role="button">글쓰기</a>
 {% endblock %}

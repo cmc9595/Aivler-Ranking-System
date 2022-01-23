@@ -3,20 +3,20 @@
 
 <div class="container">
   <!-- 검색결과창 -->
+  {% if msg %}
   <div class="row">
     <div class="col">
       <div class="card text-center">
         <div class="card-header">
-          {% if msg %}
             <h2>{{msg}}</h2>
-          {% endif %}
+          </div>
         </div>
-
       </div>
     </div>
-  </div>
+  {% endif %}
 
   <!-- 최근커밋내역 -->
+  {% if data %}
   <div class="row">
     <div class="col">
       <h1>Recently Commit</h1>
@@ -31,7 +31,6 @@
           </tr>
         </thead>
         <tbody>
-          {% if data %}
             {% for i in data %}
               <tr>
                 <th scope="row">{{i.eventid}}</th>
@@ -41,11 +40,11 @@
                 <td>{{i.message}}</td>
               </tr>
             {% endfor %}
-          {% endif %}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
+  {% endif %}
 
 <br><br>
   <div class="row">

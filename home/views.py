@@ -61,7 +61,7 @@ def search(request):
         if commitList=='no token':
             msg = 'no token'
         elif commitList==[]:
-            msg = 'id가 틀림'
+            msg = 'id가 틀리거나 토큰만료'
         else:
             # id검색되면, database refresh
             Commit.objects.filter(userid=id).delete()

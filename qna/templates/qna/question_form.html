@@ -24,12 +24,13 @@
             <input type="text" class="form-control" name="subject"
                 value="{{ form.subject.value|default_if_none:'' }}">
         </div>
+        <br>
         <div class="form-group">
             <label for="content">내용</label>
             <textarea class="form-control" name="content" rows="10">
 {{ form.content.value|default_if_none:'' }}</textarea>
          </div>
-            
+            <br>
         <button type="submit" class="btn btn-primary">저장하기</button>
     </form>
 </div>

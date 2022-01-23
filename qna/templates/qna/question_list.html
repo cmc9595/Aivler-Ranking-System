@@ -2,37 +2,37 @@
 {% block content %}
 <h1 class="h3 mb-3">질문게시판</h1>
 
-<div>
-    <table class="table">
-        <thead>
-            <tr class="table-dark">
-                <th>번호</th>
-                <th>제목</th>
-                <th>작성일시</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% if question_list %}
-        {% for question in question_list %}
-        <tr>
-            <td>{{ forloop.counter }}</td>
-            <td>
-                <a href="{% url 'qna:detail' question.id %}">
-                    {{ question.subject }}
-                </a>
-            </td>
-            <td>{{ question.pub_date }} <br> </td>
-        </tr>
-        {% endfor %}
-        {% else %}
-        <tr>
-            <td colspan="3">질문이 없습니다.</td>
-        </tr>
-        {% endif %}
-        </tbody>
-    </table>
+
+{% if question_list %}
+{% for question in question_list %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title mb-0">
+
+                    <li><small>#{{ forloop.counter }}</small></li>
+                    <div class="d-flex justify-content-between">
+                        <a href="{% url 'qna:detail' question.id %}">
+                            {{ question.subject }}
+                        </a>
+                        {{ question.pub_date }}
+                    </div>
+                </h5>
+            </div>
+            <div class="card-body">
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% else %}
+
+<td colspan="3">질문이 없습니다.
+
+    {% endif %}
     <a href="{% url 'qna:question_create' %}" class="btn btn-primary">
         질문 등록하기
     </a>
-</div>
-{% endblock %}
+
+    {% endblock %}

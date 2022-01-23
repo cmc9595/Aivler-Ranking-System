@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 
+
+{% if msg %}
+<p>{{msg}}</p>
+{% endif %}
+
 {% if id %}
 <p>{{id}} 검색결과 : 총 {{data|length}}건</p>
 {% endif %}

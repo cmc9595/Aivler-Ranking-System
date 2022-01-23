@@ -1,11 +1,17 @@
 import imp
 from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
 
 from .models import Post
 
 def free(request):
     postlist = Post.objects.all()
-    return render(request, 'bbs/free.html', {'postlist':postlist})
+    page = request.GET.get('page', '1')
+    # 한 페이지에 출력할 갯수
+    paginator = Paginator(postlist, 3)
+    page_obj = paginator.get_page(page)
+
+    return render(request, 'bbs/free.html', {'postlist':page_obj})
 
 def posting(request, pk):
     post = Post.objects.get(pk=pk)

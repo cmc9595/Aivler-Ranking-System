@@ -27,4 +27,45 @@
 
 {% endfor %}
 <a class="btn btn-primary" href="new_post/" role="button">글쓰기</a>
+
+<!--  -->
+<div class="d-flex justify-content-between mt-3">
+    <!-- 이전페이지 -->
+    {% if postlist.has_previous %}
+    
+        <a href="?page={{ postlist.previous_page_number }}">이전</a>
+    
+    {% else %}
+    
+        <a tabindex="-1" aria-disabled="true" href="#">이전</a>
+    {% endif %}
+    <!-- 페이지리스트 -->
+    <div class="d-flex justify-content-center">
+        
+        {% for page_number in postlist.paginator.page_range %}
+            {% if page_number >= postlist.number|add:-2 and page_number <= postlist.number|add:2 %}
+                {% if page_number == postlist.number %}
+                    <!-- 현재 페이지 -->
+                    <button class="btn btn-dark" onclick="location.href = '?page={{ page_number }}'">
+                        {{ page_number }}
+                    </button>
+        {% else %}
+                <button class="btn btn-outline-dark" onclick="location.href = '?page={{ page_number }}'">
+                    {{ page_number }}
+                </button>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+        <!-- 다음페이지 -->
+        {% if postlist.has_next %}
+        
+            <a href="?page={{ postlist.next_page_number }}">다음</a>
+        
+        {% else %}
+        
+            <a tabindex="-1" aria-disabled="true" href="#">다음</a>
+        
+        {% endif %}
+</div>
 {% endblock %}

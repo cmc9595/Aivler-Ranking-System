@@ -6,10 +6,22 @@
   </a>
   <!-- 상단 navbar 시작 -->
   <div class="navbar-collapse collapse">
-    <ul class="navbar-nav navbar-align">
+    <ul class="navbar-nav w-100 justify-content-between">
       <!-- github 입력 관련 공간 -->
       <li>
+        <!-- justify-content-between 위한 공백 -->
+      </li>
+      <li>
         {% include 'search_form.html' %}
+      </li>
+      <li>
+        <button type="button btn-sm" class="btn btn-outline-success">
+          {% if user.is_authenticated %}
+          <a href="{% url 'common:logout' %}">{{ user.username }} (로그아웃)</a>
+          {% else %}
+          <a href="{% url 'common:login' %}">로그인</a>
+          {% endif %}
+        </button>
       </li>
     </ul>
   </div>

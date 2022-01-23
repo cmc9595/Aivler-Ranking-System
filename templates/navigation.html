@@ -12,8 +12,14 @@
         <!-- justify-content-between 위한 공백 -->
       </li>
       <li>
-        
-        <p class="h4"><strong>현재 나의 순위는?</strong></p>{% include 'search_form.html' %}
+        <style>
+          @media (max-width: 800px) {
+            #my_ranking_txt{
+              display:none;
+            }
+          }
+        </style>
+        <p class="h4" id="my_ranking_txt"><strong>현재 나의 순위는?</strong></p>{% include 'search_form.html' %}
       </li>
       <li>
         <button type="button btn-sm" class="btn btn-outline-success">

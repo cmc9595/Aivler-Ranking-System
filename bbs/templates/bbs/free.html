@@ -9,7 +9,10 @@
             <div class="card-header">
                 <h5 class="card-title mb-0">
 
-                    <li><a href="{{list.pk}}/"> {{list.postname}}</a></li>
+                    <li><small>#{{list.id}}</small>
+                        <a href="{{list.pk}}/"><br>
+                        {{list.postname}}</a>
+                    </li>
                     <br>{{list.contents}}
 
                 </h5>

@@ -32,12 +32,13 @@
         에이블러들의 최근 커밋
         <p>
           <a class="btn btn-secondary mt-2 w-100" data-bs-toggle="collapse" href="#collapseExample" role="button"
-            aria-expanded="false" aria-controls="collapseExample">
-            커밋 메시지 1
-          </a>
+          aria-expanded="false" aria-controls="collapseExample">
+          커밋 메시지 1
+        </a>
         <div class="collapse" id="collapseExample">
           <div class="card card-body bg-black">
-            db 기반으로 커밋 내용 삽입할 공간
+            <p id="commitmsg0">커밋 내용 0</p>
+  
           </div>
         </div>
         <a class="btn btn-secondary mt-2 w-100" data-bs-toggle="collapse" href="#collapseExample2" role="button"
@@ -46,7 +47,7 @@
         </a>
         <div class="collapse" id="collapseExample2">
           <div class="card card-body bg-black">
-            db 기반으로 커밋 내용 삽입할 공간
+            <p id="commitmsg1">커밋 내용 1</p>
           </div>
         </div>
         </p>
@@ -58,3 +59,25 @@
   </div>
 </nav>
 <!-- 사이드바 끝 -->
+<script>
+  document.getElementById('commitbox').innerHTML="이순신"
+</script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  function getCommitMsg(index, id){
+    
+    const data = axios({
+      url: '/home/commitmsg/',
+      method: 'get',
+      params: {
+        'num': index
+      }
+    });
+    data.then(function (result){
+      document.getElementById(id).innerHTML=result.data
+      console.log(result.data);
+    });
+  }
+  getCommitMsg(0, 'commitmsg0')
+  getCommitMsg(1, 'commitmsg1')
+</script>

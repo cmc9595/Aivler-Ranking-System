@@ -8,4 +8,6 @@ urlpatterns = [
     
     path('search/', views.search, name='search'),
     path('showrank/', views.showRank, name='showRank'),
+    
+    path('commitmsg/', views.commitmsg, name='commitmsg'),
 ]

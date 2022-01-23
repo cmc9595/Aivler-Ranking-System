@@ -32,11 +32,8 @@
 <div class="d-flex justify-content-between mt-3">
     <!-- 이전페이지 -->
     {% if postlist.has_previous %}
-    
         <a href="?page={{ postlist.previous_page_number }}">이전</a>
-    
     {% else %}
-    
         <a tabindex="-1" aria-disabled="true" href="#">이전</a>
     {% endif %}
     <!-- 페이지리스트 -->
@@ -59,11 +56,8 @@
     </div>
         <!-- 다음페이지 -->
         {% if postlist.has_next %}
-        
             <a href="?page={{ postlist.next_page_number }}">다음</a>
-        
         {% else %}
-        
             <a tabindex="-1" aria-disabled="true" href="#">다음</a>
         
         {% endif %}

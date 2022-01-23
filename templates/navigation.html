@@ -22,13 +22,15 @@
         <p class="h4" id="my_ranking_txt"><strong>현재 나의 순위는?</strong></p>{% include 'search_form.html' %}
       </li>
       <li>
-        <button type="button btn-sm" class="btn btn-outline-success">
-          {% if user.is_authenticated %}
-          <a href="{% url 'common:logout' %}">{{ user.username }} (로그아웃)</a>
-          {% else %}
-          <a href="{% url 'common:login' %}">로그인</a>
+        {% if user.is_authenticated %}
+            <button class="btn btn-outline-success" onclick="location.href ='{% url 'common:logout' %}'" >
+                {{ user.username }} (로그아웃)
+            </button>
+        {% else %}
+            <button class="btn btn-outline-success" onclick="location.href ='{% url 'common:login' %}'" >
+                로그인
+            </button>
           {% endif %}
-        </button>
       </li>
     </ul>
   </div>

@@ -12,7 +12,7 @@ def posting(request, pk):
     return render(request, 'bbs/posting.html', {'post':post})
 
 def new_post(request):
-    if request.method == 'POST':
+    if request.method == 'POST' and request.POST['postname'] != '':
         new_article=Post.objects.create(
             postname=request.POST['postname'],
             contents=request.POST['contents'],

@@ -19,6 +19,9 @@ def new_post(request):
         )
         new_article.save()
         return redirect('/free/')
+    elif request.method == 'POST' and request.POST['postname'] == '' :
+        context = {'written' : request.POST['contents']}
+        return render(request, 'bbs/new_post.html', context)
     return render(request, 'bbs/new_post.html')
 
 def remove_post(request, pk):

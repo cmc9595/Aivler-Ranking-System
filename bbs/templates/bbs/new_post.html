@@ -6,11 +6,11 @@
     {% csrf_token %}
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">게시판 제목</label>
-        <input type="text" name="postname" class="form-control" id="exampleFormControlInput1">
+        <input type="text" name="postname" class="form-control" id="exampleFormControlInput1" placeholder="제목은 반드시 입력">
     </div>
     <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label">게시판 내용</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" cols="50" name="contents"></textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" cols="50" name="contents">{{written}}</textarea>
     </div>
     <br>
     <input class="btn btn-primary" href="free/" type="submit" value="작성">

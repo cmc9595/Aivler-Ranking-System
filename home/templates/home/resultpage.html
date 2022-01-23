@@ -36,7 +36,7 @@
                 <th scope="row">{{i.eventid}}</th>
                 <td>{{i.userid}}</td>
                 <td>{{i.repository}}</td>
-                <td>{{i.time}}</td>
+                <td>{{i.date}}</td>
                 <td>{{i.message}}</td>
               </tr>
             {% endfor %}
@@ -51,6 +51,7 @@
     <!-- 하루 -->
     <div class="col">
       <h2>Daily</h2>
+      {% if rankDay %}
       <table class="table table-striped">
         <thead>
           <tr>
@@ -59,22 +60,22 @@
           </tr>
         </thead>
         <tbody>
-          {% if rankDay %}
             {% for key, val in rankDay %}
             <tr>
             <th scope="row">{{key}}</th>
             <td>{{val}}</td>
             </tr>
             {% endfor %}
-          {% else %}
-            순위 결과 없음.
-          {% endif %}
         </tbody>
       </table>
+        {% else %}
+          순위 결과 없음.
+        {% endif %}
     </div>
     <!-- 주 -->
     <div class="col">
       <h2>Weekly</h2>
+      {% if rankWeek %}
       <table class="table table-striped">
         <thead>
           <tr>
@@ -83,22 +84,22 @@
           </tr>
         </thead>
         <tbody>
-          {% if rankWeek %}
             {% for key, val in rankWeek %}
               <tr>
               <th scope="row">{{key}}</th>
               <td>{{val}}</td>
               </tr>
             {% endfor %}
-          {% else %}
-            순위 결과 없음.
-          {% endif %}
         </tbody>
       </table>
+        {% else %}
+          순위 결과 없음.
+        {% endif %}
     </div>
     <!-- 한달 -->
     <div class="col">
       <h2>Monthly</h2>
+      {% if rankMonth %}
       <table class="table table-striped">
         <thead>
           <tr>
@@ -107,20 +108,19 @@
           </tr>
         </thead>
         <tbody>
-          {% if rankMonth %}
             {% for key, val in rankMonth %}
               <tr>
                 <th scope="row">{{key}}</th>
                 <td>{{val}}</td>
               </tr>
             {% endfor %}
-          {% else %}
-            순위 결과 없음.
-          {% endif %}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+        순위 결과 없음.
+      {% endif %}
     </div>
-  </div>
 </div>
 {% endblock %}
 

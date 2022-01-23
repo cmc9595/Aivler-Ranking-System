@@ -6,6 +6,6 @@ class Commit(models.Model):
     eventid = models.IntegerField()
     userid = models.CharField(max_length=50)
     repository = models.CharField(max_length=100)
-    time = models.DateField()
+    date = models.DateTimeField()
     message = models.CharField(max_length=1000)
     

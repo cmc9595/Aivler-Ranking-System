@@ -4,6 +4,7 @@ import requests
 from datetime import datetime, timedelta
 from dotenv import load_dotenv
 import os
+from django.utils import timezone
 
 load_dotenv()
 # Create your views here.
@@ -11,16 +12,17 @@ def index(request):
     return render(request, 'home/mainpage.html', {})
 
 def rankByDate(option):
-    today = datetime.today()
+    today = timezone.now()
+    #print("현재시간", timezone.now())
     if option=='day':
-        diff = timedelta(days=1)
+        diff = timedelta(hours=today.hour, minutes=today.minute, seconds=today.second)
     elif option=='week':
-        diff = timedelta(days=today.weekday())
+        diff = timedelta(days=today.weekday(), hours=today.hour, minutes=today.minute, seconds=today.second)
     elif option=='month':
-        diff = timedelta(days=today.day)
-    target = str(today - diff).split()[0]
-    
-    commitList = Commit.objects.filter(time__gte=target)
+        diff = timedelta(days=today.day-1, hours=today.hour, minutes=today.minute, seconds=today.second)
+    target = str(today - diff)
+    #print(f"{option}, {target}")
+    commitList = Commit.objects.filter(date__gte=target)
     dic = {}
     for i in commitList:
         dic[i.userid] = dic.get(i.userid, 0) + 1
@@ -66,14 +68,18 @@ def search(request):
             # id검색되면, database refresh
             Commit.objects.filter(userid=id).delete()
             for i in commitList:
-                Commit(eventid=i[0], userid=id, repository=i[1], time=i[2][:10], message=i[3]).save()
+                date, time = i[2].split('T')
+                time = time[:-1]
+                dt = datetime.strptime(f'{date} {time}', '%Y-%m-%d %H:%M:%S')
+                dt += timedelta(hours=9) # seoul/Asia = UTC+09:00
+                Commit(eventid=i[0], userid=id, repository=i[1], date=dt, message=i[3]).save()
             data = Commit.objects.filter(userid=id)
             
     else: # 사이드바 '전체랭킹'으로 접속
         id = None
     print("id=", id)
     return render(request, 'home/resultpage.html', 
-                  {'data': data[:10],
+                  {'data': data[:10], # 최근 10개목록
                    'id': id,
                    'msg':msg,
                    'rankDay':rankByDate('day'),
@@ -83,3 +89,12 @@ def search(request):
     
 def showRank(request):
     return render(request, 'home/ranking.html', {})
+
+def commitmsg(request):
+    num = int(request.GET.get('num'))
+    #print("num=", num)
+        
+    obj = Commit.objects.order_by('-date')[num] # date 최근별 정렬
+    #print(commitMsg)
+    result = f'{obj.message}<br>{obj.userid}<br>{obj.date}'
+    return HttpResponse(result)

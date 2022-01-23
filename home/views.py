@@ -26,7 +26,7 @@ def rankByDate(option):
 def getCommitsFromAPI(id):
     l = []
     # 현재 event검색, 추후 search api 검색으로 바꿀것
-    token = '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'
+    token = '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'
     headers = {'Authorization': 'token '+token} # token
     url = f'https://api.github.com/users/{id}/events'
     response = requests.get(url, headers=headers).json()
@@ -45,9 +45,8 @@ def search(request):
     data = []
     if request.method=='POST':
         id = request.POST.get('githubID').split()[0] # 양쪽공백허용
-        commitList = getCommitsFromAPI(id)
         
-        if commitList: # id검색되면, database refresh
+        if commitList:=getCommitsFromAPI(id): # id검색되면, database refresh
             Commit.objects.filter(userid=id).delete()
             for i in commitList:
                 Commit(eventid=i[0], userid=id, repository=i[1], time=i[2][:10], message=i[3]).save()

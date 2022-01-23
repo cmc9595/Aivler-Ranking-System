@@ -5,8 +5,8 @@
 <p>{{id}} 검색결과 : 총 {{data|length}}건</p>
 {% endif %}
 
-최근 커밋내역(10건)<br>
 {% if data %}
+    최근 커밋내역(10건)<br>
     {% for i in data %}
         {{i.eventid}} / {{i.userid}} / {{i.repository}} / {{i.time}} / {{i.message}}<br>
     {% endfor %}

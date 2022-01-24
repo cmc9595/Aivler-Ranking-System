@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 
+<a class="btn btn-primary" href="/qna/" role="button">목록</a>
+<a class="btn btn-danger" href="/qna/{{question.id}}/delete/" role="button">삭제</a>
+
 <div class="container my-3">
     <h2 class="border-bottom py-2">{{ question.subject }}</h2>
     <div class="card my-3">

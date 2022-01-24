@@ -5,13 +5,14 @@ from datetime import datetime, timedelta
 from dotenv import load_dotenv
 import os
 from django.utils import timezone
+from django.core.paginator import Paginator
 
 load_dotenv()
 # Create your views here.
 def index(request):
     return render(request, 'home/mainpage.html', {})
 
-def rankByDate(option):
+def rankByDate(option, params): # params 0:(id, cnt), 1:(id)
     today = timezone.now()
     #print("현재시간", timezone.now())
     if option=='day':
@@ -26,7 +27,13 @@ def rankByDate(option):
     dic = {}
     for i in commitList:
         dic[i.userid] = dic.get(i.userid, 0) + 1
-    return sorted(dic.items(), key=lambda x:x[1], reverse=True)
+    result = sorted(dic.items(), key=lambda x:x[1], reverse=True)
+    result = [(idx+1, i[0], i[1]) for idx, i in enumerate(result)]
+    print(result)
+    if params==0:
+        return result
+    elif params==1:
+        return [key for idx, key, val in result] # id만 return
 
 
 def getCommitsFromAPI(id):
@@ -48,12 +55,16 @@ def getCommitsFromAPI(id):
             continue
     return l
 
+
 from .models import Commit
 def search(request):
     data = []
     msg = ''
     if request.method=='POST': # 검색박스
         id = request.POST.get('githubID').split() # 양쪽공백허용
+        now_page1 = request.GET.get('page1', 1) # 'page' 안넘어오면 1 반환.
+        now_page2 = request.GET.get('page2', 1)
+        now_page3 = request.GET.get('page3', 1)
         if id:
             id = id[0]
         else:
@@ -77,62 +88,48 @@ def search(request):
             
     else: # 사이드바 '전체랭킹'으로 접속
         id = None
+        now_page1 = request.GET.get('page1', 1)
+        now_page2 = request.GET.get('page2', 1)
+        now_page3 = request.GET.get('page3', 1)
+        
     print("id=", id)
     # 사용한 id의 등수 (중복등수 적용)
-    rankDay = rankByDate('day')
-    rankWeek = rankByDate('week')
-    rankMonth = rankByDate('month')
-    result1 = []
-    blank1 = []
-    for key, val in rankDay:
-        blank1.append(key)
-        r1 = 1
-        for key2,val2 in rankDay:
-            if val < val2: 
-                r1+=1
-        result1.append(r1)
-    if id in blank1:
-        rankD = result1[blank1.index(id)]
-    else:
-        rankD = '기록이 없습니다.'
-    result2 = []
-    blank2 = []
-    for key, val in rankWeek:
-        blank2.append(key)
-        r2 = 1
-        for key2,val2 in rankWeek:
-            if val < val2: 
-                r2 += 1
-        result2.append(r2)
-    if id in blank2:
-        rankW = result2[blank2.index(id)]
-    else:
-        rankW = '기록이 없습니다.'
-    result3 = []
-    blank3 = []
-    for key, val in rankMonth:
-        blank3.append(key)
-        r3 = 1
-        for key2,val2 in rankMonth:
-            if val < val2: 
-                r3+=1
-        result3.append(r3)
-    if id in blank3:
-        rankM = result3[blank3.index(id)]
-    else:
-        rankM = '기록이 없습니다.'
-        
+    dayIDs = rankByDate('day', 1)
+    weekIDs = rankByDate('week', 1)
+    monthIDs = rankByDate('month', 1)
     
+    dayRank = dayIDs.index(id)+1 if id in dayIDs else None
+    weekRank = weekIDs.index(id)+1 if id in weekIDs else None
+    monthRank = monthIDs.index(id)+1 if id in monthIDs else None
+   
+    now_pages = [now_page1, now_page2, now_page3]
+    rankLists = [rankByDate('day', 0), rankByDate('week', 0), rankByDate('month', 0)]
+    pageSize = 5
+    res = []
+    for now_page, rankList in zip(now_pages, rankLists):
+        p = Paginator(rankList, pageSize)
+    
+        now_page = int(now_page)
+        start = (now_page - 1)//pageSize*pageSize + 1
+        end = start + pageSize
+        if end > p.num_pages:
+            end = p.num_pages
+ 
+        res.append((p.page(now_page), range(start, end+1)))
+        
     return render(request, 'home/resultpage.html', 
                   {'data': data[:5], # 최근 10개목록
                    'id': id,
                    'msg':msg,
-                   'rankDay':rankByDate('day'),
-                   'rankWeek':rankByDate('week'),
-                   'rankMonth':rankByDate('month'),
-                   'rankD':rankD,
-                   'rankW':rankW,
-                   'rankM':rankM,
+                   'rankDay': res[0][0],
+                   'rankWeek':res[1][0],
+                   'rankMonth':res[2][0],
+                   'rankD':dayRank,
+                   'rankW':weekRank,
+                   'rankM':monthRank,
+                   'page_range1' : res[0][1],
+                   'page_range2' : res[1][1],
+                   'page_range3' : res[2][1],
                    })
     
 def showRank(request):

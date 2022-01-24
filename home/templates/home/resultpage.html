@@ -83,13 +83,15 @@
         <table class="table table-striped table-hover">
           <thead>
             <tr>
+              <th scope="col">Rank</th>
               <th scope="col">ID</th>
               <th scope="col">커밋 횟수</th>
             </tr>
           </thead>
           <tbody>
-            {% for key, val in rankDay %}
+            {% for idx, key, val in rankDay %}
             <tr>
+              <th scope="row">{{idx}}</th>
               <th scope="row">{{key}}</th>
               <td>{{val}}</td>
             </tr>
@@ -100,6 +102,19 @@
         순위 결과 없음.
         {% endif %}
       </div>
+      
+      <div style='text-align:center;'>
+        <ul class='pagination'>
+        {% for i in page_range1 %}
+        <li>
+        <a href='{% url "home:search" %}?page1={{ i }}&page2={{page2}}&page3={{page3}}'>
+        {{ i }}
+        </a>
+        </li>
+        {% endfor %}
+        </ul>
+        </div>
+        
     </div>
     <!-- 주 -->
     <div class="col-md">
@@ -112,13 +127,15 @@
         <table class="table table-striped table-hover">
           <thead>
             <tr>
+              <th scope="col">Rank</th>
               <th scope="col">ID</th>
               <th scope="col">커밋 횟수</th>
             </tr>
           </thead>
           <tbody>
-            {% for key, val in rankWeek %}
+            {% for idx, key, val in rankWeek %}
             <tr>
+              <th scope="row">{{idx}}</th>
               <th scope="row">{{key}}</th>
               <td>{{val}}</td>
             </tr>
@@ -129,6 +146,18 @@
         순위 결과 없음.
         {% endif %}
       </div>
+      <div style='text-align:center;'>
+        <ul class='pagination'>
+        {% for i in page_range2 %}
+        <li>
+          <a href='{% url "home:search" %}?page1={{page1}}&page2={{i}}&page3={{page3}}'>
+        {{ i }}
+        </a>
+        </li>
+        {% endfor %}
+        </ul>
+        </div>
+        
     </div>
     <!-- 한달 -->
     <div class="col-md">
@@ -141,24 +170,39 @@
         <table class="table table-striped table-hover">
           <thead>
             <tr>
+              <th scope="col">Rank</th>
               <th scope="col">ID</th>
               <th scope="col">커밋 횟수</th>
             </tr>
           </thead>
           <tbody>
-            {% for key, val in rankMonth %}
+            {% for idx, key, val in rankMonth %}
             <tr>
+              <th scope="row">{{idx}}</th>
               <th scope="row">{{key}}</th>
               <td>{{val}}</td>
             </tr>
             {% endfor %}
           </tbody>
         </table>
+        {% else %}
+        순위 결과 없음.
+        {% endif %}
       </div>
-      {% else %}
-      순위 결과 없음.
-      {% endif %}
+      <div style='text-align:center;'>
+        <ul class='pagination'>
+        {% for i in page_range3 %}
+        <li>
+          <a href='{% url "home:search" %}?page1={{page1}}&page2={{page2}}&page3={{i}}'>
+        {{ i }}
+        </a>
+        </li>
+        {% endfor %}
+        </ul>
+        </div>
+        
     </div>
+    
   </div>
 </div>
 {% endblock %}

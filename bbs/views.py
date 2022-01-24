@@ -34,8 +34,8 @@ def new_post(request):
         return render(request, 'bbs/new_post.html', context)
     return render(request, 'bbs/new_post.html')
 
-def remove_post(request, pk):
-    post = Post.objects.get(pk=pk)
+def remove_post(request, post_id):
+    post = Post.objects.get(pk=post_id)
     if request.method == 'POST':
         post.delete()
         return redirect('/free/')

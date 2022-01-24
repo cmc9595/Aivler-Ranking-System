@@ -35,6 +35,7 @@
         </div>
         </a>
     </div>
+    <!-- 댓글삭제 start -->
     <form action="{% url 'qna:answer_remove' %}" method="post">
         {% csrf_token %}
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
@@ -42,6 +43,7 @@
             <button class="btn btn-danger btn-sm" type="submit">댓글삭제</button>
           </div>
     </form>
+    <!-- 댓글삭제 end -->
     {% endfor %}
     <form action="{% url 'qna:answer_create' question.id %}"
             method="post" class="my-3">

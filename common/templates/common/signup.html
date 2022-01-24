@@ -59,7 +59,9 @@
                                         <div class="mb-3">
 											<label class="form-label">E-Mail</label>
 											<input class="form-control form-control-lg" type="text" name="email" id="email"
-                                            value="{{ form.email.value|default_if_none:'' }}" placeholder="Enter E-Mail" />                                       
+                                            value="{{ form.email.value|default_if_none:'' }}" placeholder="Enter E-Mail" />
+											<br>
+                                                <a href="{% url 'common:login' %}">로그인</a>                                       
 										</div>
 										<div class="text-center mt-3">
                                             <button type="submit" class="btn btn-lg btn-primary">생성하기</button>

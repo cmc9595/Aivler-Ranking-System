@@ -1,6 +1,6 @@
 from django import forms
-from .models import Question
 
+from .models import Question
 class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
@@ -12,7 +12,6 @@ class QuestionForm(forms.ModelForm):
         }
 
 from .models import Answer
-
 class AnswerForm(forms.ModelForm):
     class Meta:
         model = Answer

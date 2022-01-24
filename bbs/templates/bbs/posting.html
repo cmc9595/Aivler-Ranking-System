@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+
 <h1 class="h3 mb-3"></h1>
 <div class="row">
     <div class="col-12">
@@ -15,6 +16,68 @@
         </div>
     </div>
 </div>
-<a class="btn btn-primary" href="/free/" role="button">목록</a>
-<a class="btn btn-danger" href="/free/{{post.pk}}/remove/" role="button">삭제</a>
+<h5 class="border-bottom my-3 py-2">
+    {{post.comment_set.count}}개의 답변이 있습니다.
+</h5>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">내용</th>
+            <th scope="col">시간</th>
+            <th scope="col">   </th>
+        </tr>
+    </thead>
+    {% for comment in post.comment_set.all %}
+        <form action="#" method="post">
+        {% csrf_token %}
+        <tbody>
+            <tr>
+                <th scope="row">{{ comment.id }}</th>
+                <td>{{ comment.content }}</td>
+                <td>{{ comment.create_date }}</td>
+            </tr>
+            </form>
+        </tbody>    
+    {% endfor %}
+</table>
+    
+ 
+
+<form action="{% url 'bbs:comment_create' post.id %}"
+        method="post" class="my-3">
+    {% csrf_token %}
+    <!-- 오류표시 Start -->
+    {% if form.errors %}
+    <div class="alert alert-danger" role="alert">
+        {% for field in form %}
+            {% if field.errors %}
+                <strong>{{ field.label }}</strong>
+                {{ field.errors }}
+            {% endif %}
+        {% endfor %}
+    </div>
+    {% endif %}
+    <!-- 오류표시 End -->
+
+    <div class="form-group">
+        <textarea name="content" id="content"
+            class="form-control" rows="5"></textarea>
+    </div>
+    <br><input type="submit" value="답변등록" class="btn btn-primary">
+    
+</form>
+
+<div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a class="btn btn-primary" href="/free/" role="button">목록</a>
+        <a class="btn btn-danger" href="/free/{{post.pk}}/remove/" role="button">삭제</a>
+</div>
+
+
+
+
+
+
+
 {% endblock %}

@@ -3,7 +3,7 @@
 
 <form method="POST">
     {% csrf_token %}
-    <div class="card">
+    <div class="card text-center">
         <div class="card-header">
             <h2> {{question.subject}} 삭제</h2>
         </div>
@@ -11,7 +11,7 @@
           <h5 class="card-title"><p class="text-black">정말 삭제하시겠습니까?</p></h5>
           
           <button type="submit" class="btn btn-danger">삭제</button>
-          <a class="btn btn-secondary" href="/free/{{Post.pk}}/" role="button">취소</a>
+          <a class="btn btn-secondary" href="/qna/{{form.pk}}/" role="button">취소</a>
         </div>
       </div>
     

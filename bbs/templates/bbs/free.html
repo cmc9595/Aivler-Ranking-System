@@ -7,14 +7,11 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
+                <small># {{list.id}}번 째 게시글</small>
                 <a href="{{list.pk}}/">
-                    <li><small>#{{list.id}}</small>
                         <h4>
-                            <p class="fw-bold">
                                 {{list.postname}}
-                            </p>
                         </h4>
-                    </li>
                 </a>
             </div>
             <div class="card-body">
@@ -28,7 +25,7 @@
 {% endfor %}
 <a class="btn btn-primary" href="new_post/" role="button">글쓰기</a>
 
-<!--  -->
+<!-- 페이징 관련 -->
 <div class="d-flex justify-content-between mt-3">
     <!-- 이전페이지 -->
     {% if postlist.has_previous %}

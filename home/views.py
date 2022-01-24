@@ -160,3 +160,14 @@ def paging(request):
     }
     
     return render(request, 'home/resultpage.html', context)
+
+def mainrank(request):
+    rankDay = rankByDate('day')
+    rankWeek = rankByDate('week')
+    rankMonth = rankByDate('month')
+
+    return render(request, 'home/mainpage.html', {
+        'rankDay':rankDay,
+        'rankWeek':rankWeek,
+        'rankMonth':rankMonth,
+    })

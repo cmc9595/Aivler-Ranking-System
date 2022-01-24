@@ -16,8 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+import home.views as home_views
 
 urlpatterns = [
+    path('', home_views.mainrank, name='mainrank'),
     path('', views.index, name='index'),  # '/' 에 해당되는 path
     path('admin/', admin.site.urls),
     path('home/', include('home.urls')),

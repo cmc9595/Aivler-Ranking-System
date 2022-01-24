@@ -9,17 +9,20 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h5 class="card-title mb-0">
-                    <li><small>{{ forloop.counter }} </small></li>
-                    <div class="d-flex justify-content-between">
-                        <a></a>
-                        {{ question.pub_date }}
+                <div class='d-flex justify-content-between'>
+                    <div>
+                        <small>#{{ forloop.counter }}번 째 질문 </small>
                     </div>
-                </h5>
+                    <div>
+                        <small>{{ question.pub_date }}</small>
+                    </div>
+                </div>
+                <h4>
+                    <a href="{% url 'qna:detail' question.id %}">{{ question.subject }}</a>
+                </h4>
             </div>
-            <a href="{% url 'qna:detail' question.id %}"><h2 class="card-body">
-                {{ question.subject }}
-            </h2></a>
+            <div class="card-body">
+            </div>
         </div>
     </div>
 </div>

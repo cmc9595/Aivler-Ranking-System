@@ -1,45 +1,85 @@
-{% extends "base.html" %}
-{% block content %}
-<div class="container my-3">
-    <div class="row">
-        <div class="col-3"></div>
-        <div class="col-6">
-            <div class="row my-3">
-                <div class="col-md-4">
-                    <h4>계정생성</h4>
-                </div>
-                <div class="col-md-8 text-end">
-                    <span>또는 <a href="{% url 'common:login' %}">로그인 하세요.</a></span>
-                </div>
-            </div>
-            <form method="post" class="post-form" action="{% url 'common:signup' %}">
-                {% csrf_token %}
-                {% include "form_errors.html" %}
-                <div class="form-group">
-                    <label for="username">사용자 이름</label>
-                    <input type="text" class="form-control" name="username" id="username"
-                           value="{{ form.username.value|default_if_none:'' }}">
-                </div>
-                <div class="form-group">
-                    <label for="password1">비밀번호</label>
-                    <input type="password" class="form-control" name="password1" id="password1"
-                           value="{{ form.password1.value|default_if_none:'' }}">
-                </div>
-                <div class="form-group">
-                    <label for="password2">비밀번호 확인</label>
-                    <input type="password" class="form-control" name="password2" id="password2"
-                           value="{{ form.password2.value|default_if_none:'' }}">
-                </div>
-                <div class="form-group">
-                    <label for="email">이메일</label>
-                    <input type="text" class="form-control" name="email" id="email"
-                           value="{{ form.email.value|default_if_none:'' }}">
-                </div>
-                <br><button type="submit" class="btn btn-primary">생성하기</button>
-            </form>
-            
-        </div>
-        <div class="col-3"></div>
-    </div>
-</div>
-{% endblock %}
+<link rel="stylesheet" href="https://unpkg.com/@adminkit/core@latest/dist/css/app.css">
+<script src="https://unpkg.com/@adminkit/core@latest/dist/js/app.js"></script>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="AdminKit">
+	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="img/icons/icon-48x48.png" />
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-sign-up.html" />
+
+	<title>Sign Up | AdminKit Demo</title>
+
+	<link href="css/app.css" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+	<main class="d-flex w-100">
+		<div class="container d-flex flex-column">
+			<div class="row vh-100">
+				<div class="col-sm-10 col-md-8 col-lg-6 mx-auto d-table h-100">
+					<div class="d-table-cell align-middle">
+
+						<div class="text-center mt-4">
+							<h1 class="h2">Aivler Ranking!!</h1>
+							<p class="lead">
+								계정 생성
+							</p>
+						</div>
+
+						<div class="card">
+							<div class="card-body">
+								<div class="m-sm-4">
+									<form method="post" class="post-form" action="{% url 'common:signup' %}">
+                                        {% csrf_token %}
+                                        {% include "form_errors.html" %}
+										<div class="mb-3">
+											<label class="form-label">ID</label>
+											<input class="form-control form-control-lg" type="text" name="username" id="username" value="{{ form.username.value|default_if_none:'' }}" placeholder="Enter your ID" />
+										</div>
+										<div class="mb-3">
+											<label class="form-label">Password</label>
+											<input class="form-control form-control-lg" type="password" name="password1" id="password1"
+                                            value="{{ form.password1.value|default_if_none:'' }}" placeholder="Enter password" />
+                                           
+										</div>
+                                        <div class="mb-3">
+											<label class="form-label">Password Check</label>
+											<input class="form-control form-control-lg" type="password" name="password2" id="password2"
+                                            value="{{ form.password2.value|default_if_none:'' }}" placeholder="Enter password" />                                          
+										</div>
+                                        <div class="mb-3">
+											<label class="form-label">E-Mail</label>
+											<input class="form-control form-control-lg" type="text" name="email" id="email"
+                                            value="{{ form.email.value|default_if_none:'' }}" placeholder="Enter E-Mail" />
+											<br>
+                                                <a href="{% url 'common:login' %}">로그인</a>                                       
+										</div>
+										<div class="text-center mt-3">
+                                            <button type="submit" class="btn btn-lg btn-primary">생성하기</button>
+                                            <a class="btn btn-secondary" href="/" role="button">취소</a>
+											<!-- <button type="submit" class="btn btn-lg btn-primary">Sign up</button> -->
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<script src="js/app.js"></script>
+
+</body>
+

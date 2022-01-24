@@ -62,3 +62,12 @@ def comment_create(request, post_id):
         form = CommentForm()
     context = {'post': post, 'form': form}
     return render(request, 'bbs/posting.html', context)
+
+def comment_delete(request, post_id, comment_id):
+    post = get_object_or_404(Post, pk=post_id)
+    comment = get_object_or_404(Comment, pk=comment_id)
+    if request.method == "GET":
+        comment.delete()
+        return redirect('bbs:posting', post_id=post.id)
+    context = {'post': post, 'form': Comment.objects.all()}
+    return render(request, 'bbs/posting.html', context)    

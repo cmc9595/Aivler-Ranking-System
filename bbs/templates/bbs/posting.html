@@ -37,6 +37,7 @@
                 <th scope="row">{{ forloop.counter }}</th>
                 <td>{{ comment.content }}</td>
                 <td>{{ comment.create_date }}</td>
+                <td><a class="btn btn-danger" href="/free/{{post.id}}/{{comment.id}}/" role="button">삭제</a></td>
             </tr>
             </form>
         </tbody>    

@@ -66,7 +66,6 @@ def question_create(request):
     
     return render(request, 'qna/question_form.html', context)
 
-<<<<<<< HEAD
 def answer_remove(request):
     a = request.POST.get('answer_id')
     target = Answer.objects.get(pk=a)
@@ -74,11 +73,9 @@ def answer_remove(request):
     return HttpResponse("answer removed")
 
 
-=======
 def question_delete(request, question_id):
     question = Question.objects.get(id=question_id)
     if request.method == 'POST':
         question.delete()
         return redirect('qna:index')
     return render(request, 'qna/question_delete.html', {'form': question })
->>>>>>> a3970be14c6a9dfaf0159acc34e492e7c5ab8b1d

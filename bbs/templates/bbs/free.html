@@ -40,11 +40,11 @@
             {% if page_number >= postlist.number|add:-2 and page_number <= postlist.number|add:2 %}
                 {% if page_number == postlist.number %}
                     <!-- 현재 페이지 -->
-                    <button class="btn btn-dark" onclick="location.href = '?page={{ page_number }}'">
+                    <button class="btn btn-primary" onclick="location.href = '?page={{ page_number }}'">
                         {{ page_number }}
                     </button>
         {% else %}
-                <button class="btn btn-outline-dark" onclick="location.href = '?page={{ page_number }}'">
+                <button class="btn btn-outline-primary" onclick="location.href = '?page={{ page_number }}'">
                     {{ page_number }}
                 </button>
                 {% endif %}

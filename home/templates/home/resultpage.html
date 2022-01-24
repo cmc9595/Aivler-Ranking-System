@@ -70,7 +70,6 @@
   </div>
   {% endif %}
 
-  <br><br>
   <div class="row">
     <!-- 하루 -->
     <div class="col-md">
@@ -149,11 +148,10 @@
       <div style='text-align:center;'>
         <ul class='pagination'>
         {% for i in page_range2 %}
-        <li>
-          <a href='{% url "home:search" %}?page1={{page1}}&page2={{i}}&page3={{page3}}'>
-        {{ i }}
-        </a>
-        </li>
+        <button class="btn btn-sm btn-primary"
+          onclick="location.href = '{% url "home:search" %}?page1={{page1}}&page2={{i}}&page3={{page3}}'">
+          {{ i }}
+        </button>
         {% endfor %}
         </ul>
         </div>

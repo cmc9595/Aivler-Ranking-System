@@ -105,7 +105,8 @@ def search(request):
    
     now_pages = [now_page1, now_page2, now_page3]
     rankLists = [rankByDate('day', 1), rankByDate('week', 1), rankByDate('month', 1)]
-    pageSize = 5
+    ## pagesize ##
+    pageSize = 10
     res = []
     for now_page, rankList in zip(now_pages, rankLists):
         p = Paginator(rankList, pageSize)

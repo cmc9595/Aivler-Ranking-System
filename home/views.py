@@ -12,7 +12,7 @@ load_dotenv()
 def index(request):
     return render(request, 'home/mainpage.html', {})
 
-def rankByDate(option, params): # params 0:(id, cnt), 1:(id)
+def rankByDate(option, params=0): # params 0:(id, cnt), 1:(id)
     today = timezone.now()
     #print("현재시간", timezone.now())
     if option=='day':
@@ -28,12 +28,13 @@ def rankByDate(option, params): # params 0:(id, cnt), 1:(id)
     for i in commitList:
         dic[i.userid] = dic.get(i.userid, 0) + 1
     result = sorted(dic.items(), key=lambda x:x[1], reverse=True)
-    result = [(idx+1, i[0], i[1]) for idx, i in enumerate(result)]
     print(result)
     if params==0:
-        return result
+        return result # (id, cnt)
     elif params==1:
-        return [key for idx, key, val in result] # id만 return
+        return [(idx+1, i[0], i[1]) for idx, i in enumerate(result)] # (idx, id, cnt)
+    elif params==2:
+        return [key for key, val in result] # (id)
 
 
 def getCommitsFromAPI(id):
@@ -94,16 +95,16 @@ def search(request):
         
     print("id=", id)
     # 사용한 id의 등수 (중복등수 적용)
-    dayIDs = rankByDate('day', 1)
-    weekIDs = rankByDate('week', 1)
-    monthIDs = rankByDate('month', 1)
+    dayIDs = rankByDate('day', 2)
+    weekIDs = rankByDate('week', 2)
+    monthIDs = rankByDate('month', 2)
     
     dayRank = dayIDs.index(id)+1 if id in dayIDs else None
     weekRank = weekIDs.index(id)+1 if id in weekIDs else None
     monthRank = monthIDs.index(id)+1 if id in monthIDs else None
    
     now_pages = [now_page1, now_page2, now_page3]
-    rankLists = [rankByDate('day', 0), rankByDate('week', 0), rankByDate('month', 0)]
+    rankLists = [rankByDate('day', 1), rankByDate('week', 1), rankByDate('month', 1)]
     pageSize = 5
     res = []
     for now_page, rankList in zip(now_pages, rankLists):
@@ -130,6 +131,9 @@ def search(request):
                    'page_range1' : res[0][1],
                    'page_range2' : res[1][1],
                    'page_range3' : res[2][1],
+                   'page1' : now_page1,
+                   'page2' : now_page2,
+                   'page3' : now_page3,
                    })
     
 def showRank(request):

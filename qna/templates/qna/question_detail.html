@@ -47,9 +47,7 @@
         </tr>
         {% endfor %}
         </tbody>
-
     </table>
-        </form>
      
 
     <form action="{% url 'qna:answer_create' question.id %}"
@@ -73,13 +71,12 @@
                 class="form-control" rows="5"></textarea>
         </div>
         <br><input type="submit" value="답변등록" class="btn btn-primary">
-        
     </form>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <a class="btn btn-primary" href="/qna/" role="button">목록</a>
             <a class="btn btn-danger" href="/qna/{{question.id}}/delete/" role="button">삭제</a>
           </div>
-</div>
+    </div>
         
 
 {% endblock %}

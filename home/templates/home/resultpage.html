@@ -8,27 +8,27 @@
     <div class="col">
       <div class="card text-center">
         <div class="card-header">
-            <h2>{{msg}}</h2>
-          </div>
+          <h2>{{msg}}</h2>
         </div>
       </div>
     </div>
+  </div>
   {% endif %}
-   <!-- 하루 -->
-   {% if data %}
-   <div class = "row">
-     <div class = "col">
-       <h1>MY RANKING</h1>
-       현재 {{id}}의 Daily rank: {{rankD}}<br>
-       현재 {{id}}의 Weekly rank: {{rankW}}<br>
-       현재 {{id}}의 Month rank: {{rankM}}<br>
-     </div>
+  <!-- 하루 -->
+  {% if data %}
+  <div class="row">
+    <div class="col">
+      <h1>MY RANKING</h1>
+      현재 {{id}}의 Daily rank: {{rankD}}<br>
+      현재 {{id}}의 Weekly rank: {{rankW}}<br>
+      현재 {{id}}의 Month rank: {{rankM}}<br>
     </div>
-    {% endif %}
+  </div>
+  {% endif %}
 
   <!-- 최근커밋내역 -->
   {% if data %}
-  <div class="row">
+  <div class="row my-5">
     <div class="col">
       <h1>Recently Commit</h1>
       <table class="table">
@@ -42,98 +42,110 @@
           </tr>
         </thead>
         <tbody>
-            {% for i in data %}
-              <tr>
-                <th scope="row">{{i.eventid}}</th>
-                <td>{{i.userid}}</td>
-                <td>{{i.repository}}</td>
-                <td>{{i.date}}</td>
-                <td>{{i.message}}</td>
-              </tr>
+          {% for i in data %}
+          <tr>
+            <th scope="row">{{i.eventid}}</th>
+            <td>{{i.userid}}</td>
+            <td>{{i.repository}}</td>
+            <td>{{i.date}}</td>
+            <td>{{i.message}}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+  {% endif %}
+
+  <br><br>
+  <div class="row">
+    <!-- 하루 -->
+    <div class="col-md">
+      <div class="card">
+        <div class="card-header">
+          <h2>Daily</h2>
+        </div>
+        {% if rankDay %}
+
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">커밋 횟수</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for key, val in rankDay %}
+            <tr>
+              <th scope="row">{{key}}</th>
+              <td>{{val}}</td>
+            </tr>
             {% endfor %}
           </tbody>
         </table>
+        {% else %}
+        순위 결과 없음.
+        {% endif %}
       </div>
     </div>
-  {% endif %}
-
-<br><br>
-  <div class="row">
-    <!-- 하루 -->
-    <div class="col">
-      <h2>Daily</h2>
-      {% if rankDay %}
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">num</th>
-          </tr>
-        </thead>
-        <tbody>
-            {% for key, val in rankDay %}
-            <tr>
-            <th scope="row">{{key}}</th>
-            <td>{{val}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-      </table>
-        {% else %}
-          순위 결과 없음.
-        {% endif %}
-    </div>
     <!-- 주 -->
-    <div class="col">
-      <h2>Weekly</h2>
-      {% if rankWeek %}
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">num</th>
-          </tr>
-        </thead>
-        <tbody>
+    <div class="col-md">
+      <div class="card">
+        <div class="card-header">
+
+          <h2>Weekly</h2>
+        </div>
+        {% if rankWeek %}
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">커밋 횟수</th>
+            </tr>
+          </thead>
+          <tbody>
             {% for key, val in rankWeek %}
-              <tr>
+            <tr>
               <th scope="row">{{key}}</th>
               <td>{{val}}</td>
-              </tr>
+            </tr>
             {% endfor %}
-        </tbody>
-      </table>
+          </tbody>
+        </table>
         {% else %}
-          순위 결과 없음.
+        순위 결과 없음.
         {% endif %}
+      </div>
     </div>
     <!-- 한달 -->
-    <div class="col">
-      <h2>Monthly</h2>
-      {% if rankMonth %}
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">num</th>
-          </tr>
-        </thead>
-        <tbody>
+    <div class="col-md">
+      <div class="card">
+        <div class="card-header">
+
+          <h2>Monthly</h2>
+        </div>
+        {% if rankMonth %}
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">커밋 횟수</th>
+            </tr>
+          </thead>
+          <tbody>
             {% for key, val in rankMonth %}
-              <tr>
-                <th scope="row">{{key}}</th>
-                <td>{{val}}</td>
-              </tr>
+            <tr>
+              <th scope="row">{{key}}</th>
+              <td>{{val}}</td>
+            </tr>
             {% endfor %}
           </tbody>
         </table>
       </div>
       {% else %}
-        순위 결과 없음.
+      순위 결과 없음.
       {% endif %}
     </div>
+  </div>
 </div>
 {% endblock %}
-
-
-

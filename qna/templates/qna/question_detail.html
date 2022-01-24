@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<a class="btn btn-primary" href="/qna/" role="button">목록</a>
-<a class="btn btn-danger" href="/qna/{{question.id}}/delete/" role="button">삭제</a>
+
 
 <div class="container my-3">
     <h2 class="border-bottom py-2">{{ question.subject }}</h2>
@@ -34,15 +33,15 @@
                 </div>
             </div>
         </div>
-
-        <form action="{% url 'qna:answer_remove' %}" method="post">
-            {% csrf_token %}
-            <INPUT TYPE="hidden" NAME="answer_id" SIZE=10 value={{answer.id}}>
-            <input type="submit", value="댓글 삭제">
-        </form>
-        
         </a>
     </div>
+    <form action="{% url 'qna:answer_remove' %}" method="post">
+        {% csrf_token %}
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <INPUT TYPE="hidden" NAME="answer_id" SIZE=10 value={{answer.id}}>
+            <button class="btn btn-danger btn-sm" type="submit">댓글삭제</button>
+          </div>
+    </form>
     {% endfor %}
     <form action="{% url 'qna:answer_create' question.id %}"
             method="post" class="my-3">
@@ -65,7 +64,12 @@
                 class="form-control" rows="5"></textarea>
         </div>
         <br><input type="submit" value="답변등록" class="btn btn-primary">
+        
     </form>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a class="btn btn-primary" href="/qna/" role="button">목록</a>
+            <a class="btn btn-danger" href="/qna/{{question.id}}/delete/" role="button">삭제</a>
+          </div>
 </div>
         
 

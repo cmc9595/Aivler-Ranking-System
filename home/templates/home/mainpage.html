@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="row">
+  <!-- 좌측 영역 -->
   <div class="col-lg-6">
     <h1 class="h3 mb-3"><strong>Top</strong> Ranker</h1>
     <div class="card">
@@ -13,7 +14,7 @@
                 <h2>Daily</h2>
               </div>
               {% if rankDay %}
-      
+
               <table class="table table-striped table-hover">
                 <thead>
                   <tr>
@@ -22,7 +23,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  {% for key, val in rankDay %}   
+                  {% for key, val in rankDay %}
                   <tr>
                     <th scope="row">{{key}}</th>
                     <td>{{val}}</td>
@@ -35,10 +36,11 @@
               {% endif %}
             </div>
           </div>
+        </div>
       </div>
     </div>
-    
   </div>
+  <!-- 우측 영역 -->
   <div class="col-lg-6">
     <h1 class="h3 mb-3">Answer<strong> required</strong></h1>
     <div class="card">

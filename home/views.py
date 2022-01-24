@@ -124,7 +124,7 @@ def search(request):
         
     
     return render(request, 'home/resultpage.html', 
-                  {'data': data[:10], # 최근 10개목록
+                  {'data': data[:5], # 최근 10개목록
                    'id': id,
                    'msg':msg,
                    'rankDay':rankByDate('day'),

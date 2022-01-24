@@ -35,7 +35,7 @@
             {% csrf_token %}
             <tbody>
                 <tr>
-                    <th scope="row">{{ answer.id }}</th>
+                    <th scope="row">{{ forloop.counter }}</th>
                     <td>{{ answer.content }}</td>
                     <td>{{ answer.create_date }}</td>
                     <td><INPUT TYPE="hidden" NAME="answer_id" SIZE=10 value={{answer.id}}>

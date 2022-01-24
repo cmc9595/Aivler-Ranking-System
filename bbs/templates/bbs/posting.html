@@ -34,7 +34,7 @@
         {% csrf_token %}
         <tbody>
             <tr>
-                <th scope="row">{{ comment.id }}</th>
+                <th scope="row">{{ forloop.counter }}</th>
                 <td>{{ comment.content }}</td>
                 <td>{{ comment.create_date }}</td>
             </tr>

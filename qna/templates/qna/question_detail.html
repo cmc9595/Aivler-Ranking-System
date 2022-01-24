@@ -21,7 +21,6 @@
         {{question.answer_set.count}}개의 답변이 있습니다.
     </h5>
     {% for answer in question.answer_set.all %}
-    {{ answer.id }}
     <div class="card my-3">
         <div class="card-body">
             <div class="card-text" style="white-space: pre-line;">
@@ -40,8 +39,9 @@
         {% csrf_token %}
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <INPUT TYPE="hidden" NAME="answer_id" SIZE=10 value={{answer.id}}>
+            <INPUT TYPE="hidden" NAME="question_id" SIZE=10 value={{question.id}}>
             <button class="btn btn-danger btn-sm" type="submit">댓글삭제</button>
-          </div>
+        </div>
     </form>
     <!-- 댓글삭제 end -->
     {% endfor %}

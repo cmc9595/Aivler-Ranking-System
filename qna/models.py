@@ -4,6 +4,7 @@ class Question(models.Model):
     subject = models.CharField(max_length=200)
     content = models.TextField()
     pub_date = models.DateTimeField()
+    hits = models.IntegerField(default='0')
     def __str__(self):
         return self.subject
     

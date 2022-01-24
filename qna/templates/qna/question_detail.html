@@ -20,29 +20,34 @@
     <h5 class="border-bottom my-3 py-2">
         {{question.answer_set.count}}개의 답변이 있습니다.
     </h5>
-    {% for answer in question.answer_set.all %}
-    {{ answer.id }}
-    <div class="card my-3">
-        <div class="card-body">
-            <div class="card-text" style="white-space: pre-line;">
-                {{ answer.content }}
-            </div>
-            <div class="d-flex justify-content-end">
-                <div class="badge badge-light p-2">
-                    {{ answer.create_date }}
-                </div>
-            </div>
-        </div>
-        </a>
-    </div>
-    <form action="{% url 'qna:answer_remove' %}" method="post">
-        {% csrf_token %}
-        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-            <INPUT TYPE="hidden" NAME="answer_id" SIZE=10 value={{answer.id}}>
-            <button class="btn btn-danger btn-sm" type="submit">댓글삭제</button>
-          </div>
-    </form>
-    {% endfor %}
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">내용</th>
+                <th scope="col">시간</th>
+                <th scope="col">   </th>
+            </tr>
+        </thead>
+        {% for answer in question.answer_set.all %}
+            <form action="{% url 'qna:answer_remove' %}" method="post">
+            {% csrf_token %}
+            <tbody>
+                <tr>
+                    <th scope="row">{{ answer.id }}</th>
+                    <td>{{ answer.content }}</td>
+                    <td>{{ answer.create_date }}</td>
+                    <td><INPUT TYPE="hidden" NAME="answer_id" SIZE=10 value={{answer.id}}>
+                      <button type="submit" class="btn btn-light"><i class="align-middle me-2" type="submit" data-feather="delete"></i></button></td>
+                </tr>
+        {% endfor %}
+            </tbody>
+
+    </table>
+        </form>
+     
+
     <form action="{% url 'qna:answer_create' question.id %}"
             method="post" class="my-3">
         {% csrf_token %}

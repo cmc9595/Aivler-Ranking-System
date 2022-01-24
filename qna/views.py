@@ -26,7 +26,7 @@ def detail(request, question_id):
     return render(request, 'qna/question_detail.html', context)
 
 from django.utils import timezone
-# from .models import Answer
+from .models import Answer
 from django.shortcuts import redirect
 
 from .forms import AnswerForm
@@ -65,5 +65,11 @@ def question_create(request):
     context = {'form': form}
     
     return render(request, 'qna/question_form.html', context)
+
+def answer_remove(request):
+    a = request.POST.get('answer_id')
+    target = Answer.objects.get(pk=a)
+    target.delete()
+    return HttpResponse("answer removed")
 
 

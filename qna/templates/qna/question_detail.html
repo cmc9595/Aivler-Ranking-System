@@ -19,6 +19,7 @@
         {{question.answer_set.count}}개의 답변이 있습니다.
     </h5>
     {% for answer in question.answer_set.all %}
+    {{ answer.id }}
     <div class="card my-3">
         <div class="card-body">
             <div class="card-text" style="white-space: pre-line;">
@@ -30,6 +31,14 @@
                 </div>
             </div>
         </div>
+
+        <form action="{% url 'qna:answer_remove' %}" method="post">
+            {% csrf_token %}
+            <INPUT TYPE="hidden" NAME="answer_id" SIZE=10 value={{answer.id}}>
+            <input type="submit", value="댓글 삭제">
+        </form>
+        
+        </a>
     </div>
     {% endfor %}
     <form action="{% url 'qna:answer_create' question.id %}"

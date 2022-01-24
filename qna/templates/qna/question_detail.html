@@ -39,6 +39,7 @@
                     <td>{{ answer.content }}</td>
                     <td>{{ answer.create_date }}</td>
                     <td><INPUT TYPE="hidden" NAME="answer_id" SIZE=10 value={{answer.id}}>
+                        <INPUT TYPE="hidden" NAME="question_id" SIZE=10 value={{question.id}}>
                       <button type="submit" class="btn btn-light"><i class="align-middle me-2" type="submit" data-feather="delete"></i></button></td>
                 </tr>
         {% endfor %}

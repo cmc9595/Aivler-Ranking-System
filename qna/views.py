@@ -66,4 +66,9 @@ def question_create(request):
     
     return render(request, 'qna/question_form.html', context)
 
-
+def question_delete(request, question_id):
+    question = Question.objects.get(id=question_id)
+    if request.method == 'POST':
+        question.delete()
+        return redirect('qna:index')
+    return render(request, 'qna/question_delete.html', {'form': question })

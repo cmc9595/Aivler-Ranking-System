@@ -70,7 +70,7 @@ def answer_remove(request):
     a = request.POST.get('answer_id')
     target = Answer.objects.get(pk=a)
     target.delete()
-    return HttpResponse("answer removed")
+    return redirect('/qna/'+ request.POST.get('question_id') )
 
 
 def question_delete(request, question_id):

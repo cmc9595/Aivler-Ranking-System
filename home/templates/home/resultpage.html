@@ -106,11 +106,11 @@
       <div style='text-align:center;'>
         <ul class='pagination'>
         {% for i in page_range1 %}
-        <li>
-        <a href='{% url "home:search" %}?page1={{ i }}&page2={{page2}}&page3={{page3}}'>
-        {{ i }}
-        </a>
-        </li>
+        <button class="btn btn-sm btn-primary"
+          onclick="location.href = '{% url "home:search" %}?page1={{ i }}&page2={{page2}}&page3={{page3}}'">
+          {{ i }}
+        </button>
+        
         {% endfor %}
         </ul>
         </div>
@@ -192,11 +192,11 @@
       <div style='text-align:center;'>
         <ul class='pagination'>
         {% for i in page_range3 %}
-        <li>
-          <a href='{% url "home:search" %}?page1={{page1}}&page2={{page2}}&page3={{i}}'>
-        {{ i }}
-        </a>
-        </li>
+        <button class="btn btn-sm btn-primary"
+          onclick="location.href = '{% url "home:search" %}?page1={{page1}}&page2={{page2}}&page3={{i}}'">
+          {{ i }}
+        </button>
+        
         {% endfor %}
         </ul>
         </div>

@@ -14,6 +14,17 @@
       </div>
     </div>
   {% endif %}
+   <!-- 하루 -->
+   {% if data %}
+   <div class = "row">
+     <div class = "col">
+       <h1>MY RANKING</h1>
+       현재 {{id}}의 Daily rank는 {{rankD}}<br>
+       현재 {{id}}의 Weekly rank는 {{rankW}}<br>
+       현재 {{id}}의 Month rank는 {{rankM}}<br>
+     </div>
+    </div>
+    {% endif %}
 
   <!-- 최근커밋내역 -->
   {% if data %}

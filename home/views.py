@@ -78,6 +78,32 @@ def search(request):
     else: # 사이드바 '전체랭킹'으로 접속
         id = None
     print("id=", id)
+    # 사용한 id의 등수 (원래 잘 되는데 rankByDate 수정하면서 오류가 생긴걸로 추정)
+    rankDay = rankByDate('day')
+    rankWeek = rankByDate('week')
+    rankMonth = rankByDate('month')
+    blank = []
+    for key, val in rankDay:
+        blank.append(key)
+    if id in blank:
+        rankD = blank.index(id)
+    else:
+        rankD = None
+    blank2=[]
+    for key, val in rankWeek:
+        blank2.append(key)
+    if id in blank2:
+        rankW = blank2.index(id)
+    else:
+        rankW = None
+    blank3 = []
+    for key, val in rankDay:
+        blank3.append(key)
+    if id in blank3:
+        rankM = blank3.index(id)
+    else:
+        rankM = None
+    
     return render(request, 'home/resultpage.html', 
                   {'data': data[:10], # 최근 10개목록
                    'id': id,
@@ -85,6 +111,9 @@ def search(request):
                    'rankDay':rankByDate('day'),
                    'rankWeek':rankByDate('week'),
                    'rankMonth':rankByDate('month'),
+                   'rankD':rankD,
+                   'rankW':rankW,
+                   'rankM':rankM,
                    })
     
 def showRank(request):

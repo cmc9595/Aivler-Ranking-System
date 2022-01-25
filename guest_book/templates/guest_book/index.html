@@ -5,18 +5,19 @@
   <div class="col-4"></div>
   <div class="col-4">
     <div class="input-group">
-      <input type="text" class="form-control" aria-label="Text input with segmented dropdown button">
-      <button type="button" class="btn btn-outline-secondary">작성</button>
-      <button type="button" class="btn btn-outline-secondary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-        <span class="visually-hidden">Toggle Dropdown</span>
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end">
-        <li><a class="dropdown-item" href="#">수도권</a></li>
-        <li><a class="dropdown-item" href="#">충청권</a></li>
-        <li><a class="dropdown-item" href="#">강원권</a></li>
-        <li><a class="dropdown-item" href="#">경상권</a></li>
-        <li><a class="dropdown-item" href="#">전라권</a></li>
-      </ul>
+    <form method="POST">
+      {% csrf_token %}
+      <input type="text" class="form-control" name="content">
+      <input class="btn btn-primary" type="submit" value="작성">
+      <select name="region" id="region-select">
+        <option value="">--Please choose an option--</option>
+        <option value="수도권">수도권</option>
+        <option value="경상권">경상권</option>
+        <option value="전라권">전라권</option>
+        <option value="강원권">강원권</option>
+        <option value="충청권">충청권</option>
+      </select>
+    </form>
     </div>
   </div>
   <div class="col-4"></div>
@@ -29,18 +30,13 @@
           수도권
         </div>
         <div class="list-group list-group-flush scrollarea">
+          {% for content in guestbook%}
+          {% if content.region == "수도권"%}
           <p class="list-group-item list-group-item list-group-item py-3">
-            수도권 방명록 1
+            {{content.content}}
           </p>
-          <p class="list-group-item list-group-item list-group-item py-3">
-            수도권 방명록 2
-          </p>
-          <p class="list-group-item list-group-item list-group-item py-3">
-            수도권 방명록 3
-          </p>
-          <p class="list-group-item list-group-item list-group-item py-3">
-            수도권 방명록 4
-          </p>
+          {% endif %}
+          {% endfor %}
         </div>
       </div>
     </div>
@@ -50,15 +46,13 @@
           충청권
         </div>
         <div class="list-group list-group-flush scrollarea">
+          {% for content in guestbook%}
+          {% if content.region == "충청권"%}
           <p class="list-group-item list-group-item list-group-item py-3">
-            충청권 방명록 1
+            {{content.content}}
           </p>
-          <p class="list-group-item list-group-item list-group-item py-3">
-            충청권 방명록 2
-          </p>
-          <p class="list-group-item list-group-item list-group-item py-3">
-            충청권 방명록 3
-          </p>
+          {% endif %}
+          {% endfor %}
         </div>
       </div>
     </div>
@@ -68,15 +62,13 @@
           강원권
         </div>
         <div class="list-group list-group-flush scrollarea">
+          {% for content in guestbook%}
+          {% if content.region == "강원권"%}
           <p class="list-group-item list-group-item list-group-item py-3">
-            강원권 방명록 1
+            {{content.content}}
           </p>
-          <p class="list-group-item list-group-item list-group-item py-3">
-            강원권 방명록 2
-          </p>
-          <p class="list-group-item list-group-item list-group-item py-3">
-            강원권 방명록 3
-          </p>
+          {% endif %}
+          {% endfor %}
         </div>
       </div>
     </div>
@@ -86,9 +78,13 @@
           경상권
         </div>
         <div class="list-group list-group-flush scrollarea">
+          {% for content in guestbook%}
+          {% if content.region == "경상권"%}
           <p class="list-group-item list-group-item list-group-item py-3">
-            경상권 방명록 1
+            {{content.content}}
           </p>
+          {% endif %}
+          {% endfor %}
         </div>
       </div>
     </div>
@@ -98,33 +94,13 @@
           전라권
         </div>
         <div class="list-group list-group-flush scrollarea">
+          {% for content in guestbook%}
+          {% if content.region == "전라권"%}
           <p class="list-group-item list-group-item list-group-item py-3">
-            전라권 방명록 1
+            {{content.content}}
           </p>
-          <p class="list-group-item list-group-item list-group-item py-3">
-            전라권 방명록 2
-          </p>
-          <p class="list-group-item list-group-item list-group-item py-3">
-            전라권 방명록 3
-          </p>
-          <p class="list-group-item list-group-item list-group-item py-3">
-            전라권 방명록 4
-          </p>
-          <p class="list-group-item list-group-item list-group-item py-3">
-            전라권 방명록 5
-          </p>
-          <p class="list-group-item list-group-item list-group-item py-3">
-            전라권 방명록 6
-          </p>
-          <p class="list-group-item list-group-item list-group-item py-3">
-            전라권 방명록 7
-          </p>
-          <p class="list-group-item list-group-item list-group-item py-3">
-            전라권 방명록 8
-          </p>
-          <p class="list-group-item list-group-item list-group-item py-3">
-            전라권 방명록 9
-          </p>
+          {% endif %}
+          {% endfor %}
         </div>
       </div>
     </div>
@@ -134,17 +110,5 @@
 <div class="row">
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 {% endblock %}

@@ -13,28 +13,32 @@ load_dotenv()
 def index(request):
     return render(request, 'home/mainpage.html', {})
 
-def rankByDate(option, params=0):
-    today = timezone.now()
-    #print("현재시간", timezone.now())
+def rankByDate(option, params=1): # params 는 (idx, id, count) 원소갯수
+    today = datetime.now()
     if option=='day':
-        diff = timedelta(hours=today.hour, minutes=today.minute, seconds=today.second)
+        target = datetime(year=today.year, month=today.month, day=today.day)
     elif option=='week':
-        diff = timedelta(days=today.weekday(), hours=today.hour, minutes=today.minute, seconds=today.second)
+        target = datetime(year=today.year, month=today.month, day=today.day - today.weekday())
     elif option=='month':
-        diff = timedelta(days=today.day-1, hours=today.hour, minutes=today.minute, seconds=today.second)
-    target = str(today - diff)
+        target = datetime(year=today.year, month=today.month, day=1)
     #print(f"{option}, {target}")
-    commitList = Commit.objects.filter(date__gte=target)
+    commits = Commit.objects.filter(date__gte=str(target))
     dic = {}
-    for i in commitList:
-        dic[i.userid] = dic.get(i.userid, 0) + 1
-    result = sorted(dic.items(), key=lambda x:x[1], reverse=True)
-    if params==0:
-        return result # (id, cnt)
-    elif params==1:
-        return [(idx+1, i[0], i[1]) for idx, i in enumerate(result)] # (idx, id, cnt)
+    for commit in commits:
+        dic[commit.userid] = dic.get(commit.userid, 0) + 1
+    res = sorted(dic.items(), key=lambda x:x[1], reverse=True)
+    res = [[idx+1, id, cnt]for idx, (id, cnt) in enumerate(res)]
+    # 중복 rank 적용
+    for i in range(len(res)-1):
+        if res[i][2]==res[i+1][2]:
+            res[i+1][0] = res[i][0]
+    
+    if params==1:
+        return [(id) for idx, id, cnt in res]
     elif params==2:
-        return [key for key, val in result] # (id)
+        return [(id, cnt) for idx, id, cnt in res]
+    elif params==3:
+        return res
 
 
 def getCommitsFromAPI(id):
@@ -170,9 +174,9 @@ def search(request):
         
         print("id=", id)
         # 사용한 id의 등수 (중복등수 적용)
-        dayIDs = rankByDate('day', 2)
-        weekIDs = rankByDate('week', 2)
-        monthIDs = rankByDate('month', 2)
+        dayIDs = rankByDate('day', 1)
+        weekIDs = rankByDate('week', 1)
+        monthIDs = rankByDate('month', 1)
         
         dayRank = dayIDs.index(id)+1 if id in dayIDs else '-'
         weekRank = weekIDs.index(id)+1 if id in weekIDs else '-'
@@ -198,9 +202,9 @@ def commitmsg(request):
     return HttpResponse(result)
 
 def mainrank(request):
-    dayRank = rankByDate('day', 1)
-    weekRank = rankByDate('week', 1)
-    monthRank = rankByDate('month', 1)
+    dayRank = rankByDate('day', 3)
+    weekRank = rankByDate('week', 3)
+    monthRank = rankByDate('month', 3)
     return render(request, 'home/mainpage.html', {
         'rankD':dayRank,
         'rankW':weekRank,
@@ -210,11 +214,11 @@ def mainrank(request):
 def ranking(request): # 사이드바, 버튼
     option = request.GET.get('option', 'daily')
     if option == 'daily':
-        returnList = rankByDate('day', 1)
+        returnList = rankByDate('day', 3)
     elif option=='weekly':
-        returnList = rankByDate('week', 1)
+        returnList = rankByDate('week', 3)
     elif option=='monthly':
-        returnList = rankByDate('month', 1)
+        returnList = rankByDate('month', 3)
     # 렉이 많이 걸리는 부분 (코드 수정 ... 검토)
     new_list = []
     for rank, id, cnt in returnList:

@@ -118,19 +118,19 @@
               <th scope="col">Rank</th>
               <th scope="col">Profile</th>
               <th scope="col">ID</th>
-              <th scope="col">커밋 횟수</th>
+              <th scope="col">커밋</th>
               <th scope="col">지역</th>
               <th scope="col">BIO</th>
             </tr>
           </thead>
-          <tbody class="text-center">
+          <tbody class="text-center" style="font-size:16px">
             {% for rank, id, cnt, profile in new_list %}
             <tr>
-              {% if idx == 1 %}
+              {% if rank == 1 %}
                 <td scope="row">🥇</td>
-              {% elif idx == 2 %}
+              {% elif rank == 2 %}
                 <td scope="row">🥈</td>
-              {% elif idx == 3 %}
+              {% elif rank == 3 %}
                 <td scope="row">🥉</td>
               {% else %}
                 <td scope="row">{{rank}}</td>

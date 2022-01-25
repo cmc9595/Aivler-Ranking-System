@@ -114,14 +114,14 @@
         {% if returnList %}
 
         <table class="table table-borderless table-hover">
-          <thead class="table-dark">
+          <thead class="table-dark text-center">
             <tr>
               <th scope="col">Rank</th>
               <th scope="col">ID</th>
               <th scope="col">커밋 횟수</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="text-center">
             {% for idx, key, val in returnList %}
             <tr>
               <th scope="row">{{idx}}</th>

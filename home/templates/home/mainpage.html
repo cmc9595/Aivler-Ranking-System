@@ -13,18 +13,22 @@
               <div class="card-header">
                 <h2>Daily</h2>
               </div>
-              {% if rankDay %}
+              {% if rankD %}
 
               <table class="table borderless table-striped table-hover">
-                <thead class="table-dark">
+                <thead class="table-dark text-center">
                   <tr>
+                    <th scope="col">Rank</th>
+                    <th scope="col">Name</th>
                     <th scope="col">ID</th>
                     <th scope="col">커밋 횟수</th>
                   </tr>
                 </thead>
-                <tbody>
-                  {% for key, val in rankDay %}
+                <tbody class="text-center">
+                  {% for idx, key, val in rankD %}
                   <tr>
+                    <th scope="row">{{idx}}</th>
+                    <th scope="row">null</th>
                     <th scope="row">{{key}}</th>
                     <td>{{val}}</td>
                   </tr>

@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container">
+  <!-- 검색결과창 -->
+  {% if msg and not sidebar %}
+  <div class="row">
+    <div class="col">
+      <div class="card text-center">
+        <div class="card-header">
+          <h2>{{msg}}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+{%if data %}
+
+<div class="row">
+
+  <div class="col-lg-2">
+    <h3>Profile</h3>
+    <div class="card mb-3">
+      <div class="card-header">
+        <h5 class="card-title mb-0">Profile Details</h5>
+      </div>
+      <div class="card-body text-center">
+        <img src="{{avatar}}" class="img-fluid rounded-circle mb-2" width="128" height="128" />
+        <h5 class="card-title mb-0">{{id}}</h5>
+        <div class="text-muted mb-2">{{bio}}</div>
+
+        <div>
+          <a class="btn btn-primary btn-sm" href={{html_url}} target="_blank">프로필주소</a>
+          </div>
+      </div>
+
+      <div class="card-body">
+        <h5 class="h6 card-title">About</h5>
+        <ul class="list-unstyled mb-0">
+          <li class="mb-1"><span data-feather="home" class="feather-sm me-1"></span>{{company}}</li>
+          <li class="mb-1"><span data-feather="briefcase" class="feather-sm me-1"></span>{{blog}}</li>
+          <li class="mb-1"><span data-feather="map-pin" class="feather-sm me-1"></span> {{location}}</li>
+        </ul>
+      </div>
+      <hr class="my-0" />
+    </div>
+  </div>
+
+  <div class="col-lg-2">
+    <h3>🏅Your Ranking🏅</h3>
+    <div class="card">
+      <div class="card-header">
+        <h5 class="card-title mb-0">Daily Ranking</h5>
+      </div>
+      <div class="card-body">
+        <h1>{{rankD}}</h1>
+      </div>
+    </div>
+    <div class="card mt-5">
+      <div class="card-header">
+        <h5 class="card-title mb-0">Weekly Ranking</h5>
+      </div>
+      <div class="card-body">
+        <h1>{{rankW}}</h1>
+      </div>
+    </div>
+    <div class="card mt-5">
+      <div class="card-header">
+        <h5 class="card-title mb-0">Monthly Ranking</h5>
+      </div>
+      <div class="card-body">
+        <h1>{{rankM}}</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-8">
+    <h3>최근 {{id}}의 커밋</h3>
+    <div class="card">
+      <div class="card-header">
+        <table class="table w-auto">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Github ID</th>
+              <th scope="col">Repository Name</th>
+              <th scope="col">Date</th>
+              <th scope="col">Commit Message</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for i in data %}
+            <tr>
+              <th scope="row">{{i.eventid}}</th>
+              <td>{{i.userid}}</td>
+              <td>{{i.repository}}</td>
+              <td>{{i.date}}</td>
+              <td>{{i.message}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+{% endif %}
+{% endblock %}

@@ -70,4 +70,22 @@ def comment_delete(request, post_id, comment_id):
         comment.delete()
         return redirect('bbs:posting', post_id=post.id)
     context = {'post': post, 'form': Comment.objects.all()}
-    return render(request, 'bbs/posting.html', context)    
+    return render(request, 'bbs/posting.html', context)  
+
+
+from django.shortcuts import render
+from django.http import HttpResponse
+def upload(request):
+    if request.method == 'POST':
+        upload_files = request.FILES.getlist('file')
+        
+        result = ''
+        for upload_file in upload_files:
+            name = upload_file.name
+            size = upload_file.size
+            with open(name, 'wb') as file:
+                for chunk in upload_file.chunks():
+                    file.write(chunk)
+            result += '%s<br>%s<hr>' % (name, size)
+        return HttpResponse(result)
+    return render(request, 'bbs/upload.html')

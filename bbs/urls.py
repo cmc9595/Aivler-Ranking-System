@@ -10,4 +10,6 @@ urlpatterns = [
 
     path('comment/create/<int:post_id>/', views.comment_create,name='comment_create'), # 댓글 작성
     path('<int:post_id>/<int:comment_id>/',views.comment_delete, name="comment_delete"),
+
+    path('upload/', views.upload, name='upload'),
 ]

@@ -16,10 +16,14 @@
         </div>
     </div>
 </div>
+{% for uploadfile in post.uploadfile_set.all %}
+    {% csrf_token %}
+        <td><a class="btn" href="/free/{{uploadfile.id}}/download/" role="button"> <h5>{{ uploadfile.file }}</h5> </a></td>
+{% endfor %}
+
 <h5 class="border-bottom my-3 py-2">
     {{post.comment_set.count}}개의 답변이 있습니다.
 </h5>
-
 <table class="table table-striped">
     <thead>
         <tr>
@@ -30,7 +34,6 @@
         </tr>
     </thead>
     {% for comment in post.comment_set.all %}
-        <form action="#" method="post">
         {% csrf_token %}
         <tbody>
             <tr>
@@ -39,7 +42,6 @@
                 <td>{{ comment.create_date }}</td>
                 <td><a class="btn btn-danger" href="/free/{{post.id}}/{{comment.id}}/" role="button">삭제</a></td>
             </tr>
-            </form>
         </tbody>    
     {% endfor %}
 </table>

@@ -13,7 +13,8 @@ urlpatterns = [
 
     path('comment/create/<int:post_id>/', views.comment_create,name='comment_create'), # 댓글 작성
     path('<int:post_id>/<int:comment_id>/',views.comment_delete, name="comment_delete"),
-    path('download/', views.download, name='download'),
+    path('<int:uploadfile_id>/download/', views.download, name='download'),
+
 ]+ static(
     settings.MEDIA_URL,
     document_root=settings.MEDIA_ROOT)

@@ -13,3 +13,9 @@ class Comment(models.Model):
     create_date = models.DateTimeField()
     def __str__(self):
         return self.post
+
+class UploadFile(models.Model):
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
+    file = models.FileField(upload_to='%Y/%m/%d')
+    def __str__(self):
+        return self.post

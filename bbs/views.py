@@ -21,6 +21,10 @@ def posting(request, post_id):
     }
     return render(request, 'bbs/posting.html', context)
 
+
+from django.shortcuts import render
+from .forms import UploadFileForm
+
 def new_post(request):
     if request.method == 'POST' and request.POST['postname'] != '':
         new_article=Post.objects.create(
@@ -28,10 +32,18 @@ def new_post(request):
             contents=request.POST['contents'],
         )
         new_article.save()
-        return redirect('/free/')
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            uploadFile = form.save(commit=False)
+            uploadFile.post = new_article
+            uploadFile.save()
+            return redirect('/free/')
+
     elif request.method == 'POST' and request.POST['postname'] == '' :
         context = {'written' : request.POST['contents']}
         return render(request, 'bbs/new_post.html', context)
+    else:
+        form = UploadFileForm()
     return render(request, 'bbs/new_post.html')
 
 def remove_post(request, post_id):
@@ -73,19 +85,3 @@ def comment_delete(request, post_id, comment_id):
     return render(request, 'bbs/posting.html', context)  
 
 
-from django.shortcuts import render
-from django.http import HttpResponse
-def upload(request):
-    if request.method == 'POST':
-        upload_files = request.FILES.getlist('file')
-        
-        result = ''
-        for upload_file in upload_files:
-            name = upload_file.name
-            size = upload_file.size
-            with open(name, 'wb') as file:
-                for chunk in upload_file.chunks():
-                    file.write(chunk)
-            result += '%s<br>%s<hr>' % (name, size)
-        return HttpResponse(result)
-    return render(request, 'bbs/upload.html')

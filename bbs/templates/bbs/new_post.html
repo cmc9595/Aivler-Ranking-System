@@ -2,7 +2,7 @@
 {% block content %}
 <h1 class="h3 mb-3">게시판-작성</h1>
 
-<form method="POST">
+<form enctype="multipart/form-data" method="POST">
     {% csrf_token %}
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">게시판 제목</label>
@@ -13,6 +13,9 @@
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" cols="50" name="contents">{{written}}</textarea>
     </div>
     <br>
+    
+    <input type="file" name="file">
+ 
     <input class="btn btn-primary" href="free/" type="submit" value="작성">
     <a class="btn btn-secondary" href="/free/" role="button">취소</a>
 </form>

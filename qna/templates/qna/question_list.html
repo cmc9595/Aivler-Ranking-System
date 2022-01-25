@@ -1,42 +1,51 @@
 {% extends "base.html" %}
 {% block content %}
-<h1 class="h3 mb-3">질문게시판</h1>
 
 
-{% if question_list %}
-{% for question in question_list %}
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <div class='d-flex justify-content-between'>
-                    <div>
-                        <small>#{{ question.id }}번 째 질문 </small>
-                    </div>
-                    <div>
-                        <small>{{ question.pub_date }}</small>
-                        <br>
-                        <small>조회 수 : {{ question.hits }}</small>
-                    </div>
-                </div>
-                <h4>
-                    <a href="{% url 'qna:detail' question.id %}">{{ question.subject }}</a>
-                </h4>
+    <div clss="row">
+        <div class="row">
+            <div class="col-md-8 col-sm-8">
+                <h1><i data-feather="align-right"></i> 질문게시판</h1>
             </div>
-            <div class="card-body">
-                {{question.summary}} ...
+            <div class="col-md-4 col-sm-4">
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                    <a href="{% url 'qna:question_create' %}" class="btn btn-primary">
+                        질문 등록하기
+                    </a>
+                  </div>
             </div>
         </div>
     </div>
-</div>
-{% endfor %}
-{% else %}
 
-<td colspan="3">질문이 없습니다.
-
+    {% if question_list %}
+    {% for question in question_list %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class='d-flex justify-content-between'>
+                        <div>
+                            <small>#{{ question.id }}번 째 질문 </small>
+                        </div>
+                        <div>
+                            <small>{{ question.pub_date }}</small>
+                            <br>
+                            <small>조회 수 : {{ question.hits }}</small>
+                        </div>
+                    </div>
+                    <h4>
+                        <a href="{% url 'qna:detail' question.id %}">{{ question.subject }}</a>
+                    </h4>
+                </div>
+                <div class="card-body">
+                    {{question.summary}} ...
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+        <td colspan="3">질문이 없습니다.
     {% endif %}
-    <a href="{% url 'qna:question_create' %}" class="btn btn-primary">
-        질문 등록하기
-    </a>
 
     {% endblock %}

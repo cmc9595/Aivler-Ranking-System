@@ -14,9 +14,18 @@
     </div>
     <br>
     
-    <input type="file" name="file">
- 
-    <input class="btn btn-primary" href="free/" type="submit" value="작성">
-    <a class="btn btn-secondary" href="/free/" role="button">취소</a>
+    <div class="row">
+
+        <div class="col-6">
+
+            <input class="form-control" type="file" id="formFile" name="file">
+        </div>
+        <div class="col-3"></div>
+        <div class="col-3 text-end">
+            <input class="btn btn-primary" href="free/" type="submit" value="작성">
+            <a class="btn btn-secondary" href="/free/" role="button">취소</a>
+        </div>
+    </div>
+
 </form>
 {% endblock %}

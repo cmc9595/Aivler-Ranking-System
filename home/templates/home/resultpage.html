@@ -97,10 +97,13 @@
   {% endif %}
 
   <!-- button -->
-  <button type="button" onClick="location.href='{% url "home:search" %}?githubID={{id}}&option=daily&sidebar={{sidebar}}'">Daily</button>
-  <button type="button" onClick="location.href='{% url "home:search" %}?githubID={{id}}&option=weekly&sidebar={{sidebar}}'">Weekly</button>
-  <button type="button" onClick="location.href='{% url "home:search" %}?githubID={{id}}&option=monthly&sidebar={{sidebar}}'">Monthly</button>
-
+  <div class="btn-gropu mb-4">
+    
+    <button class="btn btn-primary" type="button" onClick="location.href='{% url "home:search" %}?githubID={{id}}&option=daily&sidebar={{sidebar}}'">Daily</button>
+    <button class="btn btn-primary" type="button" onClick="location.href='{% url "home:search" %}?githubID={{id}}&option=weekly&sidebar={{sidebar}}'">Weekly</button>
+    <button class="btn btn-primary" type="button" onClick="location.href='{% url "home:search" %}?githubID={{id}}&option=monthly&sidebar={{sidebar}}'">Monthly</button>
+  </div>
+    
   <!-- List 출력 -->
   <div class="row">
     <div class="col-md">
@@ -111,14 +114,14 @@
         {% if returnList %}
 
         <table class="table table-borderless table-hover">
-          <thead class="table-dark">
+          <thead class="table-dark text-center">
             <tr>
               <th scope="col">Rank</th>
               <th scope="col">ID</th>
               <th scope="col">커밋 횟수</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="text-center">
             {% for idx, key, val in returnList %}
             <tr>
               <th scope="row">{{idx}}</th>

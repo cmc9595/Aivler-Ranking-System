@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404
 from .models import Post
 
 def free(request):
-    postlist = Post.objects.all()
+    postlist = Post.objects.order_by('-id')
     page = request.GET.get('page', '1')
     # 한 페이지에 출력할 갯수
     paginator = Paginator(postlist, 9)
@@ -16,6 +16,8 @@ def free(request):
 
 def posting(request, post_id):
     post = Post.objects.get(id=post_id)
+    post.views += 1
+    post.save()
     context = {
         'post': post
     }

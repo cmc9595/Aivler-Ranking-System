@@ -32,13 +32,14 @@ def new_post(request):
             contents=request.POST['contents'],
         )
         new_article.save()
-        form = UploadFileForm(request.POST, request.FILES)
-        if form.is_valid():
-            uploadFile = form.save(commit=False)
-            uploadFile.post = new_article
-            uploadFile.save()
-            return redirect('/free/')
-
+        if(request.FILES):
+            form = UploadFileForm(request.POST, request.FILES)
+            if form.is_valid():
+                uploadFile = form.save(commit=False)
+                uploadFile.post = new_article
+                uploadFile.save()
+                return redirect('/free/')
+        return redirect('/free/')
     elif request.method == 'POST' and request.POST['postname'] == '' :
         context = {'written' : request.POST['contents']}
         return render(request, 'bbs/new_post.html', context)

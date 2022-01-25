@@ -122,7 +122,7 @@ def updateProfile(id):
 def search(request):
     if request.method=='GET': # 검색박스
         id = request.GET.get('githubID')
-        sidebar = request.GET.get('sidebar')
+        #sidebar = request.GET.get('sidebar')
         if id is None:
             id = ''
         else:
@@ -181,7 +181,7 @@ def search(request):
         return render(request, 'home/profile.html', 
                     {'data': data[:5], # 최근 5개목록
                     'id': id,
-                    'sidebar':sidebar,
+                    #'sidebar':sidebar,
                     'rankD':dayRank,
                     'rankW':weekRank,
                     'rankM':monthRank,
@@ -220,7 +220,6 @@ def ranking(request): # 사이드바, 버튼
     for rank, id, cnt in returnList:
         new_list.append([rank, id, cnt, GithubUser.objects.get(userid=id)])
         
-        # 여기서 시간많이걸림 api가 느린듯...
         # a = getProfileFromAPI(key)
         # avatar = a[0]
         # git_url = a[1]

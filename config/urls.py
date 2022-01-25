@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from . import views
+from . import views, settings
 import home.views as home_views
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', home_views.mainrank, name='mainrank'),
@@ -28,3 +29,5 @@ urlpatterns = [
     path('qna/', include('qna.urls')),
     path('profile/', include('git_profile.urls'))
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

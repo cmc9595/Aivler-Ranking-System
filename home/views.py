@@ -12,7 +12,7 @@ load_dotenv()
 def index(request):
     return render(request, 'home/mainpage.html', {})
 
-def rankByDate(option, params=0): # params 0:(id, cnt), 1:(id)
+def rankByDate(option, params=0):
     today = timezone.now()
     #print("현재시간", timezone.now())
     if option=='day':
@@ -28,7 +28,6 @@ def rankByDate(option, params=0): # params 0:(id, cnt), 1:(id)
     for i in commitList:
         dic[i.userid] = dic.get(i.userid, 0) + 1
     result = sorted(dic.items(), key=lambda x:x[1], reverse=True)
-    print(result)
     if params==0:
         return result # (id, cnt)
     elif params==1:
@@ -61,15 +60,21 @@ from .models import Commit
 def search(request):
     data = []
     msg = ''
-    if request.method=='POST': # 검색박스
-        id = request.POST.get('githubID').split() # 양쪽공백허용
-        now_page1 = request.GET.get('page1', 1) # 'page' 안넘어오면 1 반환.
-        now_page2 = request.GET.get('page2', 1)
-        now_page3 = request.GET.get('page3', 1)
-        if id:
-            id = id[0]
-        else:
+    if request.method=='GET': # 검색박스, 사이드바, 버튼
+        id = request.GET.get('githubID')
+        if id is None:
             id = ''
+        else:
+            id = id.split() # 양쪽공백 허용
+            if id:
+                id = id[0]
+            else:
+                id = ''
+        sidebar = request.GET.get('sidebar')
+            
+        # now_page1 = request.GET.get('page1', 1) # 'page' 안넘어오면 1 반환.
+        # now_page2 = request.GET.get('page2', 1)
+        # now_page3 = request.GET.get('page3', 1)
             
         commitList=getCommitsFromAPI(id)
         if commitList=='no token':
@@ -87,56 +92,58 @@ def search(request):
                 Commit(eventid=i[0], userid=id, repository=i[1], date=dt, message=i[3]).save()
             data = Commit.objects.filter(userid=id)
             
-    else: # 사이드바 '전체랭킹'으로 접속
-        id = None
-        now_page1 = request.GET.get('page1', 1)
-        now_page2 = request.GET.get('page2', 1)
-        now_page3 = request.GET.get('page3', 1)
         
-    print("id=", id)
-    # 사용한 id의 등수 (중복등수 적용)
-    dayIDs = rankByDate('day', 2)
-    weekIDs = rankByDate('week', 2)
-    monthIDs = rankByDate('month', 2)
-    
-    dayRank = dayIDs.index(id)+1 if id in dayIDs else None
-    weekRank = weekIDs.index(id)+1 if id in weekIDs else None
-    monthRank = monthIDs.index(id)+1 if id in monthIDs else None
-   
-    now_pages = [now_page1, now_page2, now_page3]
-    rankLists = [rankByDate('day', 1), rankByDate('week', 1), rankByDate('month', 1)]
-    ## pagesize ##
-    pageSize = 10
-    res = []
-    for now_page, rankList in zip(now_pages, rankLists):
-        p = Paginator(rankList, pageSize)
-    
-        now_page = int(now_page)
-        start = (now_page - 1)//pageSize*pageSize + 1
-        end = start + pageSize
-        if end > p.num_pages:
-            end = p.num_pages
- 
-        res.append((p.page(now_page), range(start, end+1)))
+        print("id=", id)
+        # 사용한 id의 등수 (중복등수 적용)
+        dayIDs = rankByDate('day', 2)
+        weekIDs = rankByDate('week', 2)
+        monthIDs = rankByDate('month', 2)
         
-    return render(request, 'home/resultpage.html', 
-                  {'data': data[:5], # 최근 10개목록
-                   'id': id,
-                   'msg':msg,
-                   'rankDay': res[0][0],
-                   'rankWeek':res[1][0],
-                   'rankMonth':res[2][0],
-                   'rankD':dayRank,
-                   'rankW':weekRank,
-                   'rankM':monthRank,
-                   'page_range1' : res[0][1],
-                   'page_range2' : res[1][1],
-                   'page_range3' : res[2][1],
-                   'page1' : now_page1,
-                   'page2' : now_page2,
-                   'page3' : now_page3,
-                   })
+        dayRank = dayIDs.index(id)+1 if id in dayIDs else None
+        weekRank = weekIDs.index(id)+1 if id in weekIDs else None
+        monthRank = monthIDs.index(id)+1 if id in monthIDs else None
     
+        option = request.GET.get('option', 'daily')
+        if option == 'daily':
+            returnList = rankByDate('day', 1)
+        elif option=='weekly':
+            returnList = rankByDate('week', 1)
+        elif option=='monthly':
+            returnList = rankByDate('month', 1)
+        # now_pages = [now_page1, now_page2, now_page3]
+        # rankLists = [rankByDate('day', 1), rankByDate('week', 1), rankByDate('month', 1)]
+        # ## pagesize ##
+        # pageSize = 10
+        # res = []
+        # for now_page, rankList in zip(now_pages, rankLists):
+        #     p = Paginator(rankList, pageSize)
+        
+        #     now_page = int(now_page)
+        #     start = (now_page - 1)//pageSize*pageSize + 1
+        #     end = start + pageSize
+        #     if end > p.num_pages:
+        #         end = p.num_pages
+    
+        #     res.append((p.page(now_page), range(start, end+1)))
+            
+        return render(request, 'home/resultpage.html', 
+                    {'data': data[:5], # 최근 5개목록
+                    'id': id,
+                    'msg':msg,
+                    'sidebar':sidebar,
+                    'option': option[0].upper() + option[1:],
+                    'returnList': returnList,
+                    'rankD':dayRank,
+                    'rankW':weekRank,
+                    'rankM':monthRank,
+                    #    'page_range1' : res[0][1],
+                    #    'page_range2' : res[1][1],
+                    #    'page_range3' : res[2][1],
+                    #    'page1' : now_page1,
+                    #    'page2' : now_page2,
+                    #    'page3' : now_page3,
+                    })
+
 def showRank(request):
     return render(request, 'home/ranking.html', {})
 

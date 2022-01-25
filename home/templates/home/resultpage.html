@@ -3,7 +3,7 @@
 
 <div class="container">
   <!-- 검색결과창 -->
-  {% if msg %}
+  {% if msg and not sidebar %}
   <div class="row">
     <div class="col">
       <div class="card text-center">
@@ -14,6 +14,7 @@
     </div>
   </div>
   {% endif %}
+  <!-- 현재순위 -->
   {% if data %}
   <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
@@ -95,14 +96,19 @@
   </div>
   {% endif %}
 
+  <!-- button -->
+  <button type="button" onClick="location.href='{% url "home:search" %}?githubID={{id}}&option=daily&sidebar={{sidebar}}'">Daily</button>
+  <button type="button" onClick="location.href='{% url "home:search" %}?githubID={{id}}&option=weekly&sidebar={{sidebar}}'">Weekly</button>
+  <button type="button" onClick="location.href='{% url "home:search" %}?githubID={{id}}&option=monthly&sidebar={{sidebar}}'">Monthly</button>
+
+  <!-- List 출력 -->
   <div class="row">
-    <!-- 하루 -->
     <div class="col-md">
       <div class="card">
         <div class="card-header">
-          <h2>Daily</h2>
+          <h2>{{option}}</h2>
         </div>
-        {% if rankDay %}
+        {% if returnList %}
 
         <table class="table table-striped table-hover">
           <thead>
@@ -113,7 +119,7 @@
             </tr>
           </thead>
           <tbody>
-            {% for idx, key, val in rankDay %}
+            {% for idx, key, val in returnList %}
             <tr>
               <th scope="row">{{idx}}</th>
               <th scope="row"><a href="http://www.github.com/{{key}}" target="_blank">{{key}}</a></th>
@@ -126,106 +132,7 @@
         순위 결과 없음.
         {% endif %}
       </div>
-      
-      <div style='text-align:center;'>
-        <ul class='pagination'>
-        {% for i in page_range1 %}
-        <button class="btn btn-sm btn-primary"
-          onclick="location.href = '{% url "home:search" %}?page1={{ i }}&page2={{page2}}&page3={{page3}}'">
-          {{ i }}
-        </button>
-        
-        {% endfor %}
-        </ul>
-        </div>
-        
     </div>
-    <!-- 주 -->
-    <div class="col-md">
-      <div class="card">
-        <div class="card-header">
-
-          <h2>Weekly</h2>
-        </div>
-        {% if rankWeek %}
-        <table class="table table-striped table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Rank</th>
-              <th scope="col">ID</th>
-              <th scope="col">커밋 횟수</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for idx, key, val in rankWeek %}
-            <tr>
-              <th scope="row">{{idx}}</th>
-              <th scope="row"><a href="http://www.github.com/{{key}}" target="_blank">{{key}}</a></th>
-              <td>{{val}}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        {% else %}
-        순위 결과 없음.
-        {% endif %}
-      </div>
-      <div style='text-align:center;'>
-        <ul class='pagination'>
-        {% for i in page_range2 %}
-        <button class="btn btn-sm btn-primary"
-          onclick="location.href = '{% url "home:search" %}?page1={{page1}}&page2={{i}}&page3={{page3}}'">
-          {{ i }}
-        </button>
-        {% endfor %}
-        </ul>
-        </div>
-        
-    </div>
-    <!-- 한달 -->
-    <div class="col-md">
-      <div class="card">
-        <div class="card-header">
-
-          <h2>Monthly</h2>
-        </div>
-        {% if rankMonth %}
-        <table class="table table-striped table-hover">
-          <thead>
-            <tr>
-              <th scope="col">Rank</th>
-              <th scope="col">ID</th>
-              <th scope="col">커밋 횟수</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for idx, key, val in rankMonth %}
-            <tr>
-              <th scope="row">{{idx}}</th>
-              <th scope="row"><a href="http://www.github.com/{{key}}" target="_blank">{{key}}</a></th>
-              <td>{{val}}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-        {% else %}
-        순위 결과 없음.
-        {% endif %}
-      </div>
-      <div style='text-align:center;'>
-        <ul class='pagination'>
-        {% for i in page_range3 %}
-        <button class="btn btn-sm btn-primary"
-          onclick="location.href = '{% url "home:search" %}?page1={{page1}}&page2={{page2}}&page3={{i}}'">
-          {{ i }}
-        </button>
-        
-        {% endfor %}
-        </ul>
-        </div>
-        
-    </div>
-    
   </div>
 </div>
 {% endblock %}

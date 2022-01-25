@@ -40,7 +40,28 @@
                 <th scope="row">{{ forloop.counter }}</th>
                 <td>{{ comment.content }}</td>
                 <td>{{ comment.create_date }}</td>
-                <td><a class="btn btn-danger" href="/free/{{post.id}}/{{comment.id}}/" role="button">삭제</a></td>
+                <td>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#삭제1">
+                        삭제
+                    </button>
+                    <div class="modal fade" id="삭제1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="staticBackdropLabel">정말로 이 댓글을 삭제하시겠습니까?</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    {{comment.content}}
+                                </div>
+                                <div class="modal-footer">
+                                    <a class="btn btn-danger" href="/free/{{post.id}}/{{comment.id}}/" role="button">삭제</a>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
             </tr>
         </tbody>    
     {% endfor %}

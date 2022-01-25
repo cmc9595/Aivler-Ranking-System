@@ -96,7 +96,7 @@
   {% endif %} {% endcomment %}
 
   <!-- button -->
-  <div class="btn-gropu mb-4">
+  <div class="btn-group mb-4">
     
     <button class="btn btn-primary" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=daily&sidebar={{sidebar}}'">Daily</button>
     <button class="btn btn-primary" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=weekly&sidebar={{sidebar}}'">Weekly</button>
@@ -106,14 +106,14 @@
   <!-- List 출력 -->
   <div class="row">
     <div class="col-md">
-      <div class="card">
-        <div class="card-header">
+      <div class="card" style="border-radius: 2em">
+        <div class="card-header" style="border-radius: 2em">
           <h2>🎉 MAKE IT POSSIBLE</h2>
         </div>
         {% if returnList %}
 
         <table class="table table-borderless table-hover">
-          <thead class="table-dark text-center">
+          <thead class="table-dark text-center" style="font-size:16px">
             <tr>
               <th scope="col">Rank</th>
               <th scope="col">Profile</th>
@@ -124,14 +124,22 @@
             </tr>
           </thead>
           <tbody class="text-center">
-            {% for idx, key, val, avatar, location, bio in new_list %}
+            {% for rank, id, cnt, profile in new_list %}
             <tr>
-              <th scope="row">{{idx}}</th>
-              <th scope="row"><img src="{{avatar}}" class="img-fluid rounded-circle mb-2" width="20" height="20"></th>
-              <th scope="row"><a href="http://www.github.com/{{key}}" target="_blank">{{key}}</a></th>
-              <th scope="row">{{val}}</th>
-              <th scope="row">{{location}}</th>
-              <td>{{bio}}</td>
+              {% if idx == 1 %}
+                <th scope="row">🥇</th>
+              {% elif idx == 2 %}
+                <th scope="row">🥈</th>
+              {% elif idx == 3 %}
+                <th scope="row">🥉</th>
+              {% else %}
+                <th scope="row">{{rank}}</th>
+              {% endif %}
+              <th scope="row"><img src="{{profile.avatar}}" class="img-fluid rounded-circle mb-2" width="40" height="40"></th>
+              <th scope="row"><a href="http://www.github.com/{{id}}" target="_blank">{{id}}</a></th>
+              <th scope="row">{{cnt}}</th>
+              <th scope="row">{{profile.location}}</th>
+              <td>{{profile.bio}}</td>
             </tr>
             {% endfor %}
           </tbody>

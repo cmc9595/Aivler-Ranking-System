@@ -27,7 +27,8 @@ urlpatterns = [
     path('common/', include('common.urls')),
     path('free/', include('bbs.urls')),
     path('qna/', include('qna.urls')),
-    path('profile/', include('git_profile.urls'))
+    path('profile/', include('git_profile.urls')),
+    path('guest_book/',include('guest_book.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

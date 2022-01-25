@@ -247,10 +247,23 @@ def ranking(request):
         returnList = rankByDate('week', 1)
     elif option=='monthly':
         returnList = rankByDate('month', 1)
+    new_list = []
+    for idx, key, val in returnList:
+        a = getProfileFromAPI(key)
+        avatar = a[0]
+        git_url = a[1]
+        location = (a[-2])
+        bio = (a[-1])
+        new = (idx,key,val,avatar,location,bio)
+        new_list.append(new)    
+    
+    
         
     return render(request, 'home/resultpage.html',
-                  {'returnList': returnList,
+                  {'option': option,
+                   'returnList': returnList,
                    'rankD':dayRank,
                     'rankW':weekRank,
                     'rankM':monthRank,
+                    'new_list':new_list,
                    })

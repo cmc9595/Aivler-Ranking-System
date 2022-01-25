@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="container">
   {% comment %} <!-- 검색결과창 -->
   {% if msg and not sidebar %}
   <div class="row">
@@ -109,7 +108,7 @@
     <div class="col-md">
       <div class="card">
         <div class="card-header">
-          <h2>{{option}}</h2>
+          <h2>🎉 MAKE IT POSSIBLE</h2>
         </div>
         {% if returnList %}
 
@@ -117,16 +116,22 @@
           <thead class="table-dark text-center">
             <tr>
               <th scope="col">Rank</th>
+              <th scope="col">Profile</th>
               <th scope="col">ID</th>
               <th scope="col">커밋 횟수</th>
+              <th scope="col">지역</th>
+              <th scope="col">BIO</th>
             </tr>
           </thead>
           <tbody class="text-center">
-            {% for idx, key, val in returnList %}
+            {% for idx, key, val, avatar, location, bio in new_list %}
             <tr>
               <th scope="row">{{idx}}</th>
+              <th scope="row"><img src="{{avatar}}" class="img-fluid rounded-circle mb-2" width="20" height="20"></th>
               <th scope="row"><a href="http://www.github.com/{{key}}" target="_blank">{{key}}</a></th>
-              <td>{{val}}</td>
+              <th scope="row">{{val}}</th>
+              <th scope="row">{{location}}</th>
+              <td>{{bio}}</td>
             </tr>
             {% endfor %}
           </tbody>
@@ -138,4 +143,7 @@
     </div>
   </div>
 </div>
+</div>
+
+
 {% endblock %}

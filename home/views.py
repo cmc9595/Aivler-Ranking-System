@@ -203,12 +203,14 @@ def commitmsg(request):
 
 def mainrank(request):
     dayRank = rankByDate('day', 3)
+    new_list = [(idx, id, cnt, GithubUser.objects.get(userid=id)) for idx, id, cnt in dayRank]
     weekRank = rankByDate('week', 3)
     monthRank = rankByDate('month', 3)
     return render(request, 'home/mainpage.html', {
         'rankD':dayRank,
         'rankW':weekRank,
         'rankM':monthRank,
+        'new_list':new_list,
     })
     
 def ranking(request): # 사이드바, 버튼
@@ -234,6 +236,6 @@ def ranking(request): # 사이드바, 버튼
         
     return render(request, 'home/resultpage.html',
                   {'option': option,
-                   'returnList': returnList,
+                   #'returnList': returnList,
                     'new_list':new_list,
                    })

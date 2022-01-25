@@ -97,7 +97,6 @@
 
   <!-- button -->
   <div class="btn-group mb-4">
-    
     <button class="btn btn-primary" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=daily'">Daily</button>
     <button class="btn btn-primary" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=weekly'">Weekly</button>
     <button class="btn btn-primary" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=monthly'">Monthly</button>
@@ -110,7 +109,7 @@
         <div class="card-header" style="border-radius: 2em">
           <h2>🎉 MAKE IT POSSIBLE</h2>
         </div>
-        {% if returnList %}
+        {% if new_list %}
 
         <table class="table table-borderless table-hover">
           <thead class="table-dark text-center" style="font-size:16px">
@@ -118,6 +117,7 @@
               <th scope="col">Rank</th>
               <th scope="col">Profile</th>
               <th scope="col">ID</th>
+              <th scope="col">이름</th>
               <th scope="col">커밋</th>
               <th scope="col">지역</th>
               <th scope="col">BIO</th>
@@ -137,6 +137,7 @@
               {% endif %}
               <td scope="row"><img src="{{profile.avatar}}" class="img-fluid rounded-circle mb-2" width="40" height="40"></td>
               <td scope="row"><a href="http://www.github.com/{{id}}" target="_blank">{{id|default_if_none:"-"}}</a></td>
+              <td scope="row">{{profile.name|default_if_none:"-"}}</td>
               <td scope="row">{{cnt}}</td>
               <td scope="row">{{profile.location|default_if_none:"-"}}</td>
               <td>{{profile.bio|default_if_none:"-"}}</td>

@@ -247,6 +247,7 @@ def ranking(request):
         returnList = rankByDate('week', 1)
     elif option=='monthly':
         returnList = rankByDate('month', 1)
+    # 렉이 많이 걸리는 부분 (코드 수정 ... 검토)
     new_list = []
     for idx, key, val in returnList:
         a = getProfileFromAPI(key)

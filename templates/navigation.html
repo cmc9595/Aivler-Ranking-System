@@ -22,6 +22,30 @@
           <i id="my_ranking_txt">현재 나의 순위는?</i>{% include 'search_form.html' %}
       </li>
       <li>
+        <!-- 모달 버튼 -->
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#도움말">
+        도움말
+      </button>
+      <!-- Modal -->
+      <div class="modal fade" id="도움말" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">도움말</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+            <div class="modal-body">
+              º 도움말 내용 1 <br>
+              º 도움말 내용 2 <br>
+              º 도움말 내용 3 <br>
+              º 도움말 내용 4 <br>
+              º 도움말 내용 5 <br>
+              º 도움말 내용 6 <br>
+              </div>
+          </div>
+        </div>
+      </div>
+      <!-- 모달 끝 -->
         {% if user.is_authenticated %}
             <button class="btn btn-outline-primary" onclick="location.href ='{% url 'common:logout' %}'" >
                 {{ user.username }} (로그아웃)

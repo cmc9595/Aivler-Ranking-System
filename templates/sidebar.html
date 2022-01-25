@@ -24,7 +24,7 @@
       </li>
 
       <li class="sidebar-item">
-        <a class="sidebar-link" href="{% url 'home:search' %}">
+        <a class="sidebar-link" href="{% url 'home:search' %}?sidebar=True">
           <i class="align-middle" data-feather="user"></i> <span class="align-middle">전체 랭킹</span>
         </a>
       </li>
@@ -80,9 +80,6 @@
 <!-- 사이드바 끝 -->
 
 <!-- recently commitmessage javascript -->
-<script>
-  document.getElementById('commitbox').innerHTML="이순신"
-</script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
   function getCommitMsg(index, id){
@@ -96,7 +93,7 @@
     });
     data.then(function (result){
       document.getElementById(id).innerHTML=result.data
-      console.log(result.data);
+      //console.log(result.data);
     });
   }
   getCommitMsg(0, 'commitmsg0')

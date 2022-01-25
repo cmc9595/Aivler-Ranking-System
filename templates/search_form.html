@@ -1,4 +1,4 @@
-<form class='d-flex justify-content-between' method='post' action="{% url 'home:search' %}">
+<form class='d-flex justify-content-between' method='get' action="{% url 'home:search' %}">
   {% csrf_token %}
   <input name='githubID' type="text" class="form-control" placeholder="Put in your github ID"
     aria-describedby="button-addon2">

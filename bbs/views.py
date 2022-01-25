@@ -49,6 +49,8 @@ def new_post(request):
 from config import settings
 import os
 from .models import UploadFile
+from django.http import HttpResponse
+
 def download(request):
     id = request.GET.get('id')
     uploadFile = UploadFile.objects.get(id=id)

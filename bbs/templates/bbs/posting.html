@@ -23,7 +23,14 @@
 </div>
 {% for uploadfile in post.uploadfile_set.all %}
     {% csrf_token %}
-        <td><a class="btn" href="/free/{{uploadfile.id}}/download/" role="button"> <h5>{{ uploadfile.file }}</h5> </a></td>
+        <td>
+            <i data-feather="download"></i>
+            <a class="btn" href="/free/{{uploadfile.id}}/download/" role="button"> 
+                <h5>
+                    {{ uploadfile.file }}
+                </h5> 
+            </a>
+        </td>
 {% endfor %}
 
 <h5 class="border-bottom my-3 py-2">

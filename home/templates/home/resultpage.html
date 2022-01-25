@@ -2,7 +2,7 @@
 {% block content %}
 
 <div class="container">
-  <!-- 검색결과창 -->
+  {% comment %} <!-- 검색결과창 -->
   {% if msg and not sidebar %}
   <div class="row">
     <div class="col">
@@ -40,7 +40,7 @@
     </div>
   </div>
 </div>
-{% endif %}
+{% endif %} {% endcomment %}
   {% comment %} {% if data %}
   <div class="row row-cols-3">
     <div class="col">
@@ -66,7 +66,7 @@
   {% endif %} {% endcomment %}
 
   <!-- 최근커밋내역 -->
-  {% if data %}
+  {% comment %} {% if data %}
   <div class="row my-5">
     <div class="col">
       <h1>Recently Commit</h1>
@@ -94,14 +94,14 @@
       </table>
     </div>
   </div>
-  {% endif %}
+  {% endif %} {% endcomment %}
 
   <!-- button -->
   <div class="btn-gropu mb-4">
     
-    <button class="btn btn-primary" type="button" onClick="location.href='{% url "home:search" %}?githubID={{id}}&option=daily&sidebar={{sidebar}}'">Daily</button>
-    <button class="btn btn-primary" type="button" onClick="location.href='{% url "home:search" %}?githubID={{id}}&option=weekly&sidebar={{sidebar}}'">Weekly</button>
-    <button class="btn btn-primary" type="button" onClick="location.href='{% url "home:search" %}?githubID={{id}}&option=monthly&sidebar={{sidebar}}'">Monthly</button>
+    <button class="btn btn-primary" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=daily&sidebar={{sidebar}}'">Daily</button>
+    <button class="btn btn-primary" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=weekly&sidebar={{sidebar}}'">Weekly</button>
+    <button class="btn btn-primary" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=monthly&sidebar={{sidebar}}'">Monthly</button>
   </div>
     
   <!-- List 출력 -->

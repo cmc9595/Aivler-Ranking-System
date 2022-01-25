@@ -55,6 +55,28 @@ def getCommitsFromAPI(id):
             continue
     return l
 
+# profileapi
+def getProfileFromAPI(id):
+    t = []
+    token = os.environ.get("TOKEN")
+    if token is None:
+        return "no token"
+    headers = {'Authorization': 'token '+token}
+    url = f'http://api.github.com/users/{id}'
+    
+    response = requests.get(url, headers=headers).json()
+    try :
+        if response['type']=='User':
+            avatar = response['avatar_url']
+            html_url = response['html_url']
+            company = response['company']
+            blog = response['blog']
+            location = response['location']
+            bio = response['bio']
+            t = [avatar, html_url, company, blog, location, bio]
+    except:
+        t = []         
+    return t
 
 from .models import Commit
 def search(request):
@@ -91,7 +113,26 @@ def search(request):
                 dt += timedelta(hours=9) # seoul/Asia = UTC+09:00
                 Commit(eventid=i[0], userid=id, repository=i[1], date=dt, message=i[3]).save()
             data = Commit.objects.filter(userid=id)
-            
+        
+        # profile 가져오는부분 
+        profileList = getProfileFromAPI(id)
+        if profileList=='no token':
+            msg = 'no token'
+        elif profileList==[]:
+            msg = 'id가 틀리거나 토큰만료'
+            avatar = ""
+            html_url = ""
+            company = ""
+            blog = ""
+            location = ""
+            bio = ""
+        else :
+            avatar = profileList[0]
+            html_url = profileList[1]
+            company = profileList[2]
+            blog = profileList[3]
+            location = profileList[4]
+            bio = profileList[5]    
         
         print("id=", id)
         # 사용한 id의 등수 (중복등수 적용)
@@ -126,7 +167,7 @@ def search(request):
     
         #     res.append((p.page(now_page), range(start, end+1)))
             
-        return render(request, 'home/resultpage.html', 
+        return render(request, 'home/profile.html', 
                     {'data': data[:5], # 최근 5개목록
                     'id': id,
                     'msg':msg,
@@ -136,6 +177,12 @@ def search(request):
                     'rankD':dayRank,
                     'rankW':weekRank,
                     'rankM':monthRank,
+                    'avatar':avatar,
+                    'html_url':html_url,
+                    'company':company,
+                    'blog':blog,
+                    'location':location,
+                    'bio':bio,
                     #    'page_range1' : res[0][1],
                     #    'page_range2' : res[1][1],
                     #    'page_range3' : res[2][1],
@@ -182,3 +229,28 @@ def mainrank(request):
         'rankW':weekRank,
         'rankM':monthRank,
     })
+    
+    
+def ranking(request):
+    dayIDs = rankByDate('day', 2)
+    weekIDs = rankByDate('week', 2)
+    monthIDs = rankByDate('month', 2)
+        
+    dayRank = dayIDs.index(id)+1 if id in dayIDs else None
+    weekRank = weekIDs.index(id)+1 if id in weekIDs else None
+    monthRank = monthIDs.index(id)+1 if id in monthIDs else None
+    
+    option = request.GET.get('option', 'daily')
+    if option == 'daily':
+        returnList = rankByDate('day', 1)
+    elif option=='weekly':
+        returnList = rankByDate('week', 1)
+    elif option=='monthly':
+        returnList = rankByDate('month', 1)
+        
+    return render(request, 'home/resultpage.html',
+                  {'returnList': returnList,
+                   'rankD':dayRank,
+                    'rankW':weekRank,
+                    'rankM':monthRank,
+                   })

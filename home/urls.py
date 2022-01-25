@@ -10,4 +10,5 @@ urlpatterns = [
     path('showrank/', views.showRank, name='showRank'),
     path('home/', views.mainrank),
     path('commitmsg/', views.commitmsg, name='commitmsg'),
+    path('ranking/', views.ranking, name='ranking'),
 ]

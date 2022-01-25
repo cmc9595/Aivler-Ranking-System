@@ -29,10 +29,15 @@
             <label for="content">내용</label>
             <textarea class="form-control" name="content" rows="10" value="{{ form.content.value|default_if_none:''}}"></textarea>
         </div>
-        <input type="file" accept="image/jpeg,.txt" name="file" multiple>
         <br>
-        <button type="submit" class="btn btn-primary">저장하기</button>
+        <div>
+            <input class="form-control" type="file" accept="image/jpeg,.txt" name="file" multiple>
+        </div>
+        <br>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button type="submit" class="btn btn-primary">저장하기</button>
         <a class="btn btn-secondary" href="/qna/" role="button">취소</a>
+        </div>
     </form>
 {% comment %} </div> {% endcomment %}
 

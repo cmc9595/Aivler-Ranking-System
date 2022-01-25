@@ -16,6 +16,8 @@ def free(request):
 
 def posting(request, post_id):
     post = Post.objects.get(id=post_id)
+    post.views += 1
+    post.save()
     context = {
         'post': post
     }

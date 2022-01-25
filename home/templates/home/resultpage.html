@@ -14,8 +14,33 @@
     </div>
   </div>
   {% endif %}
-  <!-- 하루 -->
   {% if data %}
+  <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+  MY RANKING 👋
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Daily rank : {{rankD}} <br>
+        Weekly rank : {{rankW}}<br>
+        Monthly rank : {{rankM}}<br>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+  {% comment %} {% if data %}
   <div class="row row-cols-3">
     <div class="col">
       <h1>MY RANKING</h1>
@@ -37,7 +62,7 @@
 
     </div>
   </div>
-  {% endif %}
+  {% endif %} {% endcomment %}
 
   <!-- 최근커밋내역 -->
   {% if data %}

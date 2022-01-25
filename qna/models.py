@@ -7,6 +7,8 @@ class Question(models.Model):
     hits = models.IntegerField(default='0')
     def __str__(self):
         return self.subject
+    def summary(self):
+        return self.content[:80]
     
 class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)

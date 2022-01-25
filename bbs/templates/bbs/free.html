@@ -2,9 +2,11 @@
 {% block content %}
 
 <h1 class="h3 mb-3">자유게시판</h1>
-{%for list in postlist reversed%}
+
+
 <div class="row">
-    <div class="col-12">
+    {%for list in postlist reversed%}
+    <div class="col-md-4 col-sm-4 b">
         <div class="card">
             <div class="card-header">
                 <small># {{list.id}}번 째 게시글</small>
@@ -19,10 +21,9 @@
             </div>
         </div>
     </div>
+    {% endfor %}
 </div>
 
-
-{% endfor %}
 <a class="btn btn-primary" href="new_post/" role="button">글쓰기</a>
 
 <!-- 페이징 관련 -->

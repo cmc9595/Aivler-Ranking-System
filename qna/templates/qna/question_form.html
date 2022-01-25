@@ -1,11 +1,12 @@
+
 {% extends "base.html" %}
 {% block content %}
 <h1 class="h3 mb-3">질문 작성</h1>
 
 
-<div class="mb-3r">
+{% comment %} <div class="mb-3r"> {% endcomment %}
 
-    <form method="post" class="post-form my-3">
+    <form method="POST" class="post-form my-3" enctype="multipart/form-data">
         {% csrf_token %}
         <!-- 오류표시 Start -->
         {% if form.errors %}
@@ -21,19 +22,18 @@
         <!-- 오류표시 End -->
         <div class="form-group">
             <label for="subject">제목</label>
-            <input type="text" class="form-control" name="subject"
-                value="{{ form.subject.value|default_if_none:'' }}">
+            <input type="text" class="form-control" name="subject" value="{{ form.subject.value|default_if_none:'' }}">
         </div>
         <br>
         <div class="form-group">
             <label for="content">내용</label>
-            <textarea class="form-control" name="content" rows="10">
-{{ form.content.value|default_if_none:'' }}</textarea>
-         </div>
-            <br>
+            <textarea class="form-control" name="content" rows="10" value="{{ form.content.value|default_if_none:''}}"></textarea>
+        </div>
+        <input type="file" accept="image/jpeg,.txt" name="file" multiple>
+        <br>
         <button type="submit" class="btn btn-primary">저장하기</button>
         <a class="btn btn-secondary" href="/qna/" role="button">취소</a>
     </form>
-</div>
+{% comment %} </div> {% endcomment %}
 
 {% endblock %}

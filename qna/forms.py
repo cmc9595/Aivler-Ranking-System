@@ -4,7 +4,7 @@ from .models import Question
 class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
-        fields = ['subject', 'content']
+        fields = ['subject', 'content', 'file']
         
         labels = {
             'subject': '제목',

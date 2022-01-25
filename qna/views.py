@@ -44,18 +44,24 @@ def answer_create(request, question_id):
 
 
 from .forms import QuestionForm
-def question_create(request):
-    form = QuestionForm()
-    return render(request, 'qna/question_form.html', {'form': form})
+# def question_create(request):
+#     form = QuestionForm()
+#     return render(request, 'qna/question_form.html', {'form': form})
 
 def question_create(request):
     if request.method == 'POST':
-        form = QuestionForm(request.POST)
+        form = QuestionForm(request.POST,request.FILES)
         if form.is_valid():
             question = form.save(commit=False)
             question.pub_date = timezone.now()
             question.save()
-            return redirect('qna:index')
+            name = ''
+            size = ''
+            name = question.file.name
+            size = question.file.size
+            return HttpResponse('%s<br>%s' % (name, size))
+
+            # return redirect('qna:index')
     else:
         form = QuestionForm()
     context = {'form': form}

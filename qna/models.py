@@ -5,7 +5,8 @@ class Question(models.Model):
     content = models.TextField()
     pub_date = models.DateTimeField()
     hits = models.IntegerField(default='0')
-    file = models.FileField(upload_to='%Y/%m/%d',blank=True)
+    # file = models.FileField(upload_to='%Y/%m/%d',blank=True)
+    file = models.FileField(upload_to='%Y/%m/%d')
     def __str__(self):
         return self.subject
     def summary(self):

@@ -4,12 +4,26 @@ from .models import Question
 
 from django.shortcuts import get_object_or_404
 
+# def index(request):
+#     question_list = Question.objects.order_by('-pub_date')
+#     context = {
+#         'question_list': question_list
+#     }
+#     return render(request, 'qna/question_list.html', context)
+
 def index(request):
-    question_list = Question.objects.order_by('-pub_date')
+    question_list = Question.objects.filter(qsolve = 0)
     context = {
         'question_list': question_list
     }
     return render(request, 'qna/question_list.html', context)
+
+def solve(request):
+    question_list = Question.objects.filter(qsolve = 1)
+    context = {
+        'question_list': question_list
+    }
+    return render(request, 'qna/question_list2.html', context)
 
 def detail(request, question_id):
     question = get_object_or_404(Question, id=question_id)

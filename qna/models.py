@@ -6,6 +6,8 @@ class Question(models.Model):
     pub_date = models.DateTimeField()
     hits = models.IntegerField(default='0')
     file = models.FileField(upload_to='%Y/%m/%d',blank=True)
+    qsolve = models.IntegerField(default='0')
+
     def __str__(self):
         return self.subject
     def summary(self):

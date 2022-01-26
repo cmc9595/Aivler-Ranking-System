@@ -31,86 +31,78 @@
 </div>
 
   <div class="row mt-5 gx-3">
+
     <div class="col">
-      <div class="card">
-        <div class="card-header text-center">
+      <div class="alert alert-light" role="alert">
           수도권
-        </div>
-        <div class="list-group list-group-flush scrollarea">
-          {% for content in guestbook%}
+      </div>
+        
+      {% for content in guestbook%}
           {% if content.region == "수도권"%}
-          <p class="list-group-item list-group-item list-group-item py-3">
-            {{content.content}}
-          </p>
-          {% endif %}
-          {% endfor %}
-        </div>
+        <div class="alert alert-primary" role="alert">
+        {{content.content}}
       </div>
+      {% endif %}
+      {% endfor %}
     </div>
+
     <div class="col">
-      <div class="card">
-        <div class="card-header text-center">
-          충청권
-        </div>
-        <div class="list-group list-group-flush scrollarea">
-          {% for content in guestbook%}
-          {% if content.region == "충청권"%}
-          <p class="list-group-item list-group-item list-group-item py-3">
-            {{content.content}}
-          </p>
-          {% endif %}
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <div class="card-header text-center">
-          강원권
-        </div>
-        <div class="list-group list-group-flush scrollarea">
-          {% for content in guestbook%}
-          {% if content.region == "강원권"%}
-          <p class="list-group-item list-group-item list-group-item py-3">
-            {{content.content}}
-          </p>
-          {% endif %}
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-    <div class="col">
-      <div class="card">
-        <div class="card-header text-center">
+      <div class="alert alert-light" role="alert">
           경상권
-        </div>
-        <div class="list-group list-group-flush scrollarea">
-          {% for content in guestbook%}
+      </div>
+        
+      {% for content in guestbook%}
           {% if content.region == "경상권"%}
-          <p class="list-group-item list-group-item list-group-item py-3">
-            {{content.content}}
-          </p>
-          {% endif %}
-          {% endfor %}
-        </div>
+        <div class="alert alert-secondary" role="alert">
+        {{content.content}}
       </div>
+      {% endif %}
+      {% endfor %}
     </div>
+
     <div class="col">
-      <div class="card">
-        <div class="card-header text-center">
+      <div class="alert alert-light" role="alert">
           전라권
-        </div>
-        <div class="list-group list-group-flush scrollarea">
-          {% for content in guestbook%}
-          {% if content.region == "전라권"%}
-          <p class="list-group-item list-group-item list-group-item py-3">
-            {{content.content}}
-          </p>
-          {% endif %}
-          {% endfor %}
-        </div>
       </div>
+        
+      {% for content in guestbook%}
+          {% if content.region == "전라권"%}
+        <div class="alert alert-success" role="alert">
+        {{content.content}}
+      </div>
+      {% endif %}
+      {% endfor %}
     </div>
+
+    <div class="col">
+      <div class="alert alert-light" role="alert">
+          강원권
+      </div>
+        
+      {% for content in guestbook%}
+          {% if content.region == "강원권"%}
+        <div class="alert alert-warning" role="alert">
+        {{content.content}}
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+
+    <div class="col">
+      <div class="alert alert-light" role="alert">
+          충청권
+      </div>
+        
+      {% for content in guestbook%}
+          {% if content.region == "충청권"%}
+        <div class="alert alert-info" role="alert">
+        {{content.content}}
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+
+    
   </div>
   
 

@@ -20,11 +20,12 @@
     </div>
     <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label"><strong>게시판 내용</strong></label>
-        <textarea class="form-control" id="content" rows="10" cols="50" name="contents">{{written|striptags}}</textarea>
+        <textarea class="form-control" id="content" rows="10" cols="30" name="contents">{{written|striptags}}</textarea>
     </div>
     <script type="text/javascript"> 
         $(document).ready(function() { $("#content").summernote(); })
         $('#content').summernote({
+            height:140,
             toolbar: [
                 ['fontname'],
                 ['fontsizeunit' ,['fontsize']],
@@ -46,7 +47,7 @@
             <label class="btn btn-outline-primary" for="btnradio3">C++</label>
         </div>
         <label for="codelabel" class="form-label"><strong>코드 작성</strong></label>
-        <textarea class="form-control" id="input" rows="10" cols="50" name="code_edit"></textarea>
+        <textarea class="form-control" id="input" rows="8" name="code_edit"></textarea>
     </div>
     <br>
     <div class="row">

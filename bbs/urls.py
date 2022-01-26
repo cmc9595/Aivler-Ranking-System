@@ -16,9 +16,6 @@ urlpatterns = [
     
     path('<int:uploadfile_id>/download/', views.download, name='download'), # 파일 다운로드
 
-    path('user/', views.user, name='user'), # 회원기능 확인(임시)
-    path('user/<word>/', views.user1, name='user1'), # 회원기능 확인(임시)
-
 ]+ static(
     settings.MEDIA_URL,
     document_root=settings.MEDIA_ROOT)

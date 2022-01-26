@@ -7,10 +7,10 @@
             <div class="col-md-8 col-sm-8">
                 <h1><i data-feather="align-right"></i> 질문게시판</h1>
                 <div class="btn-group">
-                    <button class="btn btn-primary">
+                    <button type="button" onclick="location.href='{% url 'qna:index' %}'" class="btn btn-outline-primary">
                         전체보기
                     </button>
-                    <button type="button" onclick="location.href='{% url 'qna:yet' %}'" class="btn btn-outline-primary">
+                    <button class="btn btn-primary">
                         질문
                     </button>
                     <button type="button" onclick="location.href='{% url 'qna:solve' %}'" class="btn btn-outline-primary">

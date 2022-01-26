@@ -36,7 +36,7 @@
                 ]
         });
     </script>
-    <div class="mb-3">
+    <div>
         <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
             <input type="radio" class="btn-check" onclick="ChangePython()" name="btnradio" id="btnradio1" autocomplete="off" checked>
             <label class="btn btn-outline-primary" for="btnradio1">Python</label>
@@ -60,7 +60,7 @@
         var inputarea = document.getElementById("input");
         var outputarea = document.getElementById("output");
 
-
+        hljs.highlightBlock(outputarea);
         function ChangePython(){
             outputarea.className = 'Python';
             hljs.highlightBlock(outputarea);

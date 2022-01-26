@@ -28,7 +28,7 @@
                 <br>
                 <br>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <a href="question/create/{{user.username}}/" class="btn btn-primary">
+                    <a href="{% url 'qna:question_create' user.username %}" class="btn btn-primary">
                         질문 등록하기
                     </a>
                   </div>
@@ -55,11 +55,11 @@
                         </div>
                     </div>
                     <h4>
-                        <a href="{% url 'qna:detail' question.id %}">{{ question.subject|safe|truncatechars:70|striptags }}</a>
+                        <a href="{% url 'qna:detail' question.id %}">{{ question.subject }}</a>
                     </h4>
                 </div>
                 <div class="card-body">
-                    {{question.summary|safe|truncatechars:70|striptags}} ...
+                    {{question.summary}} ...
                 </div>
             </div>
         </div>

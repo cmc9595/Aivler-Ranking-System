@@ -12,6 +12,9 @@
         <label for="exampleFormControlTextarea1" class="form-label">게시판 내용</label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" cols="50" name="contents">{{written}}</textarea>
     </div>
+    <div class="mb-3">
+        <textarea id="textbox" rows="10" cols="50" name="code_edit"></textarea>
+    </div>
     <br>
     
     <div class="row">
@@ -28,4 +31,21 @@
     </div>
 
 </form>
+<script>
+    document.getElementById('textbox').addEventListener('keydown', function(e) {
+        if (e.key == 'Tab') {
+          e.preventDefault();
+          var start = this.selectionStart;
+          var end = this.selectionEnd;
+      
+          // set textarea value to: text before caret + tab + text after caret
+          this.value = this.value.substring(0, start) +
+            "\t" + this.value.substring(end);
+      
+          // put caret at right position again
+          this.selectionStart =
+            this.selectionEnd = start + 1;
+        }
+      });
+</script>
 {% endblock %}

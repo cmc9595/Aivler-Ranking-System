@@ -4,7 +4,7 @@ from .models import Post
 class PostForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['postname', 'contents']
+        fields = ['postname', 'contents','code_edit']
         
         labels = {
             'postname': '제목',

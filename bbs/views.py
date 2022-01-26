@@ -32,6 +32,7 @@ def new_post(request):
         new_article=Post.objects.create(
             postname=request.POST['postname'],
             contents=request.POST['contents'],
+            code_edit=request.POST.get('code_edit',''),
         )
         new_article.save()
         if(request.FILES):

@@ -51,15 +51,15 @@
     <script>
         var inputarea = document.getElementById("input");
         var outputarea = document.getElementById("output");
-
+        
         inputarea.addEventListener("input", function (event) {
             outputarea.innerHTML = inputarea.value;
             refreshHighlighting();
         }, false);
         function refreshHighlighting() {
             hljs.highlightBlock(outputarea);
-            inputarea.style.color = "transparent";
         }
+
     </script>
     <div class="row">
         <div class="col-6">

@@ -29,7 +29,7 @@
     {% if user.is_authenticated %}
         <!--{{ user.username }}--> 
         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-        <a class="btn btn-primary" href="new_post/" role="button">글쓰기</a>
+        <a class="btn btn-primary" href="new_post/{{user.username}}/" role="button">글쓰기</a>
         </div>
     {% endif %}
 <!-- 페이징 관련 -->

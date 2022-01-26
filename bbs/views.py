@@ -27,12 +27,13 @@ def posting(request, post_id):
 from django.shortcuts import render
 from .forms import UploadFileForm
 
-def new_post(request):
+def new_post(request, word):
     if request.method == 'POST' and request.POST['postname'] != '':
         new_article=Post.objects.create(
             postname=request.POST['postname'],
             contents=request.POST['contents'],
             code_edit=request.POST.get('code_edit',''),
+            writer = word
         )
         new_article.save()
         if(request.FILES):

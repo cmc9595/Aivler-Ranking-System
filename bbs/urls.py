@@ -8,7 +8,7 @@ app_name = 'bbs'
 urlpatterns = [
     path('', views.free, name= 'free'), # 전체 게시글
     path('<int:post_id>/',views.posting, name="posting"), # 게시글
-    path('new_post/', views.new_post), # 게시글 새로 작성
+    path('new_post/<word>/', views.new_post), # 게시글 새로 작성
     path('<int:post_id>/remove/', views.remove_post), # 게시글 삭제
 
     path('comment/create/<int:post_id>/', views.comment_create,name='comment_create'), # 댓글 작성

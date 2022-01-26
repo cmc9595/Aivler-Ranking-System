@@ -22,10 +22,16 @@
         </div>
     </div>
     {% endfor %}
+    
+        
+    
 </div>
-<div class="d-grid gap-2 d-md-flex justify-content-md-end">
-<a class="btn btn-primary" href="new_post/" role="button">글쓰기</a>
-</div>
+    {% if user.is_authenticated %}
+        <!--{{ user.username }}--> 
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <a class="btn btn-primary" href="new_post/" role="button">글쓰기</a>
+        </div>
+    {% endif %}
 <!-- 페이징 관련 -->
 <div class="d-flex justify-content-between mt-3">
     <!-- 이전페이지 -->

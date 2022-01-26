@@ -10,7 +10,6 @@ from .models import Commit, GithubUser
 from qna.models import Question
 
 load_dotenv()
-# Create your views here.
 def index(request):
     unsolved_list = Question.objects.filter(qsolve = 0).order_by('-id')
     unsolved_len = len(unsolved_list)
@@ -193,7 +192,7 @@ def search(request):
         monthRank = monthIDs.index(id)+1 if id in monthIDs else '-'
     
         return render(request, 'home/profile.html', 
-                    {'data': data[:10], # 최근 5개목록
+                    {'data': data[:5], # 최근 5개목록
                     'id': id,
                     #'sidebar':sidebar,
                     'rankD':dayRank,
@@ -212,32 +211,18 @@ def commitmsg(request):
     return HttpResponse(result)
 
 def mainrank(request):
+    dayList = [(idx, id, cnt, GithubUser.objects.get(userid=id)) for idx, id, cnt in rankByDate('day', 3)]
+    weekList = [(idx, id, cnt, GithubUser.objects.get(userid=id)) for idx, id, cnt in rankByDate('week', 3)]
+    monthList = [(idx, id, cnt, GithubUser.objects.get(userid=id)) for idx, id, cnt in rankByDate('month', 3)]
     # dayRank = rankByDate('day', 3)
     # weekRank = rankByDate('week', 3)
     # monthRank = rankByDate('month', 3)
-    # new_list = [(idx, id, cnt, GithubUser.objects.get(userid=id)) for idx, id, cnt in weekRank[:5]] # 5
-    # return render(request, 'home/mainpage.html', {
-    #     'rankD':dayRank,
-    #     'rankW':weekRank,
-    #     'rankM':monthRank,
-    #     'new_list':new_list,
-    option = request.GET.get('option', 'daily')
-    if option == 'daily':
-        returnList = rankByDate('day', 3)
-    elif option=='weekly':
-        returnList = rankByDate('week', 3)
-    elif option=='monthly':
-        returnList = rankByDate('month', 3)
-    # 렉이 많이 걸리는 부분 (코드 수정 ... 검토)
-    new_list = []
-    for rank, id, cnt in returnList[:5]:
-        new_list.append([rank, id, cnt, GithubUser.objects.get(userid=id)])
-    
-    return render(request, 'home/mainpage.html',
-                  {'option': option,
-                   #'returnList': returnList,
-                    'new_list':new_list,
-                   })    
+    return render(request, 'home/mainpage.html', {
+        # 'rankD':dayRank,
+        # 'rankW':weekRank,
+        # 'rankM':monthRank,
+        'allList':[dayList,weekList,monthList],
+    })
     
 def ranking(request): # 사이드바, 버튼
     option = request.GET.get('option', 'daily')

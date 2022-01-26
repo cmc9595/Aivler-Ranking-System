@@ -6,9 +6,14 @@
         <div class="row">
             <div class="col-md-8 col-sm-8">
                 <h1><i data-feather="align-right"></i> 질문게시판</h1>
-
-                <a class="btn" href="{% url 'qna:index' %}" role="button"> 질문 </a>
-                <a> 해결 </a>
+                    <div class="btn-group">
+                        <button type="button" onclick="location.href='{% url 'qna:index' %}'" class="btn btn-outline-primary">
+                            질문
+                        </button>
+                        <button class="btn btn-primary">
+                            해결
+                        </button>
+                </div>
             </div>
 
             <div class="col-md-4 col-sm-4">

@@ -1,19 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
-<h1 class="h3 mb-3">게시판-작성</h1>
+<h1 class="h3 mb-3"><i data-feather="edit-3"></i> 글 작성하기</h1>
 
 <form enctype="multipart/form-data" method="POST">
     {% csrf_token %}
     <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">게시판 제목</label>
+        <label for="exampleFormControlInput1" class="form-label"><strong>게시판 제목</strong></label>
         <input type="text" name="postname" class="form-control" id="exampleFormControlInput1" placeholder="제목은 반드시 입력">
     </div>
     <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">게시판 내용</label>
+        <label for="exampleFormControlTextarea1" class="form-label"><strong>게시판 내용</strong></label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" cols="50" name="contents">{{written}}</textarea>
     </div>
     <div class="mb-3">
-        <textarea id="textbox" rows="10" cols="50" name="code_edit"></textarea>
+        <label for="codelabel" class="form-label"><strong>코드 작성</strong></label>
+        <textarea class="form-control" id="codelabel" rows="10" cols="50" name="code_edit"></textarea>
     </div>
     <br>
     
@@ -29,6 +30,12 @@
             <a class="btn btn-secondary" href="/free/" role="button">취소</a>
         </div>
     </div>
+    
+
+        <div class="summernote">
+            안녕하세요
+        </div>        
+
 
 </form>
 <script>
@@ -46,6 +53,12 @@
           this.selectionStart =
             this.selectionEnd = start + 1;
         }
+      });
+</script>
+<script>
+
+    $(document).ready(function() {
+        $('.summernote').summernote();
       });
 </script>
 {% endblock %}

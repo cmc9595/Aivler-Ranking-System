@@ -9,14 +9,16 @@
         <div class="row">
           <!-- 하루 (임시 다시 수정함)-->
           <div class="col-md">
-            <div class="card">
               <div class="card-header">
-                <h2>Weekly</h2>
-              </div>
+                <div class="btn-group mb-4">
+                  <button class="btn btn-outline-dark" type="button" onClick="location.href='{% url "home:mainrank" %}?githubID={{id}}&option=daily'">Daily</button>
+                  <button class="btn btn-outline-dark" type="button" onClick="location.href='{% url "home:mainrank" %}?githubID={{id}}&option=weekly'">Weekly</button>
+                  <button class="btn btn-outline-dark" type="button" onClick="location.href='{% url "home:mainrank" %}?githubID={{id}}&option=monthly'">Monthly</button>
+                </div>
               {% if new_list %}
 
               <table class="table table-borderless table-hover">
-                <thead class="table-dark text-center">
+                <thead class="table-dark text-center" style="font-size:14px">
                   <tr>
                     <th scope="col">Rank</th>
                     <th scope="col">Profile</th>

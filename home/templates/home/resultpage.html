@@ -95,18 +95,18 @@
   </div>
   {% endif %} {% endcomment %}
 
-  <!-- button -->
-  <div class="btn-group mb-4">
-    <button class="btn btn-primary" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=daily'">Daily</button>
-    <button class="btn btn-primary" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=weekly'">Weekly</button>
-    <button class="btn btn-primary" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=monthly'">Monthly</button>
-  </div>
     
   <!-- List 출력 -->
   <div class="row">
     <div class="col-md">
       <div class="card" style="border-radius: 2em">
         <div class="card-header" style="border-radius: 2em">
+           <!-- button -->
+          <div class="btn-group mb-4">
+            <button class="btn btn-outline-dark" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=daily'">Daily</button>
+            <button class="btn btn-outline-dark" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=weekly'">Weekly</button>
+            <button class="btn btn-outline-dark" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=monthly'">Monthly</button>
+          </div>
           <h2>🎉 MAKE IT POSSIBLE</h2>
         </div>
         {% if new_list %}

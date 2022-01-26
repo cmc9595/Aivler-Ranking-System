@@ -2,25 +2,32 @@
 {% block content %}
 
 <div class="row">
-  <div class="col-4"></div>
-  <div class="col-4">
-    <div class="input-group">
+  <div class='d-flex justify-content-center'>
+
     <form method="POST">
       {% csrf_token %}
-      <input type="text" class="form-control" name="content">
-      <input class="btn btn-primary" type="submit" value="작성">
-      <select name="region" id="region-select">
-        <option value="">--Please choose an option--</option>
-        <option value="수도권">수도권</option>
-        <option value="경상권">경상권</option>
-        <option value="전라권">전라권</option>
-        <option value="강원권">강원권</option>
-        <option value="충청권">충청권</option>
-      </select>
-    </form>
+      <div class="input-group">
+        
+        <div>
+          <select class="form-select" name="region" id="region-select">
+            <option value="">지역</option>
+            <option value="수도권">수도권</option>
+            <option value="경상권">경상권</option>
+            <option value="전라권">전라권</option>
+            <option value="강원권">강원권</option>
+            <option value="충청권">충청권</option>
+          </select>
+        </div>  
+        <div>
+          <input type="text" class="form-control" name="content">
+        </div>
+        <div>
+          <input class="btn btn-primary" type="submit" value="작성">
+        </div>
     </div>
+      
+    </form>
   </div>
-  <div class="col-4"></div>
 </div>
 
   <div class="row mt-5 gx-3">

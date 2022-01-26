@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="container">
+<div class="containe-fluid">
   <!-- 검색결과창 -->
   {% if msg and not sidebar %}
   <div class="row">
@@ -17,7 +17,7 @@
 
 <div class="row">
 
-  <div class="col-lg-2">
+  <div class="col-md-2 col-sm-2 b">
     <h3>Profile</h3>
     <div class="card mb-3" style="border-radius: 1em">
       <div class="card-header" style="border-radius: 1em">
@@ -46,7 +46,7 @@
     </div>
   </div>
 
-  <div class="col-lg-2">
+  <div class="col-md-2 col-sm-2 b">
     <h3>🏅Your Ranking🏅</h3>
     <div class="card" style="border-radius: 1em">
       <div class="card-header" style="border-radius: 1em">
@@ -74,7 +74,7 @@
     </div>
   </div>
 
-  <div class="col-lg-8">
+  <div class="col-md-8 col-sm-8 b">
     <h3>최근 {{id}}의 커밋</h3>
     <div class="card" style="border-radius: 1em">
       <div class="card-header" style="border-radius: 1em">

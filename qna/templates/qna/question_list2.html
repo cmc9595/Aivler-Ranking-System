@@ -6,6 +6,8 @@
         <div class="row">
             <div class="col-md-8 col-sm-8">
                 <h1><i data-feather="align-right"></i> 질문게시판</h1>
+                <br>
+                <br>
                 <div class="btn-group">
                     <button type="button" onclick="location.href='{% url 'qna:index' %}'" class="btn btn-outline-primary">
                         전체보기
@@ -21,6 +23,10 @@
 
             {% if user.is_authenticated %}
             <div class="col-md-4 col-sm-4">
+                <br>
+                <br>
+                <br>
+                <br>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <a href="{% url 'qna:question_create' %}" class="btn btn-primary">
                         질문 등록하기
@@ -31,7 +37,7 @@
             
         </div>
     </div>
-
+    <br>
     {% if question_list %}
     {% for question in question_list %}
     <div class="row">

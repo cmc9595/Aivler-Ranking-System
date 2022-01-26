@@ -93,7 +93,7 @@
   <h3>최근 {{id}}의 커밋</h3>
     <div class="card" style="border-radius: 1em">
       <div class="card-header" style="border-radius: 1em">
-        <table class="table w-auto">
+        <table class="table">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -135,6 +135,7 @@ let newSnow = () => {
 	// assign to it a random left
 	let left = Math.floor(document.body.offsetWidth * Math.random())
 	clonedSnow.style.left = left + 'px';
+	clonedSnow.style.color = 'pink';
 
 	// add it to the dom
 	document.body.append(clonedSnow)

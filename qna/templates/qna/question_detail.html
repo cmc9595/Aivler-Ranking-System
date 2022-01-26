@@ -4,15 +4,13 @@
 
 
 <div class="container my-3">
+    <h2 class="border-bottom py-2">{{ question.subject }}</h2>
     <div class="d-flex justify-content-between">
-
-        <h2 class="border-bottom py-2">{{ question.subject }}</h2>
         <span>
             <a class="btn btn-info" href="{% url 'qna:ok' question.id %}" role="button"> 해결완료 </a>
         </span>
-        
+        <h5>작성자 : {{ question.writer }}</h5>
     </div>
-    <h5>작성자 : {{ question.writer }}</h5>
 
     <div class="card my-3">
         <div class="card-body">

@@ -4,7 +4,79 @@
 <div class="row">
   <div class="col">
     <h1 class="h3"><i data-feather="github"></i><strong> Top</strong> Ranker</h1>
-    <div class="card">
+
+    <div class="btn-group mb-4">
+      <button class="btn btn-outline-dark" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1">Daily</button>
+      <button class="btn btn-outline-dark" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2">Weekly</button>
+      <button class="btn btn-outline-dark" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3">Monthly</button>
+    </div>
+
+    
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+      <div class="carousel-inner">
+        {% for List in allList %}
+          {% if List %}
+            {% if forloop.first %}
+            <div class="carousel-item active">
+            {% else %}
+            <div class="carousel-item">
+            {% endif %}
+              <table class="table table-borderless table-hover">
+                <thead class="table-dark text-center" style="font-size:14px">
+                  <tr>
+                    <th scope="col">Rank</th>
+                    <th scope="col">Profile</th>
+                    <th scope="col">ID</th>
+                    <th scope="col">이름</th>
+                    <th scope="col">커밋</th>
+                    {% comment %} <th scope="col">지역</th> {% endcomment %}
+                    <th scope="col" width='45%'>BIO</th>
+                  </tr>
+                </thead>
+                <tbody class="text-center">
+                  {% for rank, id, cnt, profile in List|slice:":5" %}
+                  <tr>
+                    {% if rank == 1 %}
+                      <td scope="row">🥇</td>
+                    {% elif rank == 2 %}
+                      <td scope="row">🥈</td>
+                    {% elif rank == 3 %}
+                      <td scope="row">🥉</td>
+                    {% else  %}
+                      <td scope="row">{{rank}}</td>
+                    {% endif %}
+                    <td scope="row"><img src="{{profile.avatar}}" class="img-fluid rounded-circle mb-2" width="40" height="40"></td>
+                    <td scope="row"><a href="http://www.github.com/{{id}}" target="_blank">{{id|default_if_none:"-"}}</a></td>
+                    <td scope="row">{{profile.name|default_if_none:"-"}}</td>
+                    <td scope="row">{{cnt}}</td>
+                    {% comment %} <td scope="row">{{profile.location|default_if_none:"-"}}</td> {% endcomment %}
+                    <td>{{profile.bio|default_if_none:"-"}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          {% else %}
+          순위 결과 없음.
+          {% endif %}
+        {% endfor %}
+       
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+
+    {% comment %} <div class="card">
       <div class="card-body">
         <div class="row">
           <!-- 하루 (임시 다시 수정함)-->
@@ -16,7 +88,6 @@
                   <button class="btn btn-outline-dark" type="button" onClick="location.href='{% url "home:mainrank" %}?githubID={{id}}&option=monthly'">Monthly</button>
                 </div>
               {% if new_list %}
-
               <table class="table table-borderless table-hover">
                 <thead class="table-dark text-center" style="font-size:14px">
                   <tr>
@@ -25,7 +96,6 @@
                     <th scope="col">ID</th>
                     <th scope="col">이름</th>
                     <th scope="col">커밋</th>
-                    {% comment %} <th scope="col">지역</th> {% endcomment %}
                     <th scope="col">BIO</th>
                   </tr>
                 </thead>
@@ -44,8 +114,6 @@
                     <td scope="row"><img src="{{profile.avatar}}" class="img-fluid rounded-circle mb-2" width="40" height="40"></td>
                     <td scope="row"><a href="http://www.github.com/{{id}}" target="_blank">{{id|default_if_none:"-"}}</a></td>
                     <td scope="row">{{profile.name|default_if_none:"-"}}</td>
-                    <td scope="row">{{cnt}}</td>
-                    {% comment %} <td scope="row">{{profile.location|default_if_none:"-"}}</td> {% endcomment %}
                     <td>{{profile.bio|default_if_none:"-"}}</td>
                   </tr>
                   {% endfor %}
@@ -58,7 +126,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> {% endcomment %}
   </div>
 </div>
 <!-- 하단 영역 -->

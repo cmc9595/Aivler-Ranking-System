@@ -1,3 +1,4 @@
+from csv import writer
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Question
@@ -68,12 +69,13 @@ def answer_create(request, question_id):
 
 from .forms import QuestionForm
 
-def question_create(request):
+def question_create(request, word):
     if request.method == 'POST':
         form = QuestionForm(request.POST,request.FILES)
         if form.is_valid():
             question = form.save(commit=False)
             question.pub_date = timezone.now()
+            question.writer = word
             question.save()
             # if question.file:
             #     name = question.file.name

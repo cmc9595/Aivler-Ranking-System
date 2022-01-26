@@ -10,7 +10,9 @@
         <span>
             <a class="btn btn-info" href="{% url 'qna:ok' question.id %}" role="button"> 해결완료 </a>
         </span>
+        
     </div>
+    <h5>작성자 : {{ question.writer }}</h5>
 
     <div class="card my-3">
         <div class="card-body">
@@ -115,7 +117,7 @@
     </form>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <a class="btn btn-primary" href="/qna/" role="button">목록</a>
-            {% if user.is_authenticated %}
+            {% if question.writer == user.username %}
                 <a class="btn btn-danger" href="/qna/{{question.id}}/delete/" role="button">삭제</a>
             {% endif %}
             

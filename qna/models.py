@@ -1,3 +1,4 @@
+from csv import writer
 from django.db import models
 
 class Question(models.Model):
@@ -7,6 +8,7 @@ class Question(models.Model):
     hits = models.IntegerField(default='0')
     file = models.FileField(upload_to='%Y/%m/%d',blank=True)
     qsolve = models.IntegerField(default='0')
+    writer =  models.CharField(max_length=150, blank=True)
 
     def __str__(self):
         return self.subject+" / "

@@ -107,6 +107,8 @@
             <button class="btn btn-outline-dark" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=weekly'">Weekly</button>
             <button class="btn btn-outline-dark" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=monthly'">Monthly</button>
           </div>
+          <h2>🎉 MAKE IT POSSIBLE</h2>
+          <input name="find">
         </div>
         {% if new_list %}
 
@@ -135,7 +137,7 @@
                 <td scope="row">{{rank}}</td>
               {% endif %}
               <td scope="row"><img src="{{profile.avatar}}" class="img-fluid rounded-circle mb-2" width="40" height="40"></td>
-              <td scope="row"><a href="http://www.github.com/{{id}}" target="_blank">{{id|default_if_none:"-"}}</a></td>
+              <td scope="row"><a name={{id}} href="http://www.github.com/{{id}}" target="_blank">{{id|default_if_none:"-"}}</a></td>
               <td scope="row">{{profile.name|default_if_none:"-"}}</td>
               <td scope="row">{{cnt}}</td>
               {% comment %} <td scope="row">{{profile.location|default_if_none:"-"}}</td> {% endcomment %}

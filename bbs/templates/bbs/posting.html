@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/atom-one-dark.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 
 <div class="container my-3">
     <div>
@@ -13,6 +16,8 @@
                 <div class="card-text" style="white-space: pre-line;">
                     {{ post.contents }}
                 </div>
+                <br>
+                <pre><code class="python">{{ post.code_edit }}</code></pre>
                 <div class="d-flex justify-content-end">
                     <div class="badge badge-light p-2">
                         
@@ -113,5 +118,4 @@
     </div>
     
 </div>
-
 {% endblock %}

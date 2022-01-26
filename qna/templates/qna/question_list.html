@@ -59,7 +59,7 @@
                     </h4>
                 </div>
                 <div class="card-body">
-                    {{question.summary}} ...
+                    {{question.summary|safe|striptags|truncatechars:20}}
                 </div>
             </div>
         </div>

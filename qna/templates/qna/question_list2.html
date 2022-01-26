@@ -59,14 +59,14 @@
                     </h4>
                 </div>
                 <div class="card-body">
-                    {{question.summary}} ...
+                    {{question.summary|safe|striptags|truncatechars:20}}
                 </div>
             </div>
         </div>
     </div>
     {% endfor %}
     {% else %}
-        <td colspan="3">질문이 없습니다.
+        질문이 없습니다.
     {% endif %}
 
     {% endblock %}

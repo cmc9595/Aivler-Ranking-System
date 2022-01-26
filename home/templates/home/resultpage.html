@@ -112,14 +112,14 @@
         {% if new_list %}
 
         <table class="table table-borderless table-hover">
-          <thead class="table-dark text-center" style="font-size:16px">
+          <thead class="table-dark text-center" style="font-size:14px">
             <tr>
               <th scope="col">Rank</th>
               <th scope="col">Profile</th>
               <th scope="col">ID</th>
               <th scope="col">이름</th>
               <th scope="col">커밋</th>
-              <th scope="col">지역</th>
+              {% comment %} <th scope="col">지역</th> {% endcomment %}
               <th scope="col">BIO</th>
             </tr>
           </thead>
@@ -139,7 +139,7 @@
               <td scope="row"><a href="http://www.github.com/{{id}}" target="_blank">{{id|default_if_none:"-"}}</a></td>
               <td scope="row">{{profile.name|default_if_none:"-"}}</td>
               <td scope="row">{{cnt}}</td>
-              <td scope="row">{{profile.location|default_if_none:"-"}}</td>
+              {% comment %} <td scope="row">{{profile.location|default_if_none:"-"}}</td> {% endcomment %}
               <td>{{profile.bio|default_if_none:"-"}}</td>
             </tr>
             {% endfor %}

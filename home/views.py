@@ -187,6 +187,11 @@ def search(request):
         weekIDs = rankByDate('week', 1)
         monthIDs = rankByDate('month', 1)
         
+        # 이용자수
+        dayuser=len(dayIDs)
+        weekuser=len(weekIDs)
+        monthuser=len(monthIDs)
+        
         dayRank = dayIDs.index(id)+1 if id in dayIDs else '-'
         weekRank = weekIDs.index(id)+1 if id in weekIDs else '-'
         monthRank = monthIDs.index(id)+1 if id in monthIDs else '-'
@@ -198,8 +203,10 @@ def search(request):
                     'rankD':dayRank,
                     'rankW':weekRank,
                     'rankM':monthRank,
-                    'profile':profile
-                    })
+                    'profile':profile,
+                    'dayuser':dayuser,
+                    'weekuser':weekuser,
+                    'monthuser':monthuser})
 
 def showRank(request):
     return render(request, 'home/ranking.html', {})

@@ -18,3 +18,10 @@ def signup(request):
     else:
         form = UserForm()
     return render(request, 'common/signup.html', {'form': form})
+
+#from django.http import HttpResponse
+#from django.contrib.auth.models import User
+
+def user(request):
+    #user = User.objects.get(username = user.u)
+    return render(request, 'common/user.html')

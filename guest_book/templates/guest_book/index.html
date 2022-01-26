@@ -30,27 +30,46 @@
   </div>
 </div>
 
+<style>
+  .box {
+    height:800px;
+    overflow:hidden;
+}
+.box:hover {
+    overflow-y:auto;
+}
+</style>
   <div class="row mt-5 gx-3">
 
     <div class="col">
-      <div class="alert alert-light" role="alert">
-          수도권
+      
+      
+      <div class="card text-center"style="border-radius: 2em">
+        <div class="card-body">
+          <p class="card-text"><h3><strong><i data-feather="map-pin" class="text-primary"style="width:30px;height:30px;"></i> 수도권</strong></h3></p>
+        </div>
       </div>
-        
-      {% for content in guestbook%}
+        <div class="box">
+        {% for content in guestbook%}
           {% if content.region == "수도권"%}
-        <div class="alert alert-primary" role="alert">
-        {{content.content}}
+            <div class="alert alert-primary" role="alert">
+              {{content.content}}
+            </div>
+          {% endif %}
+        {% endfor %}
       </div>
-      {% endif %}
-      {% endfor %}
     </div>
+    
 
+     
     <div class="col">
-      <div class="alert alert-light" role="alert">
-          경상권
+      
+      <div class="card text-center"style="border-radius: 2em">
+        <div class="card-body">
+          <p class="card-text"><h3><strong><i data-feather="twitter" class="text-secondary"style="width:30px;height:30px;"></i> 경상권</strong></h3></p>
+        </div>
       </div>
-        
+      <div class="box">
       {% for content in guestbook%}
           {% if content.region == "경상권"%}
         <div class="alert alert-secondary" role="alert">
@@ -59,12 +78,17 @@
       {% endif %}
       {% endfor %}
     </div>
+  </div>
+  
 
     <div class="col">
-      <div class="alert alert-light" role="alert">
-          전라권
+      
+      <div class="card text-center"style="border-radius: 2em">
+        <div class="card-body">
+          <p class="card-text"><h3><strong><i data-feather="image" class="text-success"style="width:30px;height:30px;"></i> 전라권</strong></h3></p>
+        </div>
       </div>
-        
+      <div class="box">
       {% for content in guestbook%}
           {% if content.region == "전라권"%}
         <div class="alert alert-success" role="alert">
@@ -73,12 +97,16 @@
       {% endif %}
       {% endfor %}
     </div>
+  </div>
 
     <div class="col">
-      <div class="alert alert-light" role="alert">
-          강원권
+      
+      <div class="card text-center"style="border-radius: 2em">
+        <div class="card-body">
+          <p class="card-text"><h3><strong><i data-feather="sun" class="text-warning"style="width:30px;height:30px;"></i> 강원권</strong></h3></p>
+        </div>
       </div>
-        
+      <div class="box">
       {% for content in guestbook%}
           {% if content.region == "강원권"%}
         <div class="alert alert-warning" role="alert">
@@ -87,12 +115,16 @@
       {% endif %}
       {% endfor %}
     </div>
+  </div>
 
     <div class="col">
-      <div class="alert alert-light" role="alert">
-          충청권
+      
+      <div class="card text-center"style="border-radius: 2em">
+        <div class="card-body">
+          <p class="card-text"><h3><strong><i data-feather="map" class="text-info"style="width:30px;height:30px;"></i> 충청권</strong></h3></p>
+        </div>
       </div>
-        
+      <div class="box">
       {% for content in guestbook%}
           {% if content.region == "충청권"%}
         <div class="alert alert-info" role="alert">
@@ -101,13 +133,9 @@
       {% endif %}
       {% endfor %}
     </div>
+  </div>
 
     
   </div>
-  
-
-<div class="row">
-
-</div>
 
 {% endblock %}

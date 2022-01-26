@@ -12,12 +12,12 @@
                 <small># {{list.id}}번 째 게시글</small>
                 <a href="{{list.pk}}/">
                         <h4>
-                                {{list.postname}}
+                                {{list.postname|truncatechars:17}}
                         </h4>
                 </a>
             </div>
             <div class="card-body">
-                {{list.contents|safe}}
+                {{list.contents|safe|truncatechars:20|striptags}}
             </div>
         </div>
     </div>

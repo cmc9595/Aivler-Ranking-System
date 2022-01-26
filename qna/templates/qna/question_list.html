@@ -55,11 +55,11 @@
                         </div>
                     </div>
                     <h4>
-                        <a href="{% url 'qna:detail' question.id %}">{{ question.subject }}</a>
+                        <a href="{% url 'qna:detail' question.id %}">{{ question.subject|safe|truncatechars:70|striptags }}</a>
                     </h4>
                 </div>
                 <div class="card-body">
-                    {{question.summary}} ...
+                    {{question.summary|safe|truncatechars:70|striptags}} ...
                 </div>
             </div>
         </div>

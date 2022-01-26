@@ -52,7 +52,7 @@
             <td>{{ answer.create_date }}</td>
             <td>
                 {% if user.is_authenticated %}
-                    <form action="{% url 'qna:answer_remove' %}" method="post">
+                    <form action="{% url 'qna:answer_delete' %}" method="post">
                         {% csrf_token %}
                         <INPUT TYPE="hidden" NAME="answer_id" SIZE=10 value={{answer.id}}>
                         <INPUT TYPE="hidden" NAME="question_id" SIZE=10 value={{question.id}}>

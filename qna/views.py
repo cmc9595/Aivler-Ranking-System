@@ -89,7 +89,7 @@ def question_create(request, word):
     
     return render(request, 'qna/question_form.html', context)
 
-def answer_remove(request):
+def answer_delete(request):
     a = request.POST.get('answer_id')
     target = Answer.objects.get(pk=a)
     target.delete()

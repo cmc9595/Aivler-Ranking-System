@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1 class="h3 mb-3"><i data-feather="align-left"></i> 자유게시판</h1>
+<h1 class="h1 mb-3"><i data-feather="align-left"></i> 자유게시판</h1>
 
-
+<br>
 <div class="row">
     {%for list in postlist%}
     <div class="col-md-4 col-sm-4 b">
@@ -17,7 +17,7 @@
                 </a>
             </div>
             <div class="card-body">
-                {{list.contents}}
+                {{list.contents|safe}}
             </div>
         </div>
     </div>

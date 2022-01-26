@@ -34,9 +34,13 @@
         </a>
       </li>
       <!-- 커밋 메시지 자리 -->
-      <li class="sidebar-header">
-        에이블러들의 최근 커밋
+      
+        
+      </a>
+      <li class="sidebar-header"data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+        <strong>에이블러들의 최근 커밋 <i data-feather="arrow-down-circle" ></i></strong>
         <!-- 최근 커밋 0 -->
+        <hr>
         <style>
           #commit_list a{
               color: #ced4da;
@@ -44,39 +48,32 @@
               
           }
         </style>
+        <div class="collapse" id="collapseExample">
+          <div class="alert alert-primary" role="alert">
+            <div class="alert-message">
+              <p id="commitmsg0">최근 커밋 메시지가 없어요 😂</p>
+            </div>
+          </div>
+          <div class="alert alert-light" role="alert">
+            <div class="alert-message">
+              
+              <p id="commitmsg1">최근 커밋 메시지가 없어요 😂</p>
+            </div>
+          </div>
+          <div class="alert alert-success" role="alert">
+            <div class="alert-message">
+              
+              <p id="commitmsg2">최근 커밋 메시지가 없어요 😂</p>
+            </div>
+          </div>
+          <div class="alert alert-secondary" role="alert">
+            <div class="alert-message">
+              
+              <p id="commitmsg3">최근 커밋 메시지가 없어요 😂</p>
+            </div>
+          </div>
+      </div>
 
-        <div id = 'commit_list' class="list-group list-group-flush scrollarea mt-2">
-          <a href="#" class="list-group-item list-group-item list-group-item py-3">
-            <p id="commitmsg0">최근 커밋 메시지가 없어요 😂</p>
-          </a>
-          <a href="#" class="list-group-item list-group-item list-group-item py-3">
-            <p id="commitmsg1">최근 커밋 메시지가 없어요 😂</p>
-          </a>
-          <a href="#" class="list-group-item list-group-item list-group-item py-3">
-            <p id="commitmsg2">최근 커밋 메시지가 없어요 😂</p>
-          </a>
-          <a href="#" class="list-group-item list-group-item list-group-item py-3">
-            <p id="commitmsg3">최근 커밋 메시지가 없어요 😂</p>
-          </a>
-          <a href="#" class="list-group-item list-group-item list-group-item py-3">
-            <p id="commitmsg4">최근 커밋 메시지가 없어요 😂</p>
-          </a>
-          <a href="#" class="list-group-item list-group-item list-group-item py-3">
-            <p id="commitmsg5">최근 커밋 메시지가 없어요 😂</p>
-          </a>
-          <a href="#" class="list-group-item list-group-item list-group-item py-3">
-            <p id="commitmsg6">최근 커밋 메시지가 없어요 😂</p>
-          </a>
-          <a href="#" class="list-group-item list-group-item list-group-item py-3">
-            <p id="commitmsg7">최근 커밋 메시지가 없어요 😂</p>
-          </a>
-          <a href="#" class="list-group-item list-group-item list-group-item py-3">
-            <p id="commitmsg8">최근 커밋 메시지가 없어요 😂</p>
-          </a>
-          <a href="#" class="list-group-item list-group-item list-group-item py-3">
-            <p id="commitmsg9">최근 커밋 메시지가 없어요 😂</p>
-          </a>
-        </div>
       </li>
       <!-- 커밋 관련 자리 끝 -->
     </ul>
@@ -106,10 +103,5 @@
   getCommitMsg(2, 'commitmsg2')
   getCommitMsg(3, 'commitmsg3')
   getCommitMsg(4, 'commitmsg4')
-  getCommitMsg(5, 'commitmsg5')
-  getCommitMsg(6, 'commitmsg6')
-  getCommitMsg(7, 'commitmsg7')
-  getCommitMsg(8, 'commitmsg8')
-  getCommitMsg(9, 'commitmsg9')
 
 </script>

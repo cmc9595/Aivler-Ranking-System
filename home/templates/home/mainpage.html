@@ -5,12 +5,25 @@
   <div class="col">
     <h1 class="h3"><i data-feather="github"></i><strong> Top</strong> Ranker</h1>
 
-    <div class="btn-group mb-4">
+    <div class="btn-group" data-toggle='buttons'>
+      <label class="btn btn-outline-dark active" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0">
+        <input id='b0' type="radio" class="btn-check" name="options" autocomplete="off" checked>Daily
+      </label>
+      
+      <label class="btn btn-outline-dark" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1">
+        <input id='b1' type="radio" class="btn-check" name="options" autocomplete="off">Weekly
+      </label>
+
+      <label class="btn btn-outline-dark" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2">
+        <input id='b2' type="radio" class="btn-check"name="options" autocomplete="off">Monthly
+      </label>
+    </div>
+    <p></p>
+    {% comment %} <div class="btn-group mb-4">
       <button class="btn btn-outline-dark" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1">Daily</button>
       <button class="btn btn-outline-dark" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2">Weekly</button>
       <button class="btn btn-outline-dark" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3">Monthly</button>
-    </div>
-
+    </div> {% endcomment %}
     
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-indicators">
@@ -29,24 +42,24 @@
               <table class="table table-borderless table-hover">
                 <thead class="table-dark text-center" style="font-size:14px">
                   <tr>
-                    <th scope="col">Rank</th>
-                    <th scope="col">Profile</th>
-                    <th scope="col">ID</th>
+                    <th scope="col">순위</th>
+                    <th scope="col">프로필</th>
+                    <th scope="col">아이디</th>
                     <th scope="col">이름</th>
                     <th scope="col">커밋</th>
                     {% comment %} <th scope="col">지역</th> {% endcomment %}
                     <th scope="col" width='45%'>BIO</th>
                   </tr>
                 </thead>
-                <tbody class="text-center">
+                <tbody class="text-center" style="font-size:12px" height=400>
                   {% for rank, id, cnt, profile in List|slice:":5" %}
                   <tr>
                     {% if rank == 1 %}
-                      <td scope="row">🥇</td>
+                      <td scope="row" style="font-size:40px">🥇</td>
                     {% elif rank == 2 %}
-                      <td scope="row">🥈</td>
+                      <td scope="row" style="font-size:35px">🥈</td>
                     {% elif rank == 3 %}
-                      <td scope="row">🥉</td>
+                      <td scope="row" style="font-size:30px">🥉</td>
                     {% else  %}
                       <td scope="row">{{rank}}</td>
                     {% endif %}
@@ -76,57 +89,6 @@
       </button>
     </div>
 
-    {% comment %} <div class="card">
-      <div class="card-body">
-        <div class="row">
-          <!-- 하루 (임시 다시 수정함)-->
-          <div class="col-md">
-              <div class="card-header">
-                <div class="btn-group mb-4">
-                  <button class="btn btn-outline-dark" type="button" onClick="location.href='{% url "home:mainrank" %}?githubID={{id}}&option=daily'">Daily</button>
-                  <button class="btn btn-outline-dark" type="button" onClick="location.href='{% url "home:mainrank" %}?githubID={{id}}&option=weekly'">Weekly</button>
-                  <button class="btn btn-outline-dark" type="button" onClick="location.href='{% url "home:mainrank" %}?githubID={{id}}&option=monthly'">Monthly</button>
-                </div>
-              {% if new_list %}
-              <table class="table table-borderless table-hover">
-                <thead class="table-dark text-center" style="font-size:14px">
-                  <tr>
-                    <th scope="col">Rank</th>
-                    <th scope="col">Profile</th>
-                    <th scope="col">ID</th>
-                    <th scope="col">이름</th>
-                    <th scope="col">커밋</th>
-                    <th scope="col">BIO</th>
-                  </tr>
-                </thead>
-                <tbody class="text-center">
-                  {% for rank, id, cnt, profile in new_list %}
-                  <tr>
-                    {% if rank == 1 %}
-                      <td scope="row">&#129351;</td>
-                    {% elif rank == 2 %}
-                      <td scope="row">&#129352;</td>
-                    {% elif rank == 3 %}
-                      <td scope="row">&#129353;</td>
-                    {% else  %}
-                      <td scope="row">{{rank}}</td>
-                    {% endif %}
-                    <td scope="row"><img src="{{profile.avatar}}" class="img-fluid rounded-circle mb-2" width="40" height="40"></td>
-                    <td scope="row"><a href="http://www.github.com/{{id}}" target="_blank">{{id|default_if_none:"-"}}</a></td>
-                    <td scope="row">{{profile.name|default_if_none:"-"}}</td>
-                    <td>{{profile.bio|default_if_none:"-"}}</td>
-                  </tr>
-                  {% endfor %}
-                </tbody>
-              </table>
-              {% else %}
-              순위 결과 없음.
-              {% endif %}
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> {% endcomment %}
   </div>
 </div>
 <!-- 하단 영역 -->
@@ -152,5 +114,16 @@
   </div>
 </div>
 
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $("#carouselExampleIndicators").on('slide.bs.carousel', function (e) {
+      var idx = $(e.relatedTarget).index();
+      //console.log($(e.relatedTarget).index());
+      //console.log('slide');
+      //console.log('#b'+idx);
+      $("#b"+idx).click();
+    });
+ });
+</script>
 {% endblock %}

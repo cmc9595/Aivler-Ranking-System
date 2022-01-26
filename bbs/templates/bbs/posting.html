@@ -15,7 +15,7 @@
         <div class="card my-3">
             <div class="card-body">
                 <div class="card-text" style="white-space: pre-line;">
-                    {{ post.contents }}
+                    {{ post.contents|safe }}
                 </div>
                 <br>
                 <pre><code class="python">{{ post.code_edit }}</code></pre>

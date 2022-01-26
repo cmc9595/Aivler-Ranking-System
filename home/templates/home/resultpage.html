@@ -107,35 +107,37 @@
             <button class="btn btn-outline-dark" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=weekly'">Weekly</button>
             <button class="btn btn-outline-dark" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=monthly'">Monthly</button>
           </div>
+          <h2>🎉 MAKE IT POSSIBLE</h2>
+          <input name="find">
         </div>
         {% if new_list %}
 
-        <table class="table table-borderless table-hover">
-          <thead class="table-dark text-center" style="font-size:14px">
+        <table class="table table-borderless table-hover" style="border-radius: 2em">
+          <thead class="table-dark text-center " style="font-size:14px, border-radius: 100px">
             <tr>
-              <th scope="col">Rank</th>
-              <th scope="col">Profile</th>
-              <th scope="col">ID</th>
+              <th scope="col">순위</th>
+              <th scope="col">프로필</th>
+              <th scope="col">아이디</th>
               <th scope="col">이름</th>
               <th scope="col">커밋</th>
               {% comment %} <th scope="col">지역</th> {% endcomment %}
               <th scope="col">BIO</th>
             </tr>
           </thead>
-          <tbody class="text-center" style="font-size:16px">
+          <tbody class="text-center" style="font-size:12px" height=400>
             {% for rank, id, cnt, profile in new_list %}
             <tr>
               {% if rank == 1 %}
-                <td scope="row">🥇</td>
+                <td scope="row" style="font-size:40px">🥇</td>
               {% elif rank == 2 %}
-                <td scope="row">🥈</td>
+                <td scope="row" style="font-size:35px">🥈</p></td>
               {% elif rank == 3 %}
-                <td scope="row">🥉</td>
+                <td scope="row" style="font-size:30px">🥉</p></td>
               {% else %}
                 <td scope="row">{{rank}}</td>
               {% endif %}
               <td scope="row"><img src="{{profile.avatar}}" class="img-fluid rounded-circle mb-2" width="40" height="40"></td>
-              <td scope="row"><a href="http://www.github.com/{{id}}" target="_blank">{{id|default_if_none:"-"}}</a></td>
+              <td scope="row"><a name={{id}} href="http://www.github.com/{{id}}" target="_blank">{{id|default_if_none:"-"}}</a></td>
               <td scope="row">{{profile.name|default_if_none:"-"}}</td>
               <td scope="row">{{cnt}}</td>
               {% comment %} <td scope="row">{{profile.location|default_if_none:"-"}}</td> {% endcomment %}

@@ -1,7 +1,7 @@
 import imp
 from django.shortcuts import render, redirect
-from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404
+from django.core.paginator import Paginator
 
 from .models import Post
 
@@ -23,8 +23,6 @@ def posting(request, post_id):
     }
     return render(request, 'bbs/posting.html', context)
 
-
-from django.shortcuts import render
 from .forms import UploadFileForm
 
 def new_post(request, word):
@@ -78,11 +76,8 @@ def remove_post(request, post_id):
         return redirect('/free/')
     return render(request, 'bbs/remove_post.html', {'Post': post})
 
-
 from django.utils import timezone
 from .models import Comment
-from django.shortcuts import redirect
-
 from .forms import CommentForm
 
 def comment_create(request, post_id):

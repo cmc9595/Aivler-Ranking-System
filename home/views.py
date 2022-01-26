@@ -203,9 +203,9 @@ def commitmsg(request):
 
 def mainrank(request):
     dayRank = rankByDate('day', 3)
-    new_list = [(idx, id, cnt, GithubUser.objects.get(userid=id)) for idx, id, cnt in dayRank]
     weekRank = rankByDate('week', 3)
     monthRank = rankByDate('month', 3)
+    new_list = [(idx, id, cnt, GithubUser.objects.get(userid=id)) for idx, id, cnt in weekRank]
     return render(request, 'home/mainpage.html', {
         'rankD':dayRank,
         'rankW':weekRank,

@@ -7,11 +7,21 @@ import os
 from django.utils import timezone
 from django.core.paginator import Paginator
 from .models import Commit, GithubUser
+from qna.models import Question
 
 load_dotenv()
 # Create your views here.
 def index(request):
-    return render(request, 'home/mainpage.html', {})
+    unsolved_list = Question.objects.filter(qsolve = 0).order_by('-id')
+    unsolved_len = len(unsolved_list)
+    if unsolved_len > 4 :
+        unsolved_len = 4
+    unsolved_list = Question.objects.filter(qsolve = 0).order_by('-id')[:unsolved_len]
+    context = {
+        'unsolved_list': unsolved_list
+    }
+    # return HttpResponse(unsolved_list)
+    return render(request, 'home/mainpage.html', context)
 
 def rankByDate(option, params=1): # params 는 (idx, id, count) 원소갯수
     today = datetime.now()

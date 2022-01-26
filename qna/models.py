@@ -9,7 +9,7 @@ class Question(models.Model):
     qsolve = models.IntegerField(default='0')
 
     def __str__(self):
-        return self.subject
+        return self.subject+" / "
     def summary(self):
         return self.content[:80]
     

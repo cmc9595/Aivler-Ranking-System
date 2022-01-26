@@ -65,47 +65,21 @@
 <div class="row">
   <div class="col">
     <h1 class="h3"><i data-feather="help-circle"></i> Answer<strong> required</strong></h1>
-        <div class="row g-3">
-          <div class="col-md-6">
-            <div class="p-2 card">
-              <div class="card-header">
-                질문 이름1
-              </div>
-              <div class="card-body">
-                질문 상세 내역
-              </div>
-            </div>
+    <div class="row g-3">
+      <!-- 질문리스트 start -->
+      {% for unsolved in unsolved_list %}
+      <div class="col-md-6">
+        <div class="p-2 card">
+          <div class="card-header">
+            {{unsolved.subject|truncatewords:5}}
           </div>
-          <div class="col-md-6">
-            <div class="p-2 card">
-              <div class="card-header">
-                질문 이름2
-              </div>
-              <div class="card-body">
-                질문 상세 내역
-              </div>
-            </div>
+          <div class="card-body">
+            {{unsolved.content|truncatewords:5}}
           </div>
-          <div class="col-md-6">
-            <div class="p-2 card">
-              <div class="card-header">
-                질문 이름3
-              </div>
-              <div class="card-body">
-                질문 상세 내역
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="p-2 card">
-              <div class="card-header">
-                질문 이름4
-              </div>
-              <div class="card-body">
-                질문 상세 내역
-              </div>
-            </div>
-          </div>
+        </div>
+      </div>
+      {% endfor %}
+      <!-- 질문리스트 end -->
     </div>
   </div>
 </div>

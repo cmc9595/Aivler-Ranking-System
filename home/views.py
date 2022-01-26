@@ -11,16 +11,7 @@ from qna.models import Question
 
 load_dotenv()
 def index(request):
-    unsolved_list = Question.objects.filter(qsolve = 0).order_by('-id')
-    unsolved_len = len(unsolved_list)
-    if unsolved_len > 4 :
-        unsolved_len = 4
-    unsolved_list = Question.objects.filter(qsolve = 0).order_by('-id')[:unsolved_len]
-    context = {
-        'unsolved_list': unsolved_list
-    }
-    # return HttpResponse(unsolved_list)
-    return render(request, 'home/mainpage.html', context)
+    return render(request, 'home/mainpage.html')
 
 def rankByDate(option, params=1): # params 는 (idx, id, count) 원소갯수
     today = datetime.now()
@@ -221,6 +212,13 @@ def mainrank(request):
     dayList = [(idx, id, cnt, GithubUser.objects.get(userid=id)) for idx, id, cnt in rankByDate('day', 3)]
     weekList = [(idx, id, cnt, GithubUser.objects.get(userid=id)) for idx, id, cnt in rankByDate('week', 3)]
     monthList = [(idx, id, cnt, GithubUser.objects.get(userid=id)) for idx, id, cnt in rankByDate('month', 3)]
+
+    unsolved_list = Question.objects.filter(qsolve = 0).order_by('-id')
+    unsolved_len = len(unsolved_list)
+    if unsolved_len > 4 :
+        unsolved_len = 4
+    unsolved_list = Question.objects.filter(qsolve = 0).order_by('-id')[:unsolved_len]
+
     # dayRank = rankByDate('day', 3)
     # weekRank = rankByDate('week', 3)
     # monthRank = rankByDate('month', 3)
@@ -228,6 +226,7 @@ def mainrank(request):
         # 'rankD':dayRank,
         # 'rankW':weekRank,
         # 'rankM':monthRank,
+        'unsolved_list': unsolved_list,
         'allList':[dayList,weekList,monthList],
     })
     

@@ -6,12 +6,15 @@
     {% csrf_token %}
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label"><strong>게시판 제목</strong></label>
-        <input type="text" name="postname" class="form-control" id="exampleFormControlInput1" placeholder="제목은 반드시 입력">
+        <input type="text" name="postname" class="form-control" placeholder="제목은 반드시 입력">
     </div>
     <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label"><strong>게시판 내용</strong></label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="10" cols="50" name="contents">{{written}}</textarea>
+        <textarea class="form-control" id="content" rows="10" cols="50" name="contents">{{written}}</textarea>
     </div>
+    <script type="text/javascript"> 
+        $(document).ready(function() { $("#content").summernote(); }) 
+    </script>
     <div class="mb-3">
         <label for="codelabel" class="form-label"><strong>코드 작성</strong></label>
         <textarea class="form-control" id="codelabel" rows="10" cols="50" name="code_edit"></textarea>

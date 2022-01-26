@@ -29,6 +29,12 @@
             <a class="btn btn-secondary" href="/free/" role="button">취소</a>
         </div>
     </div>
+    
+
+        <div class="summernote">
+            안녕하세요
+        </div>        
+
 
 </form>
 <script>
@@ -46,6 +52,12 @@
           this.selectionStart =
             this.selectionEnd = start + 1;
         }
+      });
+</script>
+<script>
+
+    $(document).ready(function() {
+        $('.summernote').summernote();
       });
 </script>
 {% endblock %}

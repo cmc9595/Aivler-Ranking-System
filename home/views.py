@@ -183,7 +183,7 @@ def search(request):
         monthRank = monthIDs.index(id)+1 if id in monthIDs else '-'
     
         return render(request, 'home/profile.html', 
-                    {'data': data[:5], # 최근 5개목록
+                    {'data': data[:10], # 최근 5개목록
                     'id': id,
                     #'sidebar':sidebar,
                     'rankD':dayRank,
@@ -205,7 +205,7 @@ def mainrank(request):
     dayRank = rankByDate('day', 3)
     weekRank = rankByDate('week', 3)
     monthRank = rankByDate('month', 3)
-    new_list = [(idx, id, cnt, GithubUser.objects.get(userid=id)) for idx, id, cnt in weekRank]
+    new_list = [(idx, id, cnt, GithubUser.objects.get(userid=id)) for idx, id, cnt in weekRank[:5]] # 5
     return render(request, 'home/mainpage.html', {
         'rankD':dayRank,
         'rankW':weekRank,

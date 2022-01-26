@@ -12,14 +12,14 @@ from django.shortcuts import get_object_or_404
 #     return render(request, 'qna/question_list.html', context)
 
 def index(request):
-    question_list = Question.objects.filter(qsolve = 0)
+    question_list = Question.objects.filter(qsolve = 0).order_by('-id')
     context = {
         'question_list': question_list
     }
     return render(request, 'qna/question_list.html', context)
 
 def solve(request):
-    question_list = Question.objects.filter(qsolve = 1)
+    question_list = Question.objects.filter(qsolve = 1).order_by('-id')
     context = {
         'question_list': question_list
     }

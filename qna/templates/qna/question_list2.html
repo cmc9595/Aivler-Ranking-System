@@ -16,6 +16,7 @@
                 </div>
             </div>
 
+            {% if user.is_authenticated %}
             <div class="col-md-4 col-sm-4">
                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                     <a href="{% url 'qna:question_create' %}" class="btn btn-primary">
@@ -23,6 +24,8 @@
                     </a>
                   </div>
             </div>
+            {% endif %}
+            
         </div>
     </div>
 

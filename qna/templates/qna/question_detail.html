@@ -49,35 +49,37 @@
             <td>{{ answer.content }}</td>
             <td>{{ answer.create_date }}</td>
             <td>
-                <form action="{% url 'qna:answer_remove' %}" method="post">
-                    {% csrf_token %}
-                    <INPUT TYPE="hidden" NAME="answer_id" SIZE=10 value={{answer.id}}>
-                    <INPUT TYPE="hidden" NAME="question_id" SIZE=10 value={{question.id}}>
-                    
-                    <!-- 댓글 삭제 관련 모달 -->
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#삭제">
-                        삭제
-                    </button>
+                {% if user.is_authenticated %}
+                    <form action="{% url 'qna:answer_remove' %}" method="post">
+                        {% csrf_token %}
+                        <INPUT TYPE="hidden" NAME="answer_id" SIZE=10 value={{answer.id}}>
+                        <INPUT TYPE="hidden" NAME="question_id" SIZE=10 value={{question.id}}>
+                        
+                        <!-- 댓글 삭제 관련 모달 -->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#삭제">
+                            삭제
+                        </button>
 
-                    <div class="modal fade" id="삭제" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="staticBackdropLabel">정말로 이 댓글을 삭제하시겠습니까?</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    {{answer.content}}
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                    <button type="submit" class="btn btn-primary">삭제</button>
+                        <div class="modal fade" id="삭제" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">정말로 이 댓글을 삭제하시겠습니까?</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{answer.content}}
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                        <button type="submit" class="btn btn-primary">삭제</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- 댓글 삭제 관련 모달 끝 -->
-                </form>
+                        <!-- 댓글 삭제 관련 모달 끝 -->
+                    </form>
+                {% endif %}
             </td>
         </tr>
                 <!-- Modal -->
@@ -113,7 +115,10 @@
     </form>
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
             <a class="btn btn-primary" href="/qna/" role="button">목록</a>
-            <a class="btn btn-danger" href="/qna/{{question.id}}/delete/" role="button">삭제</a>
+            {% if user.is_authenticated %}
+                <a class="btn btn-danger" href="/qna/{{question.id}}/delete/" role="button">삭제</a>
+            {% endif %}
+            
           </div>
     </div>
         

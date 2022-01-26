@@ -14,7 +14,7 @@
     </div>
     <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label"><strong>게시판 내용</strong></label>
-        <textarea class="form-control" id="content" rows="10" cols="50" name="contents">{{written}}</textarea>
+        <textarea class="form-control" id="content" rows="10" cols="50" name="contents">{{written|striptags}}</textarea>
     </div>
     <script type="text/javascript"> 
         $(document).ready(function() { $("#content").summernote(); })

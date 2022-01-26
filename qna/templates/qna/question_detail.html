@@ -21,7 +21,7 @@
                     {{ question.file }}
                     <img src='{{ question.file.url }}' width='50%'>
                 {% endif %}
-                {{ question.content }}
+                {{ question.content|safe }}
             </div>
             <div class="d-flex justify-content-end">
                 <div class="badge badge-light p-2">

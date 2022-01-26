@@ -17,7 +17,7 @@
     </script>
     <div class="mb-3">
         <label for="codelabel" class="form-label"><strong>코드 작성</strong></label>
-        <textarea class="form-control" id="codelabel" rows="10" cols="50" name="code_edit"></textarea>
+        <textarea class="form-control" id="textbox" rows="10" cols="50" name="code_edit"></textarea>
     </div>
     <br>
     
@@ -33,11 +33,9 @@
             <a class="btn btn-secondary" href="/free/" role="button">취소</a>
         </div>
     </div>
-    
-    
-
-
 </form>
+
+
 <script>
     document.getElementById('textbox').addEventListener('keydown', function(e) {
         if (e.key == 'Tab') {

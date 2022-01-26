@@ -8,7 +8,7 @@
     <div class="d-flex justify-content-between">
         <h5>작성자 : {{ question.writer }}</h5>
         <span>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#해결완료">
+            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#해결완료">
                 해결완료
             </button>
 
@@ -21,7 +21,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                            <button type="button" onclick="location.href='{% url 'qna:ok' question.id %}' " class="btn btn-primary">해결완료</button>
+                            <button type="button" onclick="location.href='{% url 'qna:ok' question.id %}' " class="btn btn-info">해결완료</button>
                         </div>
                     </div>
                 </div>

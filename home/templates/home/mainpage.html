@@ -104,7 +104,7 @@
             {{unsolved.subject|truncatewords:5}}
           </div>
           <div class="card-body">
-            {{unsolved.content|truncatewords:5}}
+            {{unsolved.content|truncatewords:5|safe|striptags}}
           </div>
         </div>
       </div>

@@ -38,15 +38,15 @@
                     <th scope="col" width='45%'>BIO</th>
                   </tr>
                 </thead>
-                <tbody class="text-center" style="font-size:16px" height=400>
+                <tbody class="text-center" style="font-size:12px" height=400>
                   {% for rank, id, cnt, profile in List|slice:":5" %}
                   <tr>
                     {% if rank == 1 %}
-                      <td scope="row">🥇</td>
+                      <td scope="row" style="font-size:40px">🥇</td>
                     {% elif rank == 2 %}
-                      <td scope="row">🥈</td>
+                      <td scope="row" style="font-size:35px">🥈</td>
                     {% elif rank == 3 %}
-                      <td scope="row">🥉</td>
+                      <td scope="row" style="font-size:30px">🥉</td>
                     {% else  %}
                       <td scope="row">{{rank}}</td>
                     {% endif %}

@@ -6,7 +6,8 @@
 <div class="container my-3">
 
     <h2 class="border-bottom py-2">{{ question.subject }}</h2>
-    
+    <a class="btn" href="{% url 'qna:ok' question.id %}" role="button"> 해결완료 </a>
+
     <div class="card my-3">
         <div class="card-body">
             <div class="card-text" style="white-space: pre-line;">

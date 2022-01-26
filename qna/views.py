@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import Question
 
@@ -34,9 +34,19 @@ def detail(request, question_id):
     }
     return render(request, 'qna/question_detail.html', context)
 
+def ok(request, question_id):
+    question = Question.objects.get(pk=question_id)
+    question.qsolve = 1
+    question.save()
+    
+    question_list = Question.objects.filter(qsolve = 0).order_by('-id')
+    context = {
+        'question_list': question_list
+    }
+    return render(request, 'qna/question_list.html', context)
+
 from django.utils import timezone
 from .models import Answer
-from django.shortcuts import redirect
 
 from .forms import AnswerForm
 

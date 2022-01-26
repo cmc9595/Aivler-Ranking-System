@@ -117,7 +117,7 @@
 
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
         <a class="btn btn-primary" href="/free/" role="button">목록</a>
-        {% if user.is_authenticated %}
+        {% if post.writer == user.username %}
             <a class="btn btn-danger" href="/free/{{post.pk}}/remove/" role="button">삭제</a>
         {% endif %}
     </div>

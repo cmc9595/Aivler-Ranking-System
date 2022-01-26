@@ -22,8 +22,17 @@
           <i id="my_ranking_txt"><i data-feather="award" class="text-warning"></i> 현재 나의 순위는?</i>{% include 'search_form.html' %}
       </li>
       <li>
+        {% if user.is_authenticated %}
+            <button class="btn btn-outline-primary" onclick="location.href ='{% url 'common:logout' %}'" >
+                {{ user.username }} (로그아웃)
+            </button>
+        {% else %}
+            <button class="btn btn-outline-primary" onclick="location.href ='{% url 'common:login' %}'" >
+                로그인
+            </button>
+          {% endif %}
         <!-- 모달 버튼 -->
-      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#도움말">
+      <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#도움말">
         도움말
       </button>
       <!-- Modal -->
@@ -47,15 +56,7 @@
         </div>
       </div>
       <!-- 모달 끝 -->
-        {% if user.is_authenticated %}
-            <button class="btn btn-outline-primary" onclick="location.href ='{% url 'common:logout' %}'" >
-                {{ user.username }} (로그아웃)
-            </button>
-        {% else %}
-            <button class="btn btn-outline-primary" onclick="location.href ='{% url 'common:login' %}'" >
-                로그인
-            </button>
-          {% endif %}
+        
       </li>
     </ul>
   </div>

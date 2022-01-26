@@ -13,7 +13,18 @@
         <textarea class="form-control" id="content" rows="10" cols="50" name="contents">{{written}}</textarea>
     </div>
     <script type="text/javascript"> 
-        $(document).ready(function() { $("#content").summernote(); }) 
+        $(document).ready(function() { $("#content").summernote(); })
+        $('#content').summernote({
+            toolbar: [
+              // [groupName, [list of button]]
+              ['style', ['bold', 'italic', 'underline', 'clear']],
+              ['font', ['strikethrough', 'superscript', 'subscript']],
+              ['fontsize', ['fontsize']],
+              ['color', ['color']],
+              ['para', ['ul', 'ol', 'paragraph']],
+              ['height', ['height']]
+            ]
+          });
     </script>
     <div class="mb-3">
         <label for="codelabel" class="form-label"><strong>코드 작성</strong></label>

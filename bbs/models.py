@@ -6,6 +6,8 @@ class Post(models.Model):
     contents = models.TextField()
     views = models.IntegerField(default='0')
     code_edit = models.TextField(blank=True)
+    writer =  models.CharField(max_length=150, blank=True)
+    
     def __str__(self):
         return self.postname
 

@@ -108,4 +108,9 @@ def comment_delete(request, post_id, comment_id):
     context = {'post': post, 'form': Comment.objects.all()}
     return render(request, 'bbs/posting.html', context)  
 
+def user(request):
 
+    return render(request, 'bbs/user.html')
+
+def user1(request, word):
+    return render(request, 'bbs/user1.html', {'word':word})

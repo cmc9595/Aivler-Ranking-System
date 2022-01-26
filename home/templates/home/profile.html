@@ -17,7 +17,7 @@
 
 <div class="row">
 
-  <div class="col-xl-2 col-md-12 b">
+  <div class="col-xl-4 col-md-12 b">
     <h3>Profile</h3>
     <div class="card mb-3" style="border-radius: 1em">
       <div class="card-header" style="border-radius: 1em">
@@ -46,7 +46,7 @@
     </div>
   </div>
 
-  <div class="col-xl-2 col-md-12 b">
+  <div class="col-xl-4 col-md-12 b">
     <h3>🏅Your Ranking🏅</h3>
     <div class="card" style="border-radius: 1em">
       <div class="card-header" style="border-radius: 1em">
@@ -72,15 +72,23 @@
         <h1>{{rankM}}</h1>
       </div>
     </div>
-    <div class=col>
+    
+  </div>
+
+  <div class="col-xl-4 col-md-12 b">
+    <div>
       <img src = "https://github-readme-stats.vercel.app/api/top-langs/?username=id&layout=compact&theme=buefy"> 
- </div>
-      <img src ="https://github-readme-stats.vercel.app/api?username={{id}}" width=200 height =200>
+    </div>
+      <img src ="https://github-readme-stats.vercel.app/api?username={{id}}">
+    </div>
+    
     </div>
   </div>
 
-  <div class="col-xl-8 col-md-12 b">
-    <h3>최근 {{id}}의 커밋</h3>
+
+</div>
+<div class="row">
+  <h3>최근 {{id}}의 커밋</h3>
     <div class="card" style="border-radius: 1em">
       <div class="card-header" style="border-radius: 1em">
         <table class="table w-auto">
@@ -106,9 +114,6 @@
           </tbody>
         </table>
       </div>
-    </div>
-  </div>
-
-
 </div>
+
 {% endblock %}

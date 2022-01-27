@@ -14,7 +14,7 @@ class GithubUser(models.Model):
     bio = models.CharField(max_length=100, null=True)
     
 class Commit(models.Model):
-    eventid = models.IntegerField()
+    eventid = models.CharField(max_length=50)
     userid = models.CharField(max_length=50)
     repository = models.CharField(max_length=100)
     date = models.DateTimeField()

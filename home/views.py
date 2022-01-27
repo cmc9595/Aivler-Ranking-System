@@ -22,16 +22,13 @@ def rankByDate(option, params=1): # params 는 (idx, id, count) 원소갯수
     elif option=='month':
         target = datetime(year=today.year, month=today.month, day=1)
     #print(f"{option}, {target}")
-    print("target:", target)
+    # print("target:", target)
     commits = Commit.objects.filter(date__gte=str(target))
-    for i in commits:
-        if i.userid=='jhg2957':
-            print(i.eventid, i.userid, i.date, i.message)
-    print("len:", len(commits))
+    # print("len:", len(commits))
     dic = {}
     for commit in commits:
         dic[commit.userid] = dic.get(commit.userid, 0) + 1
-    print(dic)
+    # print(dic)
     res = sorted(dic.items(), key=lambda x:x[1], reverse=True)
     res = [[idx+1, id, cnt]for idx, (id, cnt) in enumerate(res)]
     # 중복 rank 적용
@@ -64,7 +61,6 @@ def getCommitsFromAPI(id):
             return 'token - bad credential'
     except:
         pass
-    
     l = []
     page = 0
     while True:
@@ -122,7 +118,7 @@ def updateCommit(id):
             time = time[:-1]
             dt = datetime.strptime(f'{date} {time}', '%Y-%m-%d %H:%M:%S')
             dt += timedelta(hours=9) # seoul/Asia = UTC+09:00
-            Commit(eventid=int(i[0]), userid=id, repository=i[1], date=dt, message=i[3]).save()
+            Commit(eventid=i[0], userid=id, repository=i[1], date=dt, message=i[3]).save()
         return ''
 
 def updateProfile(id):
@@ -176,25 +172,6 @@ def search(request):
             profile = None
             
         data = Commit.objects.filter(userid=id)
-        # profile 가져오는부분 
-        # profileList = getProfileFromAPI(id)
-        # if profileList=='no token':
-        #     msg = 'no token'
-        # elif profileList==[]:
-        #     msg = 'id가 틀리거나 토큰만료'
-        #     avatar = ""
-        #     html_url = ""
-        #     company = ""
-        #     blog = ""
-        #     location = ""
-        #     bio = ""
-        # else :
-        #     avatar = profileList[0]
-        #     html_url = profileList[1]
-        #     company = profileList[2]
-        #     blog = profileList[3]
-        #     location = profileList[4]
-        #     bio = profileList[5]    
         
         print("id=", id)
         # 사용한 id의 등수 (중복등수 적용)
@@ -207,7 +184,6 @@ def search(request):
         weekuser = len(weekIDs)
         monthuser = len(monthIDs)
         
-        
         dayRank = rankByDate('day',4)
         weekRank = rankByDate('week',4)
         monthRank = rankByDate('month',4)
@@ -215,8 +191,8 @@ def search(request):
         weekRank_b = weekIDs.index(id) if id in weekIDs else '-'
         monthRank_c = monthIDs.index(id) if id in monthIDs else '-'
         dayRank = dayRank[dayRank_a] if dayRank_a != '-' else '-' 
-        weekRank = weekRank[weekRank_b]
-        monthRank = monthRank[monthRank_c]
+        weekRank = weekRank[weekRank_b] if dayRank_a != '-' else '-' 
+        monthRank = monthRank[monthRank_c] if dayRank_a != '-' else '-' 
     
         return render(request, 'home/profile.html', 
                     {'data': data[:5], # 최근 5개목록

@@ -10,6 +10,8 @@ class Post(models.Model):
     
     def __str__(self):
         return self.postname
+    def summary(self):
+        return self.contents[:80]
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)

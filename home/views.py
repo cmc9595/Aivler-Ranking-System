@@ -10,8 +10,8 @@ from .models import Commit, GithubUser
 from qna.models import Question
 
 load_dotenv()
-def index(request):
-    return render(request, 'home/mainpage.html')
+# def index(request):
+#     return render(request, 'home/mainpage.html')
 
 def rankByDate(option, params=1): # params 는 (idx, id, count) 원소갯수
     today = datetime.now()

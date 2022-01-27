@@ -7,13 +7,15 @@
       <div class="card" style="border-radius: 2em">
         <div class="card-header" style="border-radius: 2em">
            <!-- button -->
-          <div class="btn-group mb-4">
-            <button class="btn btn-outline-dark" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=daily'">Daily</button>
-            <button class="btn btn-outline-dark" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=weekly'">Weekly</button>
-            <button class="btn btn-outline-dark" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=monthly'">Monthly</button>
-          </div>
           <h2>🎉 MAKE IT POSSIBLE</h2>
           {% comment %} <input name="find"> {% endcomment %}
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <div class="btn-group mb-4">
+              <button class="btn btn-outline-dark" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=daily'">Daily</button>
+              <button class="btn btn-outline-dark" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=weekly'">Weekly</button>
+              <button class="btn btn-outline-dark" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=monthly'">Monthly</button>
+            </div>
+          </div>
         </div>
         {% if new_list %}
 

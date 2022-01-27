@@ -22,8 +22,8 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                    <button type="button" onclick="location.href='{% url 'qna:ok' question.id %}' " class="btn btn-info">해결완료</button>
+                                    <button type="button" onclick="location.href='{% url 'qna:ok' question.id %}' " class="btn btn-info"><i data-feather="smile"style="width:30px;height:30px;"></i></button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i data-feather="frown"style="width:30px;height:30px;"></i></button>
                                 </div>
                             </div>
                         </div>

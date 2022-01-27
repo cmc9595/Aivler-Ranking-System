@@ -29,12 +29,14 @@
                         </div>
                     </div>
                 </span>
-            {% else %}
+            {% endif %}
+        {% endif %}
+        {% if question.qsolve == 1 %} 
                 <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#해결했어요">
                     해결했어요
                 </button>
-            {% endif %}
         {% endif %}
+
     </div>
 
     <div class="card my-3">

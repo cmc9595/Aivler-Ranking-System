@@ -32,9 +32,11 @@
             {% endif %}
         {% endif %}
         {% if question.qsolve == 1 %} 
-                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#해결했어요">
-                    해결했어요
-                </button>
+                <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            
+                            <span class="badge rounded-pill bg-success"><i data-feather="smile" style="width:30px;height:30px;"></i></span>
+                            
+                          </div>
         {% endif %}
 
     </div>

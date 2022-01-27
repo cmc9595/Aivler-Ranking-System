@@ -102,13 +102,16 @@
       <!-- 질문리스트 start -->
       {% for unsolved in unsolved_list %}
       <div class="col-md-6">
+        <a href="{% url 'qna:detail' unsolved.id %}">
         <div class="p-2 card">
           <div class="card-header">
-            <a href="{% url 'qna:detail' unsolved.id %}">{{unsolved.subject|truncatewords:5}}</a>          </div>
+            <p class="text-black">{{unsolved.subject|truncatewords:5}} </p>        </div>
           <div class="card-body">
-            {{unsolved.content|truncatewords:5|safe|striptags}}
+            <p class="text-black">
+            {{unsolved.content|truncatewords:5|safe|striptags}}</p>
           </div>
         </div>
+      </a> 
       </div>
       {% endfor %}
       <!-- 질문리스트 end -->

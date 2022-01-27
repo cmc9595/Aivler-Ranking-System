@@ -45,7 +45,7 @@
 
             {% if question.qsolve == 0 %}
                 <div class="card" >
-                    <div class="card-header"style="background:#FED0D0;">
+                    <div class="card-header">
                         <div class='d-flex justify-content-between'>
                             <div>
                                 <small>#{{ question.id }}번 째 질문 </small>
@@ -60,7 +60,7 @@
                             <a href="{% url 'qna:detail' question.id %}">{{ question.subject }}</a>
                         </h4>
                     </div>
-                    <div class="card-body" style="background:#FED0D0;">
+                    <div class="card-body">
                         {{question.summary|safe|striptags|truncatechars:20}}
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             
@@ -69,8 +69,8 @@
                     </div>
                 </div>
             {% elif question.qsolve == 1 %}
-                <div class="card" >
-                    <div class="card-header"style="background:#CAFFC8;">
+            <div class="card" style ="background:#9EC5FE;">
+                <div class="card-header"style ="background:#9EC5FE;">
                         <div class='d-flex justify-content-between'>
                             <div>
                                 <small>#{{ question.id }}번 째 질문 </small>
@@ -85,7 +85,7 @@
                             <a href="{% url 'qna:detail' question.id %}">{{ question.subject }}</a>
                         </h4>
                     </div>
-                    <div class="card-body" style="background:#CAFFC8;">
+                    <div class="card-body" style=style ="background:#9EC5FE;">
                         {{question.summary|safe|striptags|truncatechars:20}}
                         <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             

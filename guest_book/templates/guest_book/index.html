@@ -99,14 +99,14 @@
       
       <div class="card text-center"style="border-radius: 2em">
         <div class="card-body">
-          <p class="card-text"><h3><strong><i data-feather="image" class="text-success"style="width:30px;height:30px;"></i> 전라권</strong></h3></p>
+          <p class="card-text"><h3><strong><i data-feather="twitch" class="text-success"style="width:30px;height:30px;"></i> 전라권</strong></h3></p>
         </div>
       </div>
       <div class="box">
       {% for content in guestbook%}
           {% if content.region == "전라권"%}
         <div class="alert alert-success" role="alert">
-          <i data-feather="image" class="text-success"></i> {{content.content}}
+          <i data-feather="twitch" class="text-success"></i> {{content.content}}
       </div>
       {% endif %}
       {% endfor %}

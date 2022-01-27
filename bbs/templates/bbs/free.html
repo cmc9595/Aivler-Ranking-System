@@ -15,6 +15,7 @@
                                 {{list.postname|truncatechars:17}}
                         </h4>
                 </a>
+                <h5><small>조회 수 : {{ list.views }}</small></h5>
             </div>
             <div class="card-body">
                 {{list.contents|safe|striptags|truncatechars:20}}

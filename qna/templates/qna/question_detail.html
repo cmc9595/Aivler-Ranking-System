@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-
+<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/atom-one-dark.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
 
 
 <div class="container my-3">
@@ -18,7 +21,7 @@
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h3 class="modal-title" id="staticBackdropLabel">{{ question.subject }}이 잘 해결되었나요?</h3>
+                                    <h3 class="modal-title" id="staticBackdropLabel">{{ question.subject }} - 해결되었나요?</h3>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-footer">
@@ -46,6 +49,33 @@
                 {% endif %}
                 {{ question.content|safe }}
             </div>
+            {% if question.code_edit != '' %}
+                <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                    <input type="radio" class="btn-check" onclick="ChangePython()" name="btnradio" id="btnradio1" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary" for="btnradio1">Python</label>
+                    <input type="radio" class="btn-check" onclick="ChangeJava()" name="btnradio" id="btnradio2" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btnradio2">JAVA</label>
+                    <input type="radio" class="btn-check" onclick="ChangeCpp()" name="btnradio" id="btnradio3" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="btnradio3">C++</label>
+                </div>
+                <pre><code id="output" class="python">{{ question.code_edit }}</code></pre>
+            {% endif %}
+    
+            <script>
+                var outputarea = document.getElementById("output");
+                function ChangePython(){
+                    outputarea.className = 'Python';
+                    hljs.highlightBlock(outputarea);
+                }
+                function ChangeJava(){
+                    outputarea.className = 'JAVA';
+                    hljs.highlightBlock(outputarea);
+                }
+                function ChangeCpp(){
+                    outputarea.className = 'cpp';
+                    hljs.highlightBlock(outputarea);
+                }
+            </script>    
             <div class="d-flex justify-content-end">
                 <div class="badge badge-light p-2">
                     {{ question.pub_date }}

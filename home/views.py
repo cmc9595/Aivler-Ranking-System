@@ -22,10 +22,16 @@ def rankByDate(option, params=1): # params 는 (idx, id, count) 원소갯수
     elif option=='month':
         target = datetime(year=today.year, month=today.month, day=1)
     #print(f"{option}, {target}")
+    print("target:", target)
     commits = Commit.objects.filter(date__gte=str(target))
+    for i in commits:
+        if i.userid=='jhg2957':
+            print(i.eventid, i.userid, i.date, i.message)
+    print("len:", len(commits))
     dic = {}
     for commit in commits:
         dic[commit.userid] = dic.get(commit.userid, 0) + 1
+    print(dic)
     res = sorted(dic.items(), key=lambda x:x[1], reverse=True)
     res = [[idx+1, id, cnt]for idx, (id, cnt) in enumerate(res)]
     # 중복 rank 적용
@@ -44,7 +50,6 @@ def rankByDate(option, params=1): # params 는 (idx, id, count) 원소갯수
 
 
 def getCommitsFromAPI(id):
-    l = []
     # 현재 event검색, 추후 search api 검색으로 바꿀것
     token = os.environ.get("TOKEN")
     if token is None:
@@ -52,16 +57,31 @@ def getCommitsFromAPI(id):
     headers = {'Authorization': 'token '+token} # token
     url = f'https://api.github.com/users/{id}/events'
     response = requests.get(url, headers=headers).json()
-    #print(response)
-    for i in response:
-        try:
-            if i['type']=='PushEvent':
-                # id, repository, date, message
-                l.append((i['id'], i['repo']['name'], i['created_at'], i['payload']['commits'][0]['message']))
-        except:
-            continue
+    try:
+        if response['message']=='Not Found':
+            return 'id not found'
+        if response['message']=='Bad credentials':
+            return 'token - bad credential'
+    except:
+        pass
+    
+    l = []
+    page = 0
+    while True:
+        page += 1
+        url = f'https://api.github.com/users/{id}/events?per_page=100&page={page}'
+        response = requests.get(url, headers=headers).json()
+        if response == []: # last page break
+            break
+        for i in response:
+            try:
+                if i['type']=='PushEvent':
+                    # id, repository, date, message
+                    l.append((i['id'], i['repo']['name'], i['created_at'], i['payload']['commits'][0]['message']))
+            except:
+                continue
+    print("len:", len(l))
     return l
-
 # profileapi
 def getProfileFromAPI(id):
     t = []
@@ -91,8 +111,10 @@ def updateCommit(id):
     commits = getCommitsFromAPI(id)
     if commits == "no token":
         return "no token"
-    elif commits == []:
-        return "wrong id or token"
+    elif commits == 'id not found':
+        return 'id not found'
+    elif commits == 'token - bad credential':
+        return 'token - bad credential'
     else:
         Commit.objects.filter(userid=id).delete()
         for i in commits:
@@ -100,7 +122,7 @@ def updateCommit(id):
             time = time[:-1]
             dt = datetime.strptime(f'{date} {time}', '%Y-%m-%d %H:%M:%S')
             dt += timedelta(hours=9) # seoul/Asia = UTC+09:00
-            Commit(eventid=i[0], userid=id, repository=i[1], date=dt, message=i[3]).save()
+            Commit(eventid=int(i[0]), userid=id, repository=i[1], date=dt, message=i[3]).save()
         return ''
 
 def updateProfile(id):
@@ -144,7 +166,7 @@ def search(request):
         #     return render(request, 'home/error_page.html', {'msg':msg})
         
         msg = updateProfile(id) # 프로필 DB 업데이트
-        if msg=='no token' or msg=='wrong id or token':
+        if msg in ['no token' in 'wrong id or token']:
             return render(request, 'home/error_page.html', {'msg':msg})
         
         # 프로필 가져오기

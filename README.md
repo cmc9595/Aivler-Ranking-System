@@ -13,5 +13,4 @@
 ***
 ### 링크
 
-### [관련 문서(Google Drive)](https://drive.google.com/drive/folders/1KOxh0BQcq0vqFPm7B6lVInRmAHocs2Xc?usp=sharing)
 ### [노션](https://dirt-manatee-88a.notion.site/django-d0a6bdba72864b47ae0c968c37d9860d)

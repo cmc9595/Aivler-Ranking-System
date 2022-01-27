@@ -1,101 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
 
-  {% comment %} <!-- 검색결과창 -->
-  {% if msg and not sidebar %}
-  <div class="row">
-    <div class="col">
-      <div class="card text-center">
-        <div class="card-header">
-          <h2>{{msg}}</h2>
-        </div>
-      </div>
-    </div>
-  </div>
-  {% endif %}
-  <!-- 현재순위 -->
-  {% if data %}
-  <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-  MY RANKING 👋
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Daily rank : {{rankD}} <br>
-        Weekly rank : {{rankW}}<br>
-        Monthly rank : {{rankM}}<br>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-{% endif %} {% endcomment %}
-  {% comment %} {% if data %}
-  <div class="row row-cols-3">
-    <div class="col">
-      <h1>MY RANKING</h1>
-      <br>
-      <ul class="list-group">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Daily rank
-          <span class="badge bg-primary rounded-pill">{{rankD}}</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Weekly rank
-          <span class="badge bg-primary rounded-pill">{{rankW}}</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Month rank
-          <span class="badge bg-primary rounded-pill">{{rankM}}</span>
-        </li>
-      </ul>
-
-    </div>
-  </div>
-  {% endif %} {% endcomment %}
-
-  <!-- 최근커밋내역 -->
-  {% comment %} {% if data %}
-  <div class="row my-5">
-    <div class="col">
-      <h1>Recently Commit</h1>
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Github ID</th>
-            <th scope="col">Repository Name</th>
-            <th scope="col">Date</th>
-            <th scope="col">Commit Message</th>
-          </tr>
-        </thead>
-        <tbody>
-          {% for i in data %}
-          <tr>
-            <th scope="row">{{i.eventid}}</th>
-            <td>{{i.userid}}</td>
-            <td>{{i.repository}}</td>
-            <td>{{i.date}}</td>
-            <td>{{i.message}}</td>
-          </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-  </div>
-  {% endif %} {% endcomment %}
-
-    
   <!-- List 출력 -->
   <div class="row">
     <div class="col-md">
@@ -108,7 +13,7 @@
             <button class="btn btn-outline-dark" type="button" onClick="location.href='{% url "home:ranking" %}?githubID={{id}}&option=monthly'">Monthly</button>
           </div>
           <h2>🎉 MAKE IT POSSIBLE</h2>
-          <input name="find">
+          {% comment %} <input name="find"> {% endcomment %}
         </div>
         {% if new_list %}
 

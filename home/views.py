@@ -199,13 +199,13 @@ def search(request):
                     'weekuser':weekuser,
                     'monthuser':monthuser})
 
-def showRank(request):
-    return render(request, 'home/ranking.html', {})
-
 def commitmsg(request):
     num = int(request.GET.get('num'))
-    obj = Commit.objects.order_by('-date')[num] # date 최근별 정렬
-    result = f'{obj.message}<br>{obj.userid}<br>{obj.date}'
+    try:
+        obj = Commit.objects.order_by('-date')[num] # date 최근별 정렬
+        result = f'{obj.message}<br>{obj.userid}<br>{obj.date}'
+    except:
+        result = ''
     return HttpResponse(result)
 
 def mainrank(request):

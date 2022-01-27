@@ -43,7 +43,7 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-header">
+                <div class="card-header"style="background:#CAFFC8;">
                     <div class='d-flex justify-content-between'>
                         <div>
                             <small>#{{ question.id }}번 째 질문 </small>
@@ -58,8 +58,12 @@
                         <a href="{% url 'qna:detail' question.id %}">{{ question.subject }}</a>
                     </h4>
                 </div>
-                <div class="card-body">
+                <div class="card-body"style="background:#CAFFC8;">
                     {{question.summary|safe|striptags|truncatechars:20}}
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                            
+                        <span class="badge rounded-pill bg-danger"><i data-feather="frown" style="width:30px;height:30px;"></i></span>
+                      </div>
                 </div>
             </div>
         </div>

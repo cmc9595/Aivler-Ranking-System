@@ -48,7 +48,6 @@
         <div class="card-body">
             <div class="card-text" style="white-space: pre-line;">
                 {% if question.file != '' %}
-                    {{ question.file }}
                     <img src='{{ question.file.url }}' width='50%'>
                 {% endif %}
                 {{ question.content|safe }}

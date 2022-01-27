@@ -57,16 +57,17 @@
                   {% for rank, id, cnt, profile in List|slice:":5" %}
                   <tr>
                     {% if rank == 1 %}
-                      <td scope="row" style="font-size:40px">🥇</td>
+                      <td scope="row"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/1st-place-medal_1f947.png" width="50"></td>
                     {% elif rank == 2 %}
-                      <td scope="row" style="font-size:35px">🥈</td>
+                      <td scope="row"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/2nd-place-medal_1f948.png" width="40"> </td>
                     {% elif rank == 3 %}
-                      <td scope="row" style="font-size:30px">🥉</td>
+                      <td scope="row"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/285/3rd-place-medal_1f949.png" width="40"></td>
                     {% else  %}
                       <td scope="row">{{rank}}</td>
                     {% endif %}
-                    <td scope="row"><img src="{{profile.avatar}}" class="img-fluid rounded-circle mb-2" width="40" height="40"></td>
-                    <td scope="row"><a href="http://www.github.com/{{id}}" target="_blank">{{id|default_if_none:"-"}}</a></td>
+                    <td scope="row"><a href="http://127.0.0.1:8000/home/search/?githubID={{id}}"><img src="{{profile.avatar}}" class="img-fluid rounded-circle mb-2" width="40" height="40"></a></td>
+                    <td scope="row"><a href="http://127.0.0.1:8000/home/search/?githubID={{id}}">{{id|default_if_none:"-"}}</a></td>
+                    {% comment %} <td scope="row"><a href="http://www.github.com/{{id}}" target="_blank">{{id|default_if_none:"-"}}</a></td> {% endcomment %}
                     <td scope="row">{{profile.name|default_if_none:"-"}}</td>
                     <td scope="row">{{cnt}}</td>
                     {% comment %} <td scope="row">{{profile.location|default_if_none:"-"}}</td> {% endcomment %}

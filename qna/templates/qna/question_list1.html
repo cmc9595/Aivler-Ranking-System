@@ -43,7 +43,7 @@
     <div class="row">
         <div class="col-12">
             <div class="card">
-                <div class="card-header"style="background:#CAFFC8;">
+                <div class="card-header"style="background:#FED0D0;">
                     <div class='d-flex justify-content-between'>
                         <div>
                             <small>#{{ question.id }}번 째 질문 </small>
@@ -58,7 +58,7 @@
                         <a href="{% url 'qna:detail' question.id %}">{{ question.subject }}</a>
                     </h4>
                 </div>
-                <div class="card-body"style="background:#CAFFC8;">
+                <div class="card-body"style="background:#FED0D0;">
                     {{question.summary|safe|striptags|truncatechars:20}}
                     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                             

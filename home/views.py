@@ -52,19 +52,8 @@ def getCommitsFromAPI(id):
     if token is None:
         return "no token"
     headers = {'Authorization': 'token '+token} # token
-    url = f'https://api.github.com/users/{id}/events'
-    response = requests.get(url, headers=headers).json()
-    try:
-        if response['message']=='Not Found':
-            return 'id not found'
-        if response['message']=='Bad credentials':
-            return 'token - bad credential'
-    except:
-        pass
     l = []
-    page = 0
-    while True:
-        page += 1
+    for page in range(1, 4): # 4page까지
         url = f'https://api.github.com/users/{id}/events?per_page=100&page={page}'
         response = requests.get(url, headers=headers).json()
         if response == []: # last page break
@@ -77,6 +66,7 @@ def getCommitsFromAPI(id):
             except:
                 continue
     print("len:", len(l))
+    print("page:", page)
     return l
 # profileapi
 def getProfileFromAPI(id):

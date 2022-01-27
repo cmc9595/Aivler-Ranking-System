@@ -8,26 +8,32 @@
     <div class="d-flex justify-content-between">
         <h5>작성자 : {{ question.writer }}</h5>
         {% if question.writer == user.username %} 
-            <span>
-                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#해결완료">
-                    해결완료
-                </button>
+            {% if question.qsolve == 0 %} 
+                <span>
+                    <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#해결완료">
+                        해결완료
+                    </button>
 
-                <div class="modal fade" id="해결완료" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h3 class="modal-title" id="staticBackdropLabel">{{ question.subject }}이 잘 해결되었나요?</h3>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                                <button type="button" onclick="location.href='{% url 'qna:ok' question.id %}' " class="btn btn-info">해결완료</button>
+                    <div class="modal fade" id="해결완료" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title" id="staticBackdropLabel">{{ question.subject }}이 잘 해결되었나요?</h3>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                                    <button type="button" onclick="location.href='{% url 'qna:ok' question.id %}' " class="btn btn-info">해결완료</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </span>
+                </span>
+            {% else %}
+                <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#해결했어요">
+                    해결했어요
+                </button>
+            {% endif %}
         {% endif %}
     </div>
 

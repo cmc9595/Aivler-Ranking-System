@@ -44,7 +44,7 @@
                 <td scope="row">{{rank}}</td>
               {% endif %}
               <td scope="row"><img src="{{profile.avatar}}" class="img-fluid rounded-circle mb-2" width="40" height="40"></td>
-              <td scope="row"><a href="http://127.0.0.1:8000/home/search/?githubID={{id}}">{{id|default_if_none:"-"}}</a></td>
+              <td scope="row"><a href="{% url 'home:search' %}?githubID={{id}}">{{id|default_if_none:"-"}}</a></td>
               <td scope="row">{{profile.name|default_if_none:"-"}}</td>
               <td scope="row">{{cnt}}</td>
               {% comment %} <td scope="row">{{profile.location|default_if_none:"-"}}</td> {% endcomment %}

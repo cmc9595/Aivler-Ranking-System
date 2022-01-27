@@ -44,8 +44,7 @@
         <div class="col-12">
 
             {% if question.qsolve == 0 %}
-            <h5> 질문해결x </h5>
-                <div class="card">
+                <div class="card" >
                     <div class="card-header">
                         <div class='d-flex justify-content-between'>
                             <div>
@@ -66,9 +65,8 @@
                     </div>
                 </div>
             {% elif question.qsolve == 1 %}
-            <h5> 질문해결o </h5>
-                <div class="card">
-                    <div class="card-header">
+                <div class="card" style ="background:#9EC5FE;">
+                    <div class="card-header"style ="background:#9EC5FE;">
                         <div class='d-flex justify-content-between'>
                             <div>
                                 <small>#{{ question.id }}번 째 질문 </small>
@@ -83,7 +81,7 @@
                             <a href="{% url 'qna:detail' question.id %}">{{ question.subject }}</a>
                         </h4>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body"style ="background:#9EC5FE;">
                         {{question.summary|safe|striptags|truncatechars:20}}
                     </div>
                 </div>

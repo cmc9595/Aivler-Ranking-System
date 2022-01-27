@@ -42,26 +42,53 @@
     {% for question in question_list %}
     <div class="row">
         <div class="col-12">
-            <div class="card">
-                <div class="card-header">
-                    <div class='d-flex justify-content-between'>
-                        <div>
-                            <small>#{{ question.id }}번 째 질문 </small>
+
+            {% if question.qsolve == 0 %}
+            <h5> 질문해결x </h5>
+                <div class="card">
+                    <div class="card-header">
+                        <div class='d-flex justify-content-between'>
+                            <div>
+                                <small>#{{ question.id }}번 째 질문 </small>
+                            </div>
+                            <div>
+                                <small>{{ question.pub_date }}</small>
+                                <br>
+                                <small>조회 수 : {{ question.hits }}</small>
+                            </div>
                         </div>
-                        <div>
-                            <small>{{ question.pub_date }}</small>
-                            <br>
-                            <small>조회 수 : {{ question.hits }}</small>
-                        </div>
+                        <h4>
+                            <a href="{% url 'qna:detail' question.id %}">{{ question.subject }}</a>
+                        </h4>
                     </div>
-                    <h4>
-                        <a href="{% url 'qna:detail' question.id %}">{{ question.subject }}</a>
-                    </h4>
+                    <div class="card-body">
+                        {{question.summary|safe|striptags|truncatechars:20}}
+                    </div>
                 </div>
-                <div class="card-body">
-                    {{question.summary|safe|striptags|truncatechars:20}}
+            {% elif question.qsolve == 1 %}
+            <h5> 질문해결o </h5>
+                <div class="card">
+                    <div class="card-header">
+                        <div class='d-flex justify-content-between'>
+                            <div>
+                                <small>#{{ question.id }}번 째 질문 </small>
+                            </div>
+                            <div>
+                                <small>{{ question.pub_date }}</small>
+                                <br>
+                                <small>조회 수 : {{ question.hits }}</small>
+                            </div>
+                        </div>
+                        <h4>
+                            <a href="{% url 'qna:detail' question.id %}">{{ question.subject }}</a>
+                        </h4>
+                    </div>
+                    <div class="card-body">
+                        {{question.summary|safe|striptags|truncatechars:20}}
+                    </div>
                 </div>
-            </div>
+            {% endif %}
+
         </div>
     </div>
     {% endfor %}

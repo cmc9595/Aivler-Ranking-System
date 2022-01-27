@@ -38,6 +38,20 @@
 .box:hover {
     overflow-y:auto;
 }
+.box::-webkit-scrollbar {
+  width: 1px;
+}
+.box::-webkit-scrollbar-thumb {
+  background-color: #2f3542;
+  border-radius: 10px;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+}
+.box::-webkit-scrollbar-track {
+  background-color: none;
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 5px white;
+}
 </style>
   <div class="row mt-5 gx-3">
 

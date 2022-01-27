@@ -1,23 +1,25 @@
 {% extends "base.html" %}
 {% block content %}
 <!--상단영역-->
+<!-- for carousel button -->
+
+
 <div class="row">
   <div class="col">
     <h1 class="h3"><i data-feather="github"></i><strong> Top</strong> Ranker</h1>
-
-    <div class="btn-group" data-toggle='buttons'>
-      <label class="btn btn-outline-dark active" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0">
-        <input id='b0' type="radio" class="btn-check" name="options" autocomplete="off" checked>Daily
-      </label>
-      
-      <label class="btn btn-outline-dark" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1">
-        <input id='b1' type="radio" class="btn-check" name="options" autocomplete="off">Weekly
-      </label>
-
-      <label class="btn btn-outline-dark" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2">
-        <input id='b2' type="radio" class="btn-check"name="options" autocomplete="off">Monthly
-      </label>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+      <input type="radio" class="btn-check" name="options" id='b0' autocomplete="off" checked>
+      <label class="btn btn-outline-dark" for="btnradio1"data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0">Daily</label>
+    
+      <input type="radio" class="btn-check" name="options" id='b1' autocomplete="off">
+      <label class="btn btn-outline-dark" for="btnradio2"data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1">Weekly</label>
+    
+      <input type="radio" class="btn-check" name="options" id='b2' autocomplete="off">
+      <label class="btn btn-outline-dark" for="btnradio3"data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2">Monthly</label>
     </div>
+  </div>
+
     <p></p>
     {% comment %} <div class="btn-group mb-4">
       <button class="btn btn-outline-dark" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1">Daily</button>
@@ -40,7 +42,7 @@
             <div class="carousel-item">
             {% endif %}
               <table class="table table-borderless table-hover">
-                <thead class="table-dark text-center" style="font-size:14px">
+                <thead class="table-dark text-center" style="font-size:16px">
                   <tr>
                     <th scope="col">순위</th>
                     <th scope="col">프로필</th>
@@ -51,7 +53,7 @@
                     <th scope="col" width='45%'>BIO</th>
                   </tr>
                 </thead>
-                <tbody class="text-center" style="font-size:12px" height=400>
+                <tbody class="text-center" style="font-size:16px;font-weight:bold" height=400>
                   {% for rank, id, cnt, profile in List|slice:":5" %}
                   <tr>
                     {% if rank == 1 %}
@@ -101,7 +103,7 @@
       <div class="col-md-6">
         <div class="p-2 card">
           <div class="card-header">
-            <a href="{% url 'qna:detail' unsolved.id %}">{{unsolved.subject|truncatewords:5}}</a>
+            {{unsolved.subject|truncatewords:5}}
           </div>
           <div class="card-body">
             {{unsolved.content|truncatewords:5|safe|striptags}}
@@ -127,3 +129,4 @@
  });
 </script>
 {% endblock %}
+

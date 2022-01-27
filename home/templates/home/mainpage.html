@@ -44,7 +44,7 @@
             <div class="carousel-item">
             {% endif %}
               <table class="table table-borderless table-hover">
-                <thead class="table-dark text-center" style="font-size:14px">
+                <thead class="table-dark text-center" style="font-size:16px">
                   <tr>
                     <th scope="col">순위</th>
                     <th scope="col">프로필</th>
@@ -55,7 +55,7 @@
                     <th scope="col" width='45%'>BIO</th>
                   </tr>
                 </thead>
-                <tbody class="text-center" style="font-size:12px" height=400>
+                <tbody class="text-center" style="font-size:16px;font-weight:bold" height=400>
                   {% for rank, id, cnt, profile in List|slice:":5" %}
                   <tr>
                     {% if rank == 1 %}

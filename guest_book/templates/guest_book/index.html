@@ -60,14 +60,14 @@
       
       <div class="card text-center"style="border-radius: 2em">
         <div class="card-body">
-          <p class="card-text"><h3><strong><i data-feather="map-pin" class="text-primary"style="width:30px;height:30px;"></i> 수도권</strong></h3></p>
+          <p class="card-text"><h3><strong><i data-feather="github" class="text-primary"style="width:30px;height:30px;"></i> 수도권</strong></h3></p>
         </div>
       </div>
         <div class="box">
         {% for content in guestbook%}
           {% if content.region == "수도권"%}
             <div class="alert alert-primary" role="alert">
-              {{content.content}}
+              <i data-feather="github" class="text-primary"></i> {{content.content}}
             </div>
           {% endif %}
         {% endfor %}
@@ -87,7 +87,7 @@
       {% for content in guestbook%}
           {% if content.region == "경상권"%}
         <div class="alert alert-secondary" role="alert">
-        {{content.content}}
+          <i data-feather="twitter" class="text-secondary"></i> {{content.content}}
       </div>
       {% endif %}
       {% endfor %}
@@ -99,14 +99,14 @@
       
       <div class="card text-center"style="border-radius: 2em">
         <div class="card-body">
-          <p class="card-text"><h3><strong><i data-feather="image" class="text-success"style="width:30px;height:30px;"></i> 전라권</strong></h3></p>
+          <p class="card-text"><h3><strong><i data-feather="twitch" class="text-success"style="width:30px;height:30px;"></i> 전라권</strong></h3></p>
         </div>
       </div>
       <div class="box">
       {% for content in guestbook%}
           {% if content.region == "전라권"%}
         <div class="alert alert-success" role="alert">
-        {{content.content}}
+          <i data-feather="twitch" class="text-success"></i> {{content.content}}
       </div>
       {% endif %}
       {% endfor %}
@@ -117,14 +117,14 @@
       
       <div class="card text-center"style="border-radius: 2em">
         <div class="card-body">
-          <p class="card-text"><h3><strong><i data-feather="sun" class="text-warning"style="width:30px;height:30px;"></i> 강원권</strong></h3></p>
+          <p class="card-text"><h3><strong><i data-feather="thumbs-up" class="text-warning"style="width:30px;height:30px;"></i> 강원권</strong></h3></p>
         </div>
       </div>
       <div class="box">
       {% for content in guestbook%}
           {% if content.region == "강원권"%}
         <div class="alert alert-warning" role="alert">
-        {{content.content}}
+          <i data-feather="thumbs-up" class="text-warning"></i> {{content.content}}
       </div>
       {% endif %}
       {% endfor %}
@@ -135,14 +135,14 @@
       
       <div class="card text-center"style="border-radius: 2em">
         <div class="card-body">
-          <p class="card-text"><h3><strong><i data-feather="map" class="text-info"style="width:30px;height:30px;"></i> 충청권</strong></h3></p>
+          <p class="card-text"><h3><strong><i data-feather="gitlab" class="text-info"style="width:30px;height:30px;"></i> 충청권</strong></h3></p>
         </div>
       </div>
       <div class="box">
       {% for content in guestbook%}
           {% if content.region == "충청권"%}
         <div class="alert alert-info" role="alert">
-        {{content.content}}
+          <i data-feather="gitlab" class="text-info"></i> {{content.content}}
       </div>
       {% endif %}
       {% endfor %}

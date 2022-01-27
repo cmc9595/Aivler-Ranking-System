@@ -101,7 +101,7 @@
       <div class="col-md-6">
         <div class="p-2 card">
           <div class="card-header">
-            {{unsolved.subject|truncatewords:5}}
+            <a href="{% url 'qna:detail' unsolved.id %}">{{unsolved.subject|truncatewords:5}}</a>
           </div>
           <div class="card-body">
             {{unsolved.content|truncatewords:5|safe|striptags}}

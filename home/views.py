@@ -39,6 +39,8 @@ def rankByDate(option, params=1): # params 는 (idx, id, count) 원소갯수
         return [(id, cnt) for idx, id, cnt in res]
     elif params==3:
         return res
+    elif params==4:
+        return [(idx) for idx, id, cnt in res]
 
 
 def getCommitsFromAPI(id):
@@ -179,13 +181,20 @@ def search(request):
         monthIDs = rankByDate('month', 1)
         
         # 이용자수
-        dayuser=len(dayIDs)
-        weekuser=len(weekIDs)
-        monthuser=len(monthIDs)
+        dayuser = len(dayIDs)
+        weekuser = len(weekIDs)
+        monthuser = len(monthIDs)
         
-        dayRank = dayIDs.index(id)+1 if id in dayIDs else '-'
-        weekRank = weekIDs.index(id)+1 if id in weekIDs else '-'
-        monthRank = monthIDs.index(id)+1 if id in monthIDs else '-'
+        
+        dayRank = rankByDate('day',4)
+        weekRank = rankByDate('week',4)
+        monthRank = rankByDate('month',4)
+        dayRank_a = dayIDs.index(id) if id in dayIDs else '-'
+        weekRank_b = weekIDs.index(id) if id in weekIDs else '-'
+        monthRank_c = monthIDs.index(id) if id in monthIDs else '-'
+        dayRank = dayRank[dayRank_a] if dayRank_a != '-' else '-' 
+        weekRank = weekRank[weekRank_b]
+        monthRank = monthRank[monthRank_c]
     
         return render(request, 'home/profile.html', 
                     {'data': data[:5], # 최근 5개목록

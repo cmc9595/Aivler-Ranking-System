@@ -40,7 +40,7 @@ def turnok(request, question_id):
     question.qsolve = 1
     question.save()
     
-    question_list = Question.objects.filter(qsolve = 0).order_by('-id')
+    question_list = Question.objects.order_by('-pub_date')
     context = {
         'question_list': question_list
     }

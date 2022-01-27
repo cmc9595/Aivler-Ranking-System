@@ -42,8 +42,8 @@
     {% for question in question_list %}
     <div class="row">
         <div class="col-12">
-            <div class="card">
-                <div class="card-header">
+            <div class="card"style ="background:#9EC5FE;">
+                <div class="card-header"style ="background:#9EC5FE;">
                     <div class='d-flex justify-content-between'>
                         <div>
                             <small>#{{ question.id }}번 째 질문 </small>
@@ -58,7 +58,7 @@
                         <a href="{% url 'qna:detail' question.id %}">{{ question.subject }}</a>
                     </h4>
                 </div>
-                <div class="card-body">
+                <div class="card-body"style ="background:#9EC5FE;">
                     {{question.summary|safe|striptags|truncatechars:20}}
                 </div>
             </div>

@@ -10,8 +10,6 @@ from .models import Commit, GithubUser
 from qna.models import Question
 
 load_dotenv()
-# def index(request):
-#     return render(request, 'home/mainpage.html')
 
 def rankByDate(option, params=1): # params 는 (idx, id, count) 원소갯수
     today = datetime.now()
@@ -21,14 +19,12 @@ def rankByDate(option, params=1): # params 는 (idx, id, count) 원소갯수
         target = datetime(year=today.year, month=today.month, day=today.day - today.weekday())
     elif option=='month':
         target = datetime(year=today.year, month=today.month, day=1)
-    #print(f"{option}, {target}")
-    # print("target:", target)
+        
     commits = Commit.objects.filter(date__gte=str(target))
     # print("len:", len(commits))
     dic = {}
     for commit in commits:
         dic[commit.userid] = dic.get(commit.userid, 0) + 1
-    # print(dic)
     res = sorted(dic.items(), key=lambda x:x[1], reverse=True)
     res = [[idx+1, id, cnt]for idx, (id, cnt) in enumerate(res)]
     # 중복 rank 적용
@@ -44,7 +40,9 @@ def rankByDate(option, params=1): # params 는 (idx, id, count) 원소갯수
         return res
     elif params==4:
         return [(idx) for idx, id, cnt in res]
-
+    # dictation form
+    elif params=='dict':
+        return dict([(id, idx) for idx, id, cnt in res])
 
 def getCommitsFromAPI(id):
     # 현재 event검색, 추후 search api 검색으로 바꿀것
@@ -136,15 +134,11 @@ def updateProfile(id):
 def search(request):
     if request.method=='GET': # 검색박스
         id = request.GET.get('githubID')
-        #sidebar = request.GET.get('sidebar')
         if id is None:
             id = ''
         else:
             id = id.split() # 양쪽공백 허용
-            if id:
-                id = id[0]
-            else:
-                id = ''
+            id = id[0] if id else ''
         
         msg = updateCommit(id) # 커밋 DB 업데이트
         # 커밋정보가 없어도, 프로필이 있으면 출력해준다!!
@@ -164,30 +158,17 @@ def search(request):
         data = Commit.objects.filter(userid=id)
         
         print("id=", id)
-        # 사용한 id의 등수 (중복등수 적용)
-        dayIDs = rankByDate('day', 1)
-        weekIDs = rankByDate('week', 1)
-        monthIDs = rankByDate('month', 1)
-        
+        dayRank = dayDict[id] if id in (dayDict:=rankByDate('day', 'dict')).keys() else '-'
+        weekRank = weekDict[id] if id in (weekDict:=rankByDate('week', 'dict')).keys() else '-'
+        monthRank = monthDict[id] if id in (monthDict:=rankByDate('month', 'dict')).keys() else '-'
         # 이용자수
-        dayuser = len(dayIDs)
-        weekuser = len(weekIDs)
-        monthuser = len(monthIDs)
-        
-        dayRank = rankByDate('day',4)
-        weekRank = rankByDate('week',4)
-        monthRank = rankByDate('month',4)
-        dayRank_a = dayIDs.index(id) if id in dayIDs else '-'
-        weekRank_b = weekIDs.index(id) if id in weekIDs else '-'
-        monthRank_c = monthIDs.index(id) if id in monthIDs else '-'
-        dayRank = dayRank[dayRank_a] if dayRank_a != '-' else '-' 
-        weekRank = weekRank[weekRank_b] if weekRank_b != '-' else '-' 
-        monthRank = monthRank[monthRank_c] if monthRank_c != '-' else '-' 
+        dayuser = len(dayDict)
+        weekuser = len(weekDict)
+        monthuser = len(monthDict)
     
         return render(request, 'home/profile.html', 
                     {'data': data[:5], # 최근 5개목록
                     'id': id,
-                    #'sidebar':sidebar,
                     'rankD':dayRank,
                     'rankW':weekRank,
                     'rankM':monthRank,
@@ -205,6 +186,15 @@ def commitmsg(request):
         result = ''
     return HttpResponse(result)
 
+# update all GithubUsers
+def updateAll(request):
+    users = GithubUser.objects.all()
+    for user in users:
+        msg = updateCommit(user.userid)
+        print(msg, user.userid)
+    print("updated all")
+    return HttpResponse('Done')   
+
 def mainrank(request):
     dayList = [(idx, id, cnt, GithubUser.objects.get(userid=id)) for idx, id, cnt in rankByDate('day', 3)]
     weekList = [(idx, id, cnt, GithubUser.objects.get(userid=id)) for idx, id, cnt in rankByDate('week', 3)]
@@ -216,13 +206,7 @@ def mainrank(request):
         unsolved_len = 4
     unsolved_list = Question.objects.filter(qsolve = 0).order_by('-id')[:unsolved_len]
 
-    # dayRank = rankByDate('day', 3)
-    # weekRank = rankByDate('week', 3)
-    # monthRank = rankByDate('month', 3)
     return render(request, 'home/mainpage.html', {
-        # 'rankD':dayRank,
-        # 'rankW':weekRank,
-        # 'rankM':monthRank,
         'unsolved_list': unsolved_list,
         'allList':[dayList,weekList,monthList],
     })
@@ -244,16 +228,7 @@ def ranking(request): # 사이드바, 버튼
             updateProfile(id) 
         new_list.append([rank, id, cnt, GithubUser.objects.get(userid=id)])
         
-        # a = getProfileFromAPI(key)
-        # avatar = a[0]
-        # git_url = a[1]
-        # location = (a[-2])
-        # bio = (a[-1])
-        # new = (idx,key,val,avatar,location,bio)
-        # new_list.append(new)    
-        
     return render(request, 'home/resultpage.html',
                   {'option': option,
-                   #'returnList': returnList,
                     'new_list':new_list,
                    })

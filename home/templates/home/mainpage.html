@@ -7,6 +7,7 @@
 <div class="row">
   <div class="col">
     <h1 class="h3"><i data-feather="github"></i><strong> Top</strong> Ranker</h1>
+    {% comment %} <button type="button" onclick="updateAll()">업데이트</button> {% endcomment %}
     <div class="d-grid gap-2 d-md-flex justify-content-md-end">
     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
       <input type="radio" class="btn-check" name="options" id='b0' autocomplete="off" checked>
@@ -29,12 +30,12 @@
       </div>
       <div class="carousel-inner">
         {% for List in allList %}
-          {% if List %}
-            {% if forloop.first %}
-            <div class="carousel-item active">
-            {% else %}
-            <div class="carousel-item">
+        {% if forloop.first %}
+        <div class="carousel-item active">
+          {% else %}
+          <div class="carousel-item">
             {% endif %}
+          {% if List %}
               <table class="table table-borderless table-hover">
                 <thead class="table-dark text-center" style="font-size:16px">
                   <tr>
@@ -70,10 +71,10 @@
                   {% endfor %}
                 </tbody>
               </table>
+              {% else %}
+              순위 결과 없음.
+              {% endif %}
             </div>
-          {% else %}
-          순위 결과 없음.
-          {% endif %}
         {% endfor %}
        
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -124,6 +125,23 @@
       $("#b"+idx).click();
     });
  });
+</script>
+
+<!-- 업데이트버튼 -->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+  function updateAll(){
+    const data = axios({
+      url: '/home/updateAll/',
+      method: 'get',
+      params: {}
+    });
+    data.then(function (result){
+      //document.getElementById(id).innerHTML=result.data
+      //console.log(result.data);
+    });
+  }
+
 </script>
 {% endblock %}
 

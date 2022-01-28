@@ -181,8 +181,8 @@ def search(request):
         weekRank_b = weekIDs.index(id) if id in weekIDs else '-'
         monthRank_c = monthIDs.index(id) if id in monthIDs else '-'
         dayRank = dayRank[dayRank_a] if dayRank_a != '-' else '-' 
-        weekRank = weekRank[weekRank_b] if dayRank_a != '-' else '-' 
-        monthRank = monthRank[monthRank_c] if dayRank_a != '-' else '-' 
+        weekRank = weekRank[weekRank_b] if weekRank_b != '-' else '-' 
+        monthRank = monthRank[monthRank_c] if monthRank_c != '-' else '-' 
     
         return render(request, 'home/profile.html', 
                     {'data': data[:5], # 최근 5개목록

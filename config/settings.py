@@ -87,6 +87,7 @@ DATABASES = {
         'PASSWORD': '123456890a',
         'HOST': '13.125.52.234',
         'PORT': '3306',
+		'OPTIONS': {'charset':'utf8mb4'}
     }
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',

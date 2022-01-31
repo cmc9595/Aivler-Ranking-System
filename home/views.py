@@ -141,7 +141,6 @@ def search(request):
             id = id[0] if id else ''
         
         msg = updateCommit(id) # 커밋 DB 업데이트
-        # 커밋정보가 없어도, 프로필이 있으면 출력해준다!!
         # if msg=='no token' or msg=='wrong id or token':
         #     return render(request, 'home/error_page.html', {'msg':msg})
         
@@ -191,7 +190,7 @@ def updateAll(request):
     users = GithubUser.objects.all()
     for user in users:
         msg = updateCommit(user.userid)
-        print(msg, user.userid)
+        print(msg, user.userid, datetime.now())
     print("updated all")
     return HttpResponse('Done')   
 

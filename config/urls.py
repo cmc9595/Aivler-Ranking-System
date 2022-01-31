@@ -20,7 +20,7 @@ import home.views as home_views
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', home_views.ranking, name='mainrank'),
+    path('', home_views.mainrank, name='mainrank'),
     path('', views.index, name='index'),  # '/' 에 해당되는 path
     path('admin/', admin.site.urls),
     path('home/', include('home.urls')),

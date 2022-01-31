@@ -31,6 +31,8 @@ ALLOWED_HOSTS = ['3.36.132.192', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'django_crontab',
+    'django_apscheduler',
     'home',
     'common',
     'bbs',
@@ -43,6 +45,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
+
+CRONJOBS = [
+#    ('*/1 * * * *', 'home.cron.hello_every_minute', '>> schedule.log'),
+    ('*/20 * * * *', 'home.cron.updateUserInfo', '>> schedule.log'),
 ]
 
 MIDDLEWARE = [

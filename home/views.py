@@ -16,7 +16,10 @@ def rankByDate(option, params=1): # params 는 (idx, id, count) 원소갯수
     if option=='day':
         target = datetime(year=today.year, month=today.month, day=today.day)
     elif option=='week':
-        target = datetime(year=today.year, month=today.month, day=today.day - today.weekday())
+        if today.day <= today.weekday():
+            target = datetime(year=today.year, month=today.month, day=today.day)
+        else:
+            target = datetime(year=today.year, month=today.month, day=today.day - today.weekday())
     elif option=='month':
         target = datetime(year=today.year, month=today.month, day=1)
         

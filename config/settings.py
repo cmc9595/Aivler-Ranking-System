@@ -47,9 +47,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+# DJANGO_SETTINGS_MODULE = 'config.settings.local'
+
 CRONJOBS = [
 #    ('*/1 * * * *', 'home.cron.hello_every_minute', '>> schedule.log'),
-    ('*/20 * * * *', 'home.cron.updateUserInfo', '>> schedule.log'),
+    ('*/20 * * * *', 'config.cron.updateUserInfo', '>> schedule.log'),
 ]
 
 MIDDLEWARE = [

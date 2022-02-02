@@ -51,7 +51,7 @@ INSTALLED_APPS = [
 
 CRONJOBS = [
 #    ('*/1 * * * *', 'home.cron.hello_every_minute', '>> schedule.log'),
-    ('*/20 * * * *', 'config.cron.updateUserInfo', '>> schedule.log'),
+    ('*/30 * * * *', 'config.cron.updateUserInfo', '>> schedule.log'),
 ]
 
 MIDDLEWARE = [

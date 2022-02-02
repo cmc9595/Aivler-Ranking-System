@@ -11,26 +11,25 @@ from qna.models import Question
 
 load_dotenv()
 
-def rankByDate(option, params=1): # params 는 (idx, id, count) 원소갯수
+def rankByDate(option, params=1):
     today = datetime.now()
     if option=='day':
         target = datetime(year=today.year, month=today.month, day=today.day)
     elif option=='week':
         if today.day <= today.weekday():
-            target = datetime(year=today.year, month=today.month, day=today.day)
+            target = datetime(year=today.year, month=today.month, day=1)
         else:
             target = datetime(year=today.year, month=today.month, day=today.day - today.weekday())
     elif option=='month':
         target = datetime(year=today.year, month=today.month, day=1)
         
     commits = Commit.objects.filter(date__gte=str(target))
-    # print("len:", len(commits))
     dic = {}
     for commit in commits:
         dic[commit.userid] = dic.get(commit.userid, 0) + 1
     res = sorted(dic.items(), key=lambda x:x[1], reverse=True)
     res = [[idx+1, id, cnt]for idx, (id, cnt) in enumerate(res)]
-    # 중복 rank 적용
+    # 중복 rank
     for i in range(len(res)-1):
         if res[i][2]==res[i+1][2]:
             res[i+1][0] = res[i][0]
@@ -43,43 +42,53 @@ def rankByDate(option, params=1): # params 는 (idx, id, count) 원소갯수
         return res
     elif params==4:
         return [(idx) for idx, id, cnt in res]
-    # dictation form
     elif params=='dict':
         return dict([(id, idx) for idx, id, cnt in res])
 
-def getCommitsFromAPI(id):
-    # 현재 event검색, 추후 search api 검색으로 바꿀것
+def callAPI(url):
     token = os.environ.get("TOKEN")
     if token is None:
-        return "no token"
-    headers = {'Authorization': 'token '+token} # token
+        return None, "No Token", []
+
+    headers = {'Authorization': 'token '+token}
+    r = requests.get(url, headers=headers)
+    r_status = r.status_code
+    if r_status==200:
+        return r, r_status, "Success"
+    else:
+        r = r.json()
+        return r, r_status, r['message']
+    
+def getCommitsFromAPI(id):
+    # 현재 event검색, 추후 search api 검색으로 바꿀것
+    url = f'https://api.github.com/users/{id}/events?per_page=100&page=1'
+    _, status, msg = callAPI(url)
+
     l = []
-    for page in range(1, 4): # 4page까지
-        url = f'https://api.github.com/users/{id}/events?per_page=100&page={page}'
-        response = requests.get(url, headers=headers).json()
-        if response == []: # last page break
-            break
-        for i in response:
-            try:
-                if i['type']=='PushEvent':
-                    # id, repository, date, message
-                    l.append((i['id'], i['repo']['name'], i['created_at'], i['payload']['commits'][0]['message']))
-            except:
-                continue
-    print("len:", len(l))
-    print("page:", page)
-    return l
+    if status==200:
+        for page in range(1, 4):
+            url = f'https://api.github.com/users/{id}/events?per_page=100&page={page}'
+            r, r_status, msg = callAPI(url)
+
+            if r_status==200: # success
+                r = r.json()
+                for i in r:
+                    if i['type']=='PushEvent':
+                        l.append((i['id'], i['repo']['name'], i['created_at'], i['payload']['commits'][0]['message']))
+            else: # fail
+                break
+
+    return status, msg, l
+
+
 # profileapi
 def getProfileFromAPI(id):
     t = []
-    token = os.environ.get("TOKEN")
-    if token is None:
-        return "no token"
-    headers = {'Authorization': 'token '+token}
-    url = f'http://api.github.com/users/{id}'
+    url = f'https://api.github.com/users/{id}' # http -> cmc9595; 세미콜론 먹어버리는 버그
     
-    response = requests.get(url, headers=headers).json()
-    try :
+    response, r_status, msg = callAPI(url)
+    if r_status==200:
+        response = response.json()
         if response['type']=='User':
             avatar = response['avatar_url']
             html_url = response['html_url']
@@ -89,50 +98,38 @@ def getProfileFromAPI(id):
             location = response['location']
             bio = response['bio']
             t = [avatar, html_url, name, company, blog, location, bio]
-    except:
-        t = []         
-    return t
+        elif response['type']=='Organization': 
+            return 500, msg, []
+
+    return r_status, msg, t
 
 # update Database with ID
 def updateCommit(id):
-    commits = getCommitsFromAPI(id)
-    if commits == "no token":
-        return "no token"
-    elif commits == 'id not found':
-        return 'id not found'
-    elif commits == 'token - bad credential':
-        return 'token - bad credential'
-    else:
+    status, msg, l = getCommitsFromAPI(id)
+    if status==200:
         Commit.objects.filter(userid=id).delete()
-        for i in commits:
+        for i in l:
             date, time = i[2].split('T')
             time = time[:-1]
             dt = datetime.strptime(f'{date} {time}', '%Y-%m-%d %H:%M:%S')
             dt += timedelta(hours=9) # seoul/Asia = UTC+09:00
             Commit(eventid=i[0], userid=id, repository=i[1], date=dt, message=i[3]).save()
-        return ''
+    else:
+        pass
+    return status, msg
 
 def updateProfile(id):
-    profile = getProfileFromAPI(id)
-    if profile == "no token":
-        return "no token"
-    elif profile == []:
-        return "wrong id or token"
-    else:
+    status, msg, t = getProfileFromAPI(id)
+    if status==200:
         obj, created = GithubUser.objects.get_or_create(
-            userid=id,
-            avatar=profile[0],
-            html_url=profile[1],
-            name=profile[2],
-            company=profile[3],
-            blog=profile[4],
-            location=profile[5],
-            bio=profile[6])
+            userid=id, avatar=t[0], html_url=t[1], name=t[2], company=t[3], blog=t[4], location=t[5], bio=t[6])
         if created:
             print("new profile created")
         else:
             print("profile already exists")
-        return ''
+    else:
+        pass
+    return status, msg
         
 def search(request):
     if request.method=='GET': # 검색박스
@@ -143,14 +140,18 @@ def search(request):
             id = id.split() # 양쪽공백 허용
             id = id[0] if id else ''
         
-        msg = updateCommit(id) # 커밋 DB 업데이트
-        # if msg=='no token' or msg=='wrong id or token':
-        #     return render(request, 'home/error_page.html', {'msg':msg})
+        print("id=", id)
+        status, msg = updateCommit(id) # 커밋 DB 업데이트
+        print("commit:", status, msg)
         
-        msg = updateProfile(id) # 프로필 DB 업데이트
-        if msg in ['no token' in 'wrong id or token']:
-            return render(request, 'home/error_page.html', {'msg':msg})
-        
+        status, msg = updateProfile(id) # 프로필 DB 업데이트
+        print("profile:", status, msg)
+        if status==500:
+            return render(request, 'home/error_page.html', {'msg':f'id "{id}" type=Organization, not User'})
+        elif status==404:
+            return render(request, 'home/error_page.html', {'msg':f'404 Not Found:\nid={id} not found'})
+
+
         # 프로필 가져오기
         try:
             profile = GithubUser.objects.get(userid=id)
@@ -159,7 +160,6 @@ def search(request):
             
         data = Commit.objects.filter(userid=id)
         
-        print("id=", id)
         dayRank = dayDict[id] if id in (dayDict:=rankByDate('day', 'dict')).keys() else '-'
         weekRank = weekDict[id] if id in (weekDict:=rankByDate('week', 'dict')).keys() else '-'
         monthRank = monthDict[id] if id in (monthDict:=rankByDate('month', 'dict')).keys() else '-'
